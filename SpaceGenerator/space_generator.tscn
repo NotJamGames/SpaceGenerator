@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cty7f06ayes3d"]
+[gd_scene load_steps=15 format=3 uid="uid://cty7f06ayes3d"]
 
 [ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
 [ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://StarGenerator/star_generator.tscn" id="2_d6qfi"]
@@ -11,14 +11,14 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ms1"]
 shader = ExtResource("6_tdxb1")
-shader_parameter/contrast = 3.375
-shader_parameter/brightness = 5.53
-shader_parameter/alpha = 1.0
+shader_parameter/contrast = 1.755
+shader_parameter/brightness = 30.62
+shader_parameter/alpha = 0.56
 shader_parameter/palette = ExtResource("7_eqrwb")
 
 [sub_resource type="Gradient" id="Gradient_2rgkj"]
-offsets = PackedFloat32Array(0, 0.415584, 0.590909, 0.902597, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.0901961, 0.0901961, 0.14902, 1, 0.262745, 0.188235, 0.34902, 1, 0.572549, 0.305882, 0.517647, 1, 0.792157, 0.505882, 0.545098, 1)
+offsets = PackedFloat32Array(0, 0.00649351, 0.525974, 0.902597, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.0235294, 0.0196078, 0.0196078, 1, 0.0431373, 0.0392157, 0.0470588, 1, 0.0784314, 0.0431373, 0.0745098, 1, 0.101961, 0.0509804, 0.0980392, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pyc2w"]
 
@@ -30,10 +30,22 @@ noise = SubResource("FastNoiseLite_pyc2w")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_omovf"]
 shader = ExtResource("6_tdxb1")
-shader_parameter/contrast = 10.775
-shader_parameter/brightness = 12.09
-shader_parameter/alpha = 0.055
+shader_parameter/contrast = 19.835
+shader_parameter/brightness = 7.445
+shader_parameter/alpha = 0.16
 shader_parameter/palette = ExtResource("5_1kgpl")
+
+[sub_resource type="Gradient" id="Gradient_5vrtd"]
+offsets = PackedFloat32Array(0, 0.487013, 0.655844, 0.876623, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.0901961, 0.0901961, 0.14902, 1, 0.262745, 0.188235, 0.34902, 1, 0.572549, 0.305882, 0.517647, 1, 0.792157, 0.505882, 0.545098, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6vlel"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7etml"]
+seamless = true
+seamless_blend_skirt = 0.68
+color_ramp = SubResource("Gradient_5vrtd")
+noise = SubResource("FastNoiseLite_6vlel")
 
 [node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("subviewport", "star_generator", "nebulae")]
 script = ExtResource("1_8dqb6")
@@ -64,5 +76,5 @@ centered = false
 
 [node name="NebulaAbove" type="Sprite2D" parent="SubViewport"]
 material = SubResource("ShaderMaterial_omovf")
-texture = SubResource("NoiseTexture2D_8gtxf")
+texture = SubResource("NoiseTexture2D_7etml")
 centered = false

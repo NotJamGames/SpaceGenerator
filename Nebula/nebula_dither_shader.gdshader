@@ -30,7 +30,7 @@ vec4[2] closest_color(float lum, vec4 color)
 		return vec4[2] (vec4(.0, .0, .0, .0), texture(palette, vec2(0, 0)));
 	}
 
-	float palette_size = float(textureSize(palette, 0).x) - 1.0;
+	float palette_size = float(textureSize(palette, 0).x);
 
 	// avoid wrapping around palette
 	lum = max(lum - 0.00001, 0.0);
@@ -60,6 +60,7 @@ vec4 dither(vec4 color, vec4 fragcoord)
 void fragment()
 {
 	vec4 new_color = vec4(dither(COLOR, FRAGCOORD));
+	if (COLOR.a < 1.0 - .005){COLOR.a = .0;}
 	new_color.a *= alpha * COLOR.a;
 	COLOR = new_color;
 }
