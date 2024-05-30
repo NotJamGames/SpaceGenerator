@@ -1,12 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cty7f06ayes3d"]
+[gd_scene load_steps=4 format=3 uid="uid://cty7f06ayes3d"]
 
 [ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
 [ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://StarGenerator/star_generator.tscn" id="2_d6qfi"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pecdu"]
+viewport_path = NodePath("SubViewport")
 
 [node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("subviewport", "star_generator")]
 script = ExtResource("1_8dqb6")
 subviewport = NodePath("SubViewport")
 star_generator = NodePath("SubViewport/StarGenerator")
+
+[node name="PreviewDisplay" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_pecdu")
+stretch_mode = 5
 
 [node name="SubViewport" type="SubViewport" parent="."]
 canvas_item_default_texture_filter = 0
