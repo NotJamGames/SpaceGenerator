@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cty7f06ayes3d"]
+
+[ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
+
+[node name="SpaceGenerator" type="Node"]
+script = ExtResource("1_8dqb6")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(320, 240)
