@@ -1,15 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://cty7f06ayes3d"]
+[gd_scene load_steps=12 format=3 uid="uid://cty7f06ayes3d"]
 
 [ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
 [ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://StarGenerator/star_generator.tscn" id="2_d6qfi"]
+[ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://Palettes/default_fg_palette.png" id="5_1kgpl"]
+[ext_resource type="Shader" path="res://Nebula/nebula_dither_shader.gdshader" id="6_tdxb1"]
+[ext_resource type="Texture2D" uid="uid://drsp3gxhn1jxg" path="res://Palettes/default_bg_palette.png" id="7_eqrwb"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pecdu"]
 viewport_path = NodePath("SubViewport")
 
-[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("subviewport", "star_generator")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ms1"]
+shader = ExtResource("6_tdxb1")
+shader_parameter/contrast = 3.375
+shader_parameter/brightness = 5.53
+shader_parameter/alpha = 1.0
+shader_parameter/palette = ExtResource("7_eqrwb")
+
+[sub_resource type="Gradient" id="Gradient_2rgkj"]
+offsets = PackedFloat32Array(0, 0.415584, 0.590909, 0.902597, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.0901961, 0.0901961, 0.14902, 1, 0.262745, 0.188235, 0.34902, 1, 0.572549, 0.305882, 0.517647, 1, 0.792157, 0.505882, 0.545098, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pyc2w"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8gtxf"]
+seamless = true
+seamless_blend_skirt = 0.68
+color_ramp = SubResource("Gradient_2rgkj")
+noise = SubResource("FastNoiseLite_pyc2w")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omovf"]
+shader = ExtResource("6_tdxb1")
+shader_parameter/contrast = 10.775
+shader_parameter/brightness = 12.09
+shader_parameter/alpha = 0.055
+shader_parameter/palette = ExtResource("5_1kgpl")
+
+[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("subviewport", "star_generator", "nebulae")]
 script = ExtResource("1_8dqb6")
 subviewport = NodePath("SubViewport")
 star_generator = NodePath("SubViewport/StarGenerator")
+nebulae = [NodePath("SubViewport/NebulasBelow"), NodePath("SubViewport/NebulaAbove")]
 
 [node name="PreviewDisplay" type="TextureRect" parent="."]
 texture_filter = 1
@@ -25,4 +55,14 @@ stretch_mode = 5
 canvas_item_default_texture_filter = 0
 size = Vector2i(320, 240)
 
+[node name="NebulasBelow" type="Sprite2D" parent="SubViewport"]
+material = SubResource("ShaderMaterial_v4ms1")
+texture = SubResource("NoiseTexture2D_8gtxf")
+centered = false
+
 [node name="StarGenerator" parent="SubViewport" instance=ExtResource("2_d6qfi")]
+
+[node name="NebulaAbove" type="Sprite2D" parent="SubViewport"]
+material = SubResource("ShaderMaterial_omovf")
+texture = SubResource("NoiseTexture2D_8gtxf")
+centered = false
