@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cty7f06ayes3d"]
+[gd_scene load_steps=3 format=3 uid="uid://cty7f06ayes3d"]
 
 [ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
+[ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://StarGenerator/star_generator.tscn" id="2_d6qfi"]
 
 [node name="SpaceGenerator" type="Node"]
 script = ExtResource("1_8dqb6")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(320, 240)
+
+[node name="StarGenerator" parent="SubViewport" instance=ExtResource("2_d6qfi")]
