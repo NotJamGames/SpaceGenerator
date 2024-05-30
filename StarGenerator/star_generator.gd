@@ -1,3 +1,4 @@
+class_name StarGenerator
 extends Node2D
 
 
