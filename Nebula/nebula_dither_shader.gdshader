@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform sampler2D palette : filter_nearest;
 
 uniform float contrast;
-uniform float brightness;
+uniform float threshold;
 uniform float alpha = 1.0;
 
 const int indexMatrix4x4[16] = int[](0,  8,  2,  10,
@@ -49,7 +49,7 @@ vec4 dither(vec4 color, vec4 fragcoord)
 {
 	float lum = 
 		(color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114)
-		* brightness;
+		* threshold;
 	vec4 colors[2] = closest_color(lum, fragcoord);
 
 	float matrix_value = index_value(fragcoord);

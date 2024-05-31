@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b18xsn8oiptpo"]
+
+[ext_resource type="Script" path="res://Nebula/nebula_layer.gd" id="1_fy7kn"]
+[ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://Palettes/default_fg_palette.png" id="2_ixn55"]
+[ext_resource type="Shader" path="res://Nebula/nebula_dither_shader.gdshader" id="3_llrmn"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dx17x"]
+shader = ExtResource("3_llrmn")
+shader_parameter/contrast = 18.0
+shader_parameter/threshold = 7.445
+shader_parameter/alpha = 0.22
+
+[node name="NebulaLayer" type="TextureRect" node_paths=PackedStringArray("subviewport", "sprite")]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_ptxmb")
+stretch_mode = 1
+script = ExtResource("1_fy7kn")
+subviewport = NodePath("SubViewport")
+sprite = NodePath("SubViewport/Sprite2D")
+palette = ExtResource("2_ixn55")
+contrast = 18.0
+threshold = 7.445
+alpha = 0.22
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
+material = SubResource("ShaderMaterial_dx17x")
