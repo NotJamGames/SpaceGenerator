@@ -1,6 +1,6 @@
 @tool
 class_name NebulaLayer
-extends TextureRect
+extends GeneratorLayer
 
 
 @export_category("Node Paths")
@@ -19,10 +19,6 @@ const nebula_dither_shader : Shader = preload\
 @export var alpha : float = 1.0 : set = set_alpha
 
 
-@export_category("Editor Parameters")
-@export var speed : float = 64.0
-
-
 @onready var noise_texture : NoiseTexture2D = NoiseTexture2D.new()
 @onready var shader_material : ShaderMaterial = ShaderMaterial.new()
 
@@ -33,13 +29,6 @@ func _ready() -> void:
 	set_contrast(contrast)
 	set_threshold(threshold)
 	set_alpha(alpha)
-
-
-func _process(delta : float) -> void:
-	if Engine.is_editor_hint(): return
-	position.y += speed * delta
-	if position.y > .0:
-		position.y = position.y - (size.y * .5)
 
 
 func build_nebula(new_base_size : Vector2i) -> void:

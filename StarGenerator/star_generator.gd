@@ -1,5 +1,5 @@
 class_name StarGenerator
-extends Node2D
+extends GeneratorLayer
 
 
 const MARGIN : float = 3.0
@@ -25,6 +25,9 @@ const LARGE_STAR_RESOURCES : Array[Resource] = \
 
 @onready var star_resources : Array[Array] = \
 			[SMALL_STAR_RESOURCES, MEDIUM_STAR_RESOURCES, LARGE_STAR_RESOURCES]
+
+
+@export var root_2d : Node2D
 
 
 func generate_stars\
@@ -56,7 +59,7 @@ func generate_stars\
 		new_star_sprite.texture = \
 				poss_textures[randi_range(0, poss_textures.size() - 1)]
 
-		add_child(new_star_sprite)
+		root_2d.add_child(new_star_sprite)
 
 
 func clear_stars() -> void:
