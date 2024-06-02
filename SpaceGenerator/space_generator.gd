@@ -4,7 +4,7 @@ extends Node
 @export var layers : Array[TextureRect]
 
 
-@export var star_generator : StarGenerator
+@export var star_generator : StarLayer
 @export var nebula_layers : Array[NebulaLayer]
 
 

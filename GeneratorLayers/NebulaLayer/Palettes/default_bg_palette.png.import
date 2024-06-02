@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl2ii8yf60mb"
-path="res://.godot/imported/large_star.png-b3b8bc5d218e7ccb81449828d099dfb5.ctex"
+uid="uid://drsp3gxhn1jxg"
+path="res://.godot/imported/default_bg_palette.png-8935954701c8dc6e4bfb40c67ceb4547.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/large_star.png"
-dest_files=["res://.godot/imported/large_star.png-b3b8bc5d218e7ccb81449828d099dfb5.ctex"]
+source_file="res://GeneratorLayers/NebulaLayer/Palettes/default_bg_palette.png"
+dest_files=["res://.godot/imported/default_bg_palette.png-8935954701c8dc6e4bfb40c67ceb4547.ctex"]
 
 [params]
 

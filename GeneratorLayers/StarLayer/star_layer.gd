@@ -1,4 +1,4 @@
-class_name StarGenerator
+class_name StarLayer
 extends GeneratorLayer
 
 
@@ -7,20 +7,20 @@ const MARGIN : float = 3.0
 
 const SMALL_STAR_RESOURCES : Array[Resource] = \
 [
-	preload("res://Textures/small_star_1.png"),
-	preload("res://Textures/small_star_2.png")
+	preload("res://GeneratorLayers/StarLayer/Textures/small_star_1.png"),
+	preload("res://GeneratorLayers/StarLayer/Textures/small_star_2.png")
 ]
 
 const MEDIUM_STAR_RESOURCES : Array[Resource] = \
 [
-	preload("res://Textures/medium_star_1.png"),
-	preload("res://Textures/medium_star_2.png"),
-	preload("res://Textures/medium_star_3.png")
+	preload("res://GeneratorLayers/StarLayer/Textures/medium_star_1.png"),
+	preload("res://GeneratorLayers/StarLayer/Textures/medium_star_2.png"),
+	preload("res://GeneratorLayers/StarLayer/Textures/medium_star_3.png")
 ]
 
 const LARGE_STAR_RESOURCES : Array[Resource] = \
 [
-	preload("res://Textures/large_star.png")
+	preload("res://GeneratorLayers/StarLayer/Textures/large_star.png")
 ]
 
 @onready var star_resources : Array[Array] = \

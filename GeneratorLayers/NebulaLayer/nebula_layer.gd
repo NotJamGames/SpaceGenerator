@@ -9,7 +9,7 @@ extends GeneratorLayer
 
 
 const nebula_dither_shader : Shader = preload\
-		("res://Nebula/nebula_dither_shader.gdshader")
+		("res://GeneratorLayers/NebulaLayer/nebula_dither_shader.gdshader")
 
 
 @export_category("Nebula Parameters")

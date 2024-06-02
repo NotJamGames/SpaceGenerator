@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bmakpuxdb661j"]
 
-[ext_resource type="Shader" path="res://SpaceGenerator/star_flicker.gdshader" id="1_cdogt"]
-[ext_resource type="Script" path="res://StarGenerator/star_generator.gd" id="1_cp568"]
+[ext_resource type="Shader" path="res://GeneratorLayers/StarLayer/star_flicker.gdshader" id="1_cdogt"]
+[ext_resource type="Script" path="res://GeneratorLayers/StarLayer/star_layer.gd" id="1_cp568"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6oj0y"]
 
@@ -22,7 +22,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_15hbl")
 [sub_resource type="ViewportTexture" id="ViewportTexture_nrfxb"]
 viewport_path = NodePath("SubViewport")
 
-[node name="StarGenerator" type="TextureRect" node_paths=PackedStringArray("root_2d")]
+[node name="StarLayer" type="TextureRect" node_paths=PackedStringArray("root_2d")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_gr54g")
 custom_minimum_size = Vector2(1440, 1440)
