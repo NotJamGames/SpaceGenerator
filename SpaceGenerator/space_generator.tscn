@@ -1,17 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://cty7f06ayes3d"]
+[gd_scene load_steps=12 format=3 uid="uid://cty7f06ayes3d"]
 
 [ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
 [ext_resource type="Shader" path="res://SpaceGenerator/star_flicker.gdshader" id="2_7g1vs"]
 [ext_resource type="PackedScene" uid="uid://b18xsn8oiptpo" path="res://Nebula/nebula_layer.tscn" id="2_ao41h"]
 [ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://StarGenerator/star_generator.tscn" id="2_d6qfi"]
-[ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://Palettes/default_fg_palette.png" id="5_1kgpl"]
-[ext_resource type="Shader" path="res://Nebula/nebula_dither_shader.gdshader" id="6_tdxb1"]
 [ext_resource type="Texture2D" uid="uid://drsp3gxhn1jxg" path="res://Palettes/default_bg_palette.png" id="7_eqrwb"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pecdu"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_proil"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_proil"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qmkdn"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ox25b"]
@@ -31,71 +29,30 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_rrh8a")
 [sub_resource type="ViewportTexture" id="ViewportTexture_tvblh"]
 viewport_path = NodePath("SubViewport2")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qmkdn"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ms1"]
-shader = ExtResource("6_tdxb1")
-shader_parameter/contrast = 1.755
-shader_parameter/threshold = null
-shader_parameter/alpha = 0.64
-shader_parameter/palette = ExtResource("7_eqrwb")
-
-[sub_resource type="Gradient" id="Gradient_2rgkj"]
-offsets = PackedFloat32Array(0, 0.0909091, 0.525974, 0.902597, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.0235294, 0.0196078, 0.0196078, 1, 0.0431373, 0.0392157, 0.0470588, 1, 0.0784314, 0.0431373, 0.0745098, 1, 0.101961, 0.0509804, 0.0980392, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pyc2w"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8gtxf"]
-seamless = true
-color_ramp = SubResource("Gradient_2rgkj")
-noise = SubResource("FastNoiseLite_pyc2w")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_omovf"]
-shader = ExtResource("6_tdxb1")
-shader_parameter/contrast = 21.035
-shader_parameter/threshold = 8.27
-shader_parameter/alpha = 0.24
-shader_parameter/palette = ExtResource("5_1kgpl")
-
-[sub_resource type="Gradient" id="Gradient_5vrtd"]
-offsets = PackedFloat32Array(0, 0.487013, 0.655844, 0.876623, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.0901961, 0.0901961, 0.14902, 1, 0.262745, 0.188235, 0.34902, 1, 0.572549, 0.305882, 0.517647, 1, 0.792157, 0.505882, 0.545098, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6vlel"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7etml"]
-seamless = true
-seamless_blend_skirt = 0.68
-color_ramp = SubResource("Gradient_5vrtd")
-noise = SubResource("FastNoiseLite_6vlel")
-
-[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("subviewport", "star_generator", "nebula_layers")]
+[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("star_generator", "nebula_layers")]
 script = ExtResource("1_8dqb6")
-subviewport = NodePath("SubViewport")
 star_generator = NodePath("SubViewport2/StarGenerator")
 nebula_layers = [NodePath("LowerNebula"), NodePath("UpperNebula")]
-
-[node name="PreviewDisplay" type="TextureRect" parent="."]
-visible = false
-texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_pecdu")
-stretch_mode = 1
 
 [node name="LowerNebula" parent="." instance=ExtResource("2_ao41h")]
 texture = SubResource("ViewportTexture_proil")
 palette = ExtResource("7_eqrwb")
 contrast = 12.585
 threshold = 73.27
-alpha = 0.755
+alpha = 0.9
+speed = 8.0
+
+[node name="UpperNebula" parent="." instance=ExtResource("2_ao41h")]
+offset_right = 720.0
+offset_bottom = 240.0
+texture = SubResource("ViewportTexture_qmkdn")
+contrast = 20.705
+threshold = 3.94
+alpha = 0.42
+speed = 24.0
 
 [node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_huo5d")
 anchors_preset = 15
@@ -105,28 +62,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_tvblh")
 stretch_mode = 1
-
-[node name="UpperNebula" parent="." instance=ExtResource("2_ao41h")]
-offset_right = 512.0
-offset_bottom = 512.0
-texture = SubResource("ViewportTexture_qmkdn")
-contrast = 20.705
-threshold = 3.94
-alpha = 0.34
-
-[node name="SubViewport" type="SubViewport" parent="."]
-canvas_item_default_texture_filter = 0
-size = Vector2i(360, 240)
-
-[node name="NebulasBelow" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_v4ms1")
-texture = SubResource("NoiseTexture2D_8gtxf")
-centered = false
-
-[node name="NebulaAbove" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_omovf")
-texture = SubResource("NoiseTexture2D_7etml")
-centered = false
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 transparent_bg = true

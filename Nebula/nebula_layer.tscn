@@ -7,16 +7,18 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dx17x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p5btr"]
 shader = ExtResource("3_llrmn")
 shader_parameter/contrast = 18.0
 shader_parameter/threshold = 7.445
 shader_parameter/alpha = 0.22
 
 [node name="NebulaLayer" type="TextureRect" node_paths=PackedStringArray("subviewport", "sprite")]
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(720, 480)
+offset_top = -240.0
+offset_bottom = -240.0
 texture = SubResource("ViewportTexture_ptxmb")
+expand_mode = 1
 stretch_mode = 1
 script = ExtResource("1_fy7kn")
 subviewport = NodePath("SubViewport")
@@ -25,9 +27,10 @@ palette = ExtResource("2_ixn55")
 contrast = 18.0
 threshold = 7.445
 alpha = 0.22
+speed = 32.0
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_dx17x")
+material = SubResource("ShaderMaterial_p5btr")
