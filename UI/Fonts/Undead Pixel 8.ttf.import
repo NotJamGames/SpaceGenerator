@@ -1,0 +1,38 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://bf3fvjj3eddhk"
+path="res://.godot/imported/Undead Pixel 8.ttf-6b00bc9b4b38fc3daa1010ff0a8c3249.fontdata"
+
+[deps]
+
+source_file="res://UI/Fonts/Undead Pixel 8.ttf"
+dest_files=["res://.godot/imported/Undead Pixel 8.ttf-6b00bc9b4b38fc3daa1010ff0a8c3249.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=0
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=0
+subpixel_positioning=0
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
+language_support={}
+script_support={}
+opentype_features={}

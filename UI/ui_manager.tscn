@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0omivo80nscj"]
+
+[ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
+[ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
+[ext_resource type="Texture2D" uid="uid://bcut6rqrk5w23" path="res://UI/Icons/plus_icon.png" id="2_icj5e"]
+[ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
+
+[node name="UIManager" type="HBoxContainer" node_paths=PackedStringArray("left_panel")]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hx1bx")
+script = ExtResource("2_4wugv")
+left_panel = [NodePath("LeftPanel/LayersExpandPanel"), NodePath("LeftPanel/LeftPanelExpanded")]
+
+[node name="LeftPanel" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LayersExpandPanel" type="PanelContainer" parent="LeftPanel"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="LayersExpandVBox" type="VBoxContainer" parent="LeftPanel/LayersExpandPanel"]
+layout_mode = 2
+
+[node name="LayersExpandButton" type="TextureRect" parent="LeftPanel/LayersExpandPanel/LayersExpandVBox"]
+custom_minimum_size = Vector2(14, 12)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_icj5e")
+stretch_mode = 4
+
+[node name="LeftPanelExpanded" type="PanelContainer" parent="LeftPanel"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LayersScrollContainer" type="ScrollContainer" parent="LeftPanel/LeftPanelExpanded"]
+layout_mode = 2
+
+[node name="LayersVBox" type="VBoxContainer" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer"]
+layout_mode = 2
+
+[node name="LayersHideButton" type="TextureRect" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+custom_minimum_size = Vector2(14, 12)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_o5whv")
+stretch_mode = 4
+
+[node name="HSeparator" type="HSeparator" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+layout_mode = 2
+
+[node name="LayersTitle" type="Label" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+layout_mode = 2
+text = "LAYERS"
+
+[node name="TextureButton" type="TextureButton" parent="LeftPanel"]
+custom_minimum_size = Vector2(38, 36)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="RightPanel" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightPanelVBox" type="VBoxContainer" parent="RightPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[connection signal="pressed" from="LeftPanel/TextureButton" to="." method="toggle_panel" binds= ["left_panel"]]

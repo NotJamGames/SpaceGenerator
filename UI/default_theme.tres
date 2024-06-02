@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ckpi87fktn0od"]
+
+[ext_resource type="FontFile" uid="uid://bf3fvjj3eddhk" path="res://UI/Fonts/Undead Pixel 8.ttf" id="1_v0t32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbpri"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6gbm"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 0.501961)
+
+[resource]
+default_font = ExtResource("1_v0t32")
+default_font_size = 16
+HSeparator/constants/separation = 12
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_pbpri")
+MarginContainer/constants/margin_bottom = 24
+MarginContainer/constants/margin_left = 24
+MarginContainer/constants/margin_right = 24
+MarginContainer/constants/margin_top = 24
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_g6gbm")
