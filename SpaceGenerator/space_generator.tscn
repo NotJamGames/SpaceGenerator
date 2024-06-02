@@ -29,7 +29,7 @@ palette = ExtResource("7_eqrwb")
 contrast = 14.52
 threshold = 48.31
 alpha = 0.86
-speed = 12.0
+speed = 8.0
 
 [node name="StarGenerator" parent="." instance=ExtResource("2_d6qfi")]
 offset_right = 1440.0
