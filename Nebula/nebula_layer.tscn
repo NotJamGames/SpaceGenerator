@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b18xsn8oiptpo"]
 
-[ext_resource type="Script" path="res://Nebula/nebula_layer.gd" id="1_fy7kn"]
+[ext_resource type="Script" path="res://Nebula/nebula_generator.gd" id="1_fy7kn"]
 [ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://Palettes/default_fg_palette.png" id="2_ixn55"]
 [ext_resource type="Shader" path="res://Nebula/nebula_dither_shader.gdshader" id="3_llrmn"]
 
