@@ -1,8 +1,14 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ckpi87fktn0od"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ckpi87fktn0od"]
 
 [ext_resource type="FontFile" uid="uid://bf3fvjj3eddhk" path="res://UI/Fonts/Undead Pixel 8.ttf" id="1_v0t32"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbpri"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qm3a8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btcs2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tgrun"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6gbm"]
 content_margin_left = 12.0
@@ -16,6 +22,24 @@ default_font = ExtResource("1_v0t32")
 default_font_size = 16
 HSeparator/constants/separation = 12
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_pbpri")
+LineEdit/colors/caret_color = Color(1, 1, 1, 1)
+LineEdit/colors/clear_button_color = Color(0, 0, 0, 1)
+LineEdit/colors/clear_button_color_pressed = Color(0, 0, 0, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_outline_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_selected_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(0, 0, 0, 1)
+LineEdit/colors/selection_color = Color(0, 0, 0, 1)
+LineEdit/constants/caret_width = 1
+LineEdit/constants/minimum_character_width = 0
+LineEdit/constants/outline_size = 0
+LineEdit/font_sizes/font_size = 16
+LineEdit/fonts/font = ExtResource("1_v0t32")
+LineEdit/icons/clear = null
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_qm3a8")
+LineEdit/styles/normal = SubResource("StyleBoxEmpty_btcs2")
+LineEdit/styles/read_only = SubResource("StyleBoxEmpty_tgrun")
 MarginContainer/constants/margin_bottom = 24
 MarginContainer/constants/margin_left = 24
 MarginContainer/constants/margin_right = 24

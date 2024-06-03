@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=6 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
 [ext_resource type="Texture2D" uid="uid://bcut6rqrk5w23" path="res://UI/Icons/plus_icon.png" id="2_icj5e"]
 [ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
+[ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
 
 [node name="UIManager" type="HBoxContainer" node_paths=PackedStringArray("left_panel")]
 texture_filter = 1
@@ -21,6 +22,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="LayersExpandPanel" type="PanelContainer" parent="LeftPanel"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -37,7 +39,6 @@ texture = ExtResource("2_icj5e")
 stretch_mode = 4
 
 [node name="LeftPanelExpanded" type="PanelContainer" parent="LeftPanel"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -46,6 +47,7 @@ layout_mode = 2
 
 [node name="LayersVBox" type="VBoxContainer" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="LayersHideButton" type="TextureRect" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
 custom_minimum_size = Vector2(14, 12)
@@ -61,6 +63,24 @@ layout_mode = 2
 [node name="LayersTitle" type="Label" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
 layout_mode = 2
 text = "LAYERS"
+
+[node name="NebulaLayerBelow" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
+layout_mode = 2
+
+[node name="LineEdit" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" index="0"]
+text = "Lower Nebula"
+
+[node name="StarLayer" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
+layout_mode = 2
+
+[node name="LineEdit" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" index="0"]
+text = "Star Layer"
+
+[node name="NebulaLayerAbove" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
+layout_mode = 2
+
+[node name="LineEdit" parent="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" index="0"]
+text = "Upper Nebula"
 
 [node name="TextureButton" type="TextureButton" parent="LeftPanel"]
 custom_minimum_size = Vector2(38, 36)
@@ -78,3 +98,7 @@ size_flags_horizontal = 3
 alignment = 2
 
 [connection signal="pressed" from="LeftPanel/TextureButton" to="." method="toggle_panel" binds= ["left_panel"]]
+
+[editable path="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]
+[editable path="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer"]
+[editable path="LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove"]
