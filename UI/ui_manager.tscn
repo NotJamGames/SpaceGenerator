@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hx1bx")
 script = ExtResource("2_4wugv")
-left_panel = [NodePath("MainUIHBox/LeftPanel/LeftPanelExpanded"), NodePath("MainUIHBox/LeftPanel/LayersExpandPanel")]
+left_panel = NodePath("MainUIHBox/LeftPanel/LeftPanelExpanded")
 delete_layer_dialogue = NodePath("DeleteLayerDialogue")
 delete_layer_dialogue_label = NodePath("DeleteLayerDialogue/PanelContainer/VBoxContainer/Label")
 
@@ -33,24 +33,8 @@ theme = ExtResource("1_hx1bx")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LayersExpandPanel" type="PanelContainer" parent="MainUIHBox/LeftPanel"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="LayersExpandVBox" type="VBoxContainer" parent="MainUIHBox/LeftPanel/LayersExpandPanel"]
-layout_mode = 2
-
-[node name="LayersExpandButton" type="TextureRect" parent="MainUIHBox/LeftPanel/LayersExpandPanel/LayersExpandVBox"]
-custom_minimum_size = Vector2(14, 12)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("2_icj5e")
-stretch_mode = 4
-
 [node name="LeftPanelExpanded" type="PanelContainer" parent="MainUIHBox/LeftPanel"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -61,16 +45,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LayersHideButton" type="TextureRect" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
-custom_minimum_size = Vector2(14, 12)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("4_o5whv")
-stretch_mode = 4
-
 [node name="HSeparator" type="HSeparator" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
 
 [node name="LayersTitle" type="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
 layout_mode = 2
@@ -94,11 +72,16 @@ layout_mode = 2
 [node name="LineEdit" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" index="0"]
 text = "Upper Nebula"
 
-[node name="TextureButton" type="TextureButton" parent="MainUIHBox/LeftPanel"]
-custom_minimum_size = Vector2(38, 36)
+[node name="Button" type="TextureButton" parent="MainUIHBox/LeftPanel"]
+custom_minimum_size = Vector2(26, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("2_icj5e")
+texture_pressed = ExtResource("4_o5whv")
+stretch_mode = 5
 
 [node name="RightPanel" type="MarginContainer" parent="MainUIHBox"]
 layout_mode = 2
@@ -152,6 +135,7 @@ text = "Cancel"
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="query_delete_layer"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="query_delete_layer"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="query_delete_layer"]
+[connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_panel" binds= ["left_panel"]]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
 

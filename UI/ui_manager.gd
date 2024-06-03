@@ -1,7 +1,7 @@
 extends Control
 
 
-@export var left_panel : Array[PanelContainer]
+@export var left_panel : PanelContainer
 
 @export var delete_layer_dialogue : ColorRect
 @export var delete_layer_dialogue_label : Label
@@ -10,15 +10,13 @@ extends Control
 var queued_deletions : Array = []
 
 
-func toggle_panel(panel_ref : String) -> void:
-	print("h")
-	var panels : Array[PanelContainer] = get(panel_ref)
-	if panels == null:
+func toggle_panel(new_state : bool, panel_ref : String) -> void:
+	var panel : PanelContainer = get(panel_ref) as PanelContainer
+	if panel == null:
 		push_error("Error: panel %s not found" % panel_ref)
 		return
 
-	for panel : PanelContainer in panels:
-		panel.visible = !panel.visible
+	panel.visible = new_state
 
 
 func create_layer() -> void:

@@ -51,13 +51,13 @@ speed = 24.0
 
 [node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
 
-[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="3" node_paths=PackedStringArray("matched_layer")]
+[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="2" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../LowerNebula")
 
-[node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="4" node_paths=PackedStringArray("matched_layer")]
+[node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="3" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../StarGenerator")
 
-[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="5" node_paths=PackedStringArray("matched_layer")]
+[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="4" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../UpperNebula")
 
 [editable path="UIManager"]
