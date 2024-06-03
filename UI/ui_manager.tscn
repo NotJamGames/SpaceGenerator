@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=7 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
 [ext_resource type="Texture2D" uid="uid://bcut6rqrk5w23" path="res://UI/Icons/plus_icon.png" id="2_icj5e"]
 [ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
 [ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfaio"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+content_margin_bottom = 0.0
 
 [node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "delete_layer_dialogue", "delete_layer_dialogue_label")]
 layout_mode = 3
@@ -50,30 +56,38 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="LayersTitle" type="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+[node name="PanelContainer" type="PanelContainer" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jfaio")
+
+[node name="LayersTitle" type="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/PanelContainer"]
 layout_mode = 2
 text = "LAYERS"
+
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="NebulaLayerBelow" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 
-[node name="LineEdit" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" index="0"]
+[node name="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow/HBoxContainer" index="0"]
 text = "Lower Nebula"
 
 [node name="StarLayer" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 
-[node name="LineEdit" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" index="0"]
-text = "Star Layer"
+[node name="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer/HBoxContainer" index="0"]
+text = "Stars"
 
 [node name="NebulaLayerAbove" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 
-[node name="LineEdit" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" index="0"]
+[node name="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove/HBoxContainer" index="0"]
 text = "Upper Nebula"
 
 [node name="Button" type="TextureButton" parent="MainUIHBox/LeftPanel"]
-custom_minimum_size = Vector2(26, 24)
+custom_minimum_size = Vector2(30, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -132,9 +146,9 @@ layout_mode = 2
 layout_mode = 2
 text = "Cancel"
 
-[connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="query_delete_layer"]
-[connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="query_delete_layer"]
-[connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="query_delete_layer"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="toggle_layer"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="toggle_layer"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_panel" binds= ["left_panel"]]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]

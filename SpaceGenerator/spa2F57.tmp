@@ -49,7 +49,10 @@ threshold = 3.94
 alpha = 0.43
 speed = 24.0
 
-[node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
+[node name="UIManager" parent="." node_paths=PackedStringArray("left_panel", "delete_layer_dialogue", "delete_layer_dialogue_label") instance=ExtResource("5_q4bfc")]
+left_panel = NodePath("")
+delete_layer_dialogue = NodePath("")
+delete_layer_dialogue_label = NodePath("")
 
 [node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="3" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../LowerNebula")

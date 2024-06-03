@@ -7,6 +7,7 @@ extends Control
 @export var delete_layer_dialogue_label : Label
 
 
+var active_layer_control : LayerControl
 var queued_deletions : Array = []
 
 
@@ -17,6 +18,14 @@ func toggle_panel(new_state : bool, panel_ref : String) -> void:
 		return
 
 	panel.visible = new_state
+
+
+func toggle_layer(layer_control : LayerControl, layer : GeneratorLayer) -> void:
+	if active_layer_control != null:
+		active_layer_control.toggle_selected(false)
+
+	active_layer_control = layer_control
+	# TODO: open layer control panel here
 
 
 func create_layer() -> void:
