@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bn4mdgkrojikg" path="res://UI/Icons/visible_icon_false.png" id="2_qdsd4"]
 [ext_resource type="Texture2D" uid="uid://dqqshsvoqdgoh" path="res://UI/Icons/delete_icon.png" id="3_bqmrg"]
 
-[node name="LayerControl" type="HBoxContainer"]
+[node name="LayerControl" type="HBoxContainer" node_paths=PackedStringArray("line_edit")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_0j8gu")
+line_edit = NodePath("LineEdit")
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 2
@@ -41,3 +42,4 @@ texture_focused = ExtResource("3_bqmrg")
 stretch_mode = 4
 
 [connection signal="toggled" from="ToggleVisible" to="." method="toggle_visible"]
+[connection signal="pressed" from="Delete" to="." method="delete"]

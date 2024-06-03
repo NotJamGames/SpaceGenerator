@@ -7,7 +7,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o2pte"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jxup"]
 shader = ExtResource("3_llrmn")
 shader_parameter/contrast = 18.0
 shader_parameter/threshold = 7.445
@@ -33,4 +33,4 @@ alpha = 0.22
 transparent_bg = true
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_o2pte")
+material = SubResource("ShaderMaterial_5jxup")

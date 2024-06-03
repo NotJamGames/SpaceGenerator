@@ -1,6 +1,28 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ckpi87fktn0od"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://ckpi87fktn0od"]
 
 [ext_resource type="FontFile" uid="uid://bf3fvjj3eddhk" path="res://UI/Fonts/Undead Pixel 8.ttf" id="1_v0t32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_awb0s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1l6y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dfts"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0.25098)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h6q6t"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogysf"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0.25098)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbpri"]
 
@@ -17,9 +39,34 @@ content_margin_right = 12.0
 content_margin_bottom = 12.0
 bg_color = Color(0, 0, 0, 0.501961)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_227wr"]
+
 [resource]
 default_font = ExtResource("1_v0t32")
 default_font_size = 16
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
+Button/colors/icon_focus_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_normal_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_v0t32")
+Button/styles/disabled = SubResource("StyleBoxEmpty_awb0s")
+Button/styles/focus = SubResource("StyleBoxEmpty_f1l6y")
+Button/styles/hover = SubResource("StyleBoxFlat_5dfts")
+Button/styles/normal = SubResource("StyleBoxEmpty_h6q6t")
+Button/styles/pressed = SubResource("StyleBoxFlat_ogysf")
 HSeparator/constants/separation = 12
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_pbpri")
 LineEdit/colors/caret_color = Color(1, 1, 1, 1)
@@ -45,3 +92,5 @@ MarginContainer/constants/margin_left = 24
 MarginContainer/constants/margin_right = 24
 MarginContainer/constants/margin_top = 24
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_g6gbm")
+VSeparator/constants/separation = 4
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_227wr")
