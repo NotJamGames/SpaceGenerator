@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hx1bx")
 script = ExtResource("2_4wugv")
-left_panel = NodePath("MainUIHBox/LeftPanel/LeftPanelExpanded")
+left_panel = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded")
 delete_layer_dialogue = NodePath("DeleteLayerDialogue")
 delete_layer_dialogue_label = NodePath("DeleteLayerDialogue/PanelContainer/VBoxContainer/Label")
 
@@ -39,52 +39,58 @@ theme = ExtResource("1_hx1bx")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LeftPanelExpanded" type="PanelContainer" parent="MainUIHBox/LeftPanel"]
-visible = false
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUIHBox/LeftPanel"]
+layout_mode = 2
+
+[node name="LeftPanelExpanded" type="PanelContainer" parent="MainUIHBox/LeftPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LayersScrollContainer" type="ScrollContainer" parent="MainUIHBox/LeftPanel/LeftPanelExpanded"]
+[node name="LayersScrollContainer" type="ScrollContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded"]
 layout_mode = 2
 
-[node name="LayersVBox" type="VBoxContainer" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer"]
+[node name="LayersVBox" type="VBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+[node name="HSeparator" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="PanelContainer" type="PanelContainer" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+[node name="PanelContainer" type="PanelContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jfaio")
 
-[node name="LayersTitle" type="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/PanelContainer"]
+[node name="LayersTitle" type="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/PanelContainer"]
 layout_mode = 2
 text = "LAYERS"
 
-[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="NebulaLayerBelow" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
+[node name="NebulaLayerBelow" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 
-[node name="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow/HBoxContainer" index="0"]
+[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow/HBoxContainer" index="0"]
 text = "Lower Nebula"
 
-[node name="StarLayer" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
+[node name="StarLayer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 
-[node name="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer/HBoxContainer" index="0"]
+[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer/HBoxContainer" index="0"]
 text = "Stars"
 
-[node name="NebulaLayerAbove" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
+[node name="NebulaLayerAbove" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 
-[node name="Label" parent="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove/HBoxContainer" index="0"]
+[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove/HBoxContainer" index="0"]
 text = "Upper Nebula"
+
+[node name="Control" type="Control" parent="MainUIHBox/LeftPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Button" type="TextureButton" parent="MainUIHBox/LeftPanel"]
 custom_minimum_size = Vector2(30, 24)
@@ -101,7 +107,13 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RightPanelVBox" type="VBoxContainer" parent="MainUIHBox/RightPanel"]
+[node name="RightPanelExpanded" type="PanelContainer" parent="MainUIHBox/RightPanel"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/RightPanelExpanded"]
+layout_mode = 2
+
+[node name="RightPanelVBox" type="VBoxContainer" parent="MainUIHBox/RightPanel/RightPanelExpanded/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
@@ -146,16 +158,16 @@ layout_mode = 2
 layout_mode = 2
 text = "Cancel"
 
-[connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="query_delete_layer"]
-[connection signal="was_selected" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="toggle_layer"]
-[connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="query_delete_layer"]
-[connection signal="was_selected" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="toggle_layer"]
-[connection signal="request_deletion" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="query_delete_layer"]
-[connection signal="was_selected" from="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="toggle_layer"]
+[connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="query_delete_layer"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="toggle_layer"]
+[connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="query_delete_layer"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="toggle_layer"]
+[connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="query_delete_layer"]
+[connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_panel" binds= ["left_panel"]]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
 
-[editable path="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]
-[editable path="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer"]
-[editable path="MainUIHBox/LeftPanel/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove"]
+[editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]
+[editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer"]
+[editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove"]
