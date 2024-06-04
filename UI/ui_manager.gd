@@ -18,6 +18,8 @@ func toggle_panel(new_state : bool, panel_ref : String) -> void:
 		return
 
 	panel.visible = new_state
+	if active_layer_control != null and !new_state:
+		active_layer_control.toggle_selected(false)
 
 
 func toggle_layer(layer_control : LayerControl, layer : GeneratorLayer) -> void:
