@@ -2,6 +2,7 @@ extends Control
 
 
 @export var left_panel : PanelContainer
+@export var right_panel : MarginContainer
 
 @export var delete_layer_dialogue : ColorRect
 @export var delete_layer_dialogue_label : Label
@@ -22,12 +23,15 @@ func toggle_panel(new_state : bool, panel_ref : String) -> void:
 		active_layer_control.toggle_selected(false)
 
 
-func toggle_layer(layer_control : LayerControl, layer : GeneratorLayer) -> void:
+func toggle_layer\
+		(layer_control : LayerControl, layer : GeneratorLayer,
+		layer_type : int) -> void:
 	if active_layer_control != null:
 		active_layer_control.toggle_selected(false)
 
 	active_layer_control = layer_control
-	# TODO: open layer control panel here
+
+	right_panel.configure_and_open_panel(layer_control, layer, layer_type)
 
 
 func create_layer() -> void:
@@ -46,7 +50,12 @@ func confirm_delete_layer() -> void:
 		node.queue_free()
 
 	delete_layer_dialogue.visible = false
+	right_panel.close_panel()
 
 
 func cancel_delete_layer() -> void:
 	delete_layer_dialogue.visible = false
+
+
+func update_layer_name(new_name : String) -> void:
+	active_layer_control.label.text = new_name

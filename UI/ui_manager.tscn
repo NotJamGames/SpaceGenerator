@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=10 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
 [ext_resource type="Texture2D" uid="uid://bcut6rqrk5w23" path="res://UI/Icons/plus_icon.png" id="2_icj5e"]
 [ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
 [ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
+[ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
+[ext_resource type="Script" path="res://UI/stars_layer_control_panel.gd" id="7_vdxbv"]
+[ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfaio"]
 content_margin_left = 4.0
@@ -12,7 +15,7 @@ content_margin_top = 4.0
 content_margin_right = 2.0
 content_margin_bottom = 0.0
 
-[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "delete_layer_dialogue", "delete_layer_dialogue_label")]
+[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "delete_layer_dialogue", "delete_layer_dialogue_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +25,7 @@ grow_vertical = 2
 theme = ExtResource("1_hx1bx")
 script = ExtResource("2_4wugv")
 left_panel = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded")
+right_panel = NodePath("MainUIHBox/RightPanel")
 delete_layer_dialogue = NodePath("DeleteLayerDialogue")
 delete_layer_dialogue_label = NodePath("DeleteLayerDialogue/PanelContainer/VBoxContainer/Label")
 
@@ -43,6 +47,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="LeftPanelExpanded" type="PanelContainer" parent="MainUIHBox/LeftPanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -72,6 +77,7 @@ theme_override_constants/separation = 4
 
 [node name="NebulaLayerBelow" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
+matched_layer_type = 1
 
 [node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow/HBoxContainer" index="0"]
 text = "Lower Nebula"
@@ -84,6 +90,7 @@ text = "Stars"
 
 [node name="NebulaLayerAbove" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" instance=ExtResource("5_e23ao")]
 layout_mode = 2
+matched_layer_type = 1
 
 [node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove/HBoxContainer" index="0"]
 text = "Upper Nebula"
@@ -103,20 +110,63 @@ texture_normal = ExtResource("2_icj5e")
 texture_pressed = ExtResource("4_o5whv")
 stretch_mode = 5
 
-[node name="RightPanel" type="MarginContainer" parent="MainUIHBox"]
+[node name="RightPanel" type="MarginContainer" parent="MainUIHBox" node_paths=PackedStringArray("panels")]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("6_7edgt")
+panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel")]
 
-[node name="RightPanelExpanded" type="PanelContainer" parent="MainUIHBox/RightPanel"]
+[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
+visible = false
+layout_mode = 2
+script = ExtResource("7_vdxbv")
+name_edit = NodePath("ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/RightPanelExpanded"]
-layout_mode = 2
-
-[node name="RightPanelVBox" type="VBoxContainer" parent="MainUIHBox/RightPanel/RightPanelExpanded/ScrollContainer"]
+[node name="RightPanelVBox" type="VBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 20
+
+[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
+visible = false
+layout_mode = 2
+script = ExtResource("8_43iu2")
+name_edit = NodePath("ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel"]
+layout_mode = 2
+
+[node name="RightPanelVBox" type="VBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 20
 
 [node name="DeleteLayerDialogue" type="ColorRect" parent="."]
 visible = false
@@ -165,6 +215,8 @@ text = "Cancel"
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="query_delete_layer"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_panel" binds= ["left_panel"]]
+[connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
+[connection signal="text_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
 

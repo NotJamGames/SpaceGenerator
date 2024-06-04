@@ -11,6 +11,9 @@ const LAYER_CONTROL_UNSELECTED_STYLEBOX : StyleBox = preload\
 @export var label : Label
 @export var matched_layer : GeneratorLayer
 
+enum LayerTypes {STARS_LAYER, NEBULA_LAYER}
+@export var matched_layer_type : LayerTypes
+
 
 var selected : bool = false
 
@@ -28,7 +31,7 @@ func check_toggle_selected(event : InputEvent) -> void:
 		toggle_selected(false)
 		return
 
-	was_selected.emit(self, matched_layer)
+	was_selected.emit(self, matched_layer, matched_layer_type)
 	toggle_selected(true)
 
 
