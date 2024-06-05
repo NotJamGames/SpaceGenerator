@@ -19,6 +19,7 @@ var selected : bool = false
 
 
 signal was_selected()
+signal was_deselected()
 signal request_deletion()
 
 
@@ -42,6 +43,7 @@ func toggle_selected(new_state : bool) -> void:
 		add_theme_stylebox_override("panel", LAYER_CONTROL_SELECTED_STYLEBOX)
 	else:
 		add_theme_stylebox_override("panel", LAYER_CONTROL_UNSELECTED_STYLEBOX)
+		was_deselected.emit()
 
 
 func toggle_visible(new_state : bool) -> void:

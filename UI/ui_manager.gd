@@ -34,6 +34,10 @@ func toggle_layer\
 	right_panel.configure_and_open_panel(layer_control, layer, layer_type)
 
 
+func close_layer_panel() -> void:
+	right_panel.close_panel()
+
+
 func create_layer() -> void:
 	pass
 	# remember to connect layer's signals here

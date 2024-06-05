@@ -209,10 +209,13 @@ layout_mode = 2
 text = "Cancel"
 
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="query_delete_layer"]
+[connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="close_layer_panel"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow" to="." method="toggle_layer"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="query_delete_layer"]
+[connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="close_layer_panel"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer" to="." method="toggle_layer"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="query_delete_layer"]
+[connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="close_layer_panel"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_panel" binds= ["left_panel"]]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
