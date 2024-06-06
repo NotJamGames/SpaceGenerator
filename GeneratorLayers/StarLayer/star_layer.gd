@@ -47,7 +47,8 @@ func generate_stars\
 	)
 
 	max_stars = new_max_stars
-	ratio = new_ratio
+	ratio.clear()
+	ratio.append_array(new_ratio)
 
 	for i : int in max_stars:
 		var new_seed : float = randf_range(.0, ratio_sum)
