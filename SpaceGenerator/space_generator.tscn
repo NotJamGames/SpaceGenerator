@@ -30,7 +30,7 @@ texture = SubResource("ViewportTexture_proil")
 palette = ExtResource("7_eqrwb")
 contrast = 14.52
 threshold = 48.31
-alpha = 0.86
+alpha = 0.92
 speed = 8.0
 
 [node name="StarGenerator" parent="." instance=ExtResource("2_d6qfi")]
@@ -47,7 +47,7 @@ scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_qmkdn")
 contrast = 20.705
 threshold = 3.94
-alpha = 0.43
+alpha = 0.56
 speed = 24.0
 
 [node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
@@ -60,6 +60,9 @@ matched_layer = NodePath("../../../../../../../../StarGenerator")
 
 [node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="5" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../../UpperNebula")
+
+[node name="StarsLayerControlPanel" parent="UIManager/MainUIHBox/RightPanel" index="0"]
+visible = false
 
 [editable path="UIManager"]
 [editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]

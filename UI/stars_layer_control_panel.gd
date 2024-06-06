@@ -53,9 +53,7 @@ func update_layer_speed(new_value : float) -> void:
 	layer.speed = new_value
 
 
-func push_star_layer_update\
-		(value_changed : bool = true, generate_new_layer : bool = true)\
-		-> void:
+func push_star_layer_update(value_changed : bool = true) -> void:
 	if !value_changed or closed: return
 
 	layer.generate_stars(num_stars, ratio, Vector2(360, 240))
