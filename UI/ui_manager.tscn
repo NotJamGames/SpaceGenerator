@@ -116,12 +116,12 @@ size_flags_horizontal = 3
 script = ExtResource("6_7edgt")
 panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel")]
 
-[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "name_edit")]
-visible = false
+[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "scroll_speed_slider", "name_edit")]
 layout_mode = 2
 script = ExtResource("7_vdxbv")
 star_quantity_slider = NodePath("ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider")
 star_ratio_sliders = [NodePath("ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider")]
+scroll_speed_slider = NodePath("ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider")
 name_edit = NodePath("ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel"]
@@ -150,9 +150,6 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
 text = "STAR PARAMETERS"
-
-[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
-layout_mode = 2
 
 [node name="StarQuantity" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
@@ -220,6 +217,28 @@ size_flags_horizontal = 3
 focus_mode = 0
 max_value = 1.0
 step = 0.01
+
+[node name="LayerParametersSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="LayerParametersTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "LAYER PARAMETERS"
+
+[node name="ScrollSpeedHBox" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="ScrollSpeedLabel" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Scroll Speed: "
+
+[node name="ScrollSpeedHSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 128.0
+step = 0.1
 
 [node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
 visible = false
@@ -313,6 +332,7 @@ text = "Cancel"
 [connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
 [connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [2]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_layer_speed"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]

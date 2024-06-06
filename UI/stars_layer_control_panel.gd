@@ -4,11 +4,13 @@ extends LayerControlPanel
 @export var star_quantity_slider : HSlider
 @export var star_ratio_sliders : Array[HSlider]
 
+@export var scroll_speed_slider : HSlider
 
 var layer : StarLayer
 
 var num_stars : int = 0
 var ratio : Array[float] = [.0, .0, .0]
+var speed : float
 
 var closed : bool = true
 
@@ -28,6 +30,8 @@ func configure_and_open\
 	for i : int in ratio.size():
 		star_ratio_sliders[i].value = ratio[i]
 
+	scroll_speed_slider.value = layer.speed
+
 	closed = false
 	visible = true
 
@@ -45,11 +49,15 @@ func update_star_ratio(new_value : float, index : int) -> void:
 	ratio[index] = new_value
 
 
-func push_star_layer_update(value_changed : bool = true) -> void:
+func update_layer_speed(new_value : float) -> void:
+	layer.speed = new_value
+
+
+func push_star_layer_update\
+		(value_changed : bool = true, generate_new_layer : bool = true)\
+		-> void:
 	if !value_changed or closed: return
 
-	# TODO: make this actually reflect star ratio
-	# and user-specified screen size
 	layer.generate_stars(num_stars, ratio, Vector2(360, 240))
 
 
