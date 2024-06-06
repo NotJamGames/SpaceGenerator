@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://d0omivo80nscj" path="res://UI/ui_manager.tscn" id="5_q4bfc"]
 [ext_resource type="Texture2D" uid="uid://drsp3gxhn1jxg" path="res://GeneratorLayers/NebulaLayer/Palettes/default_bg_palette.png" id="7_eqrwb"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_proil"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kcvwn"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ofv6x"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qmkdn"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_q355h"]
 viewport_path = NodePath("SubViewport")
 
 [node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("layers", "star_generator", "nebula_layers", "ui_manager")]
@@ -23,15 +23,15 @@ nebula_layers = [NodePath("LowerNebula"), NodePath("UpperNebula")]
 ui_manager = NodePath("UIManager")
 
 [node name="LowerNebula" parent="." instance=ExtResource("2_ao41h")]
-offset_right = 1440.0
-offset_bottom = 1200.0
-scale = Vector2(2, 2)
-texture = SubResource("ViewportTexture_proil")
+texture = SubResource("ViewportTexture_kcvwn")
 palette = ExtResource("7_eqrwb")
-contrast = 14.52
-threshold = 48.31
-alpha = 0.92
-speed = 8.0
+threshold = 0.255
+alpha = 0.9
+oscillate = true
+oscillation_intensity = 0.12
+oscillation_rate = 0.8
+oscillation_offset = 0.5
+speed = 6.0
 
 [node name="StarGenerator" parent="." instance=ExtResource("2_d6qfi")]
 offset_right = 1440.0
@@ -41,25 +41,18 @@ texture = SubResource("ViewportTexture_ofv6x")
 speed = 6.0
 
 [node name="UpperNebula" parent="." instance=ExtResource("2_ao41h")]
-offset_right = 1440.0
-offset_bottom = 1200.0
-scale = Vector2(2, 2)
-texture = SubResource("ViewportTexture_qmkdn")
-contrast = 20.705
-threshold = 3.94
-alpha = 0.56
-speed = 24.0
+texture = SubResource("ViewportTexture_q355h")
+threshold = 0.21
+alpha = 0.48
+oscillate = true
+oscillation_intensity = 0.06
+oscillation_rate = 0.5
+speed = 18.0
 
 [node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
 
-[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="3" node_paths=PackedStringArray("matched_layer")]
-matched_layer = NodePath("../../../../../../../../LowerNebula")
-
 [node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="4" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../../StarGenerator")
-
-[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="5" node_paths=PackedStringArray("matched_layer")]
-matched_layer = NodePath("../../../../../../../../UpperNebula")
 
 [node name="StarsLayerControlPanel" parent="UIManager/MainUIHBox/RightPanel" index="0"]
 visible = false

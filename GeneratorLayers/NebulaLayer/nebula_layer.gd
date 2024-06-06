@@ -9,14 +9,21 @@ extends GeneratorLayer
 
 
 const nebula_dither_shader : Shader = preload\
-		("res://GeneratorLayers/NebulaLayer/nebula_dither_shader.gdshader")
+		("res://GeneratorLayers/NebulaLayer/nebula_dither_shader_v2.gdshader")
 
 
 @export_category("Nebula Parameters")
 @export var palette : Texture : set = set_palette
-@export var contrast : float = 1.0 : set = set_contrast
-@export var threshold : float = 1.0 : set = set_threshold
-@export var alpha : float = 1.0 : set = set_alpha
+@export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold
+@export_range(.0, 1.0) var alpha : float = 1.0 : set = set_alpha
+
+@export var oscillate : bool = false : set = set_oscillate
+@export_range(.0, 2.0) var oscillation_intensity : float = .24 :\
+		set = set_oscillation_intensity
+@export_range(.01, 16.0) var oscillation_rate : float = .2 :\
+		set = set_oscillation_rate
+@export_range(.0, .5) var oscillation_offset : float = .0 :\
+		set = set_oscillation_offset
 
 
 @onready var noise_texture : NoiseTexture2D = NoiseTexture2D.new()
@@ -26,9 +33,13 @@ const nebula_dither_shader : Shader = preload\
 func _ready() -> void:
 	shader_material.shader = nebula_dither_shader
 	sprite.material = shader_material
-	set_contrast(contrast)
+
 	set_threshold(threshold)
 	set_alpha(alpha)
+	set_oscillate(oscillate)
+	set_oscillation_intensity(oscillation_intensity)
+	set_oscillation_rate(oscillation_rate)
+	set_oscillation_offset(oscillation_offset)
 
 
 func build_nebula(new_base_size : Vector2i) -> void:
@@ -52,34 +63,39 @@ func set_palette(new_palette : Texture) -> void:
 	palette = new_palette
 	if noise_texture == null or shader_material == null: return
 
-	var new_gradient : Gradient = Gradient.new()
-	new_gradient.add_point(.0, Color(.0, .0, .0, .0))
-
-	var palette_width : int = palette.get_width()
-	var palette_image : Image = palette.get_image()
-	for i : int in palette_width:
-		new_gradient.add_point\
-				(.36 + ((i + .5) * (.64 / palette_width)),
-				palette_image.get_pixel(i, 0))
-
-	noise_texture.color_ramp = new_gradient
-
 	shader_material.set_shader_parameter("palette", palette)
 
 
-func set_contrast(new_contrast : float) -> void:
-	contrast = new_contrast
+func set_shader_parameter(param_name : String, value : Variant) -> void:
 	if shader_material == null: return
-	shader_material.set_shader_parameter("contrast", contrast)
+	shader_material.set_shader_parameter(param_name, value)
 
 
 func set_threshold(new_threshold : float) -> void:
 	threshold = new_threshold
-	if shader_material == null: return
-	shader_material.set_shader_parameter("threshold", threshold)
+	set_shader_parameter("threshold", threshold)
 
 
-func set_alpha(new_alpha) -> void:
+func set_alpha(new_alpha : float) -> void:
 	alpha = new_alpha
-	if shader_material == null: return
-	shader_material.set_shader_parameter("alpha", alpha)
+	set_shader_parameter("alpha", alpha)
+
+
+func set_oscillate(new_state : bool) -> void:
+	oscillate = new_state
+	set_shader_parameter("oscillate", oscillate)
+
+
+func set_oscillation_intensity(value : float) -> void:
+	oscillation_intensity = value
+	set_shader_parameter("oscillation_intensity", oscillation_intensity)
+
+
+func set_oscillation_rate(value : float) -> void:
+	oscillation_rate = value
+	set_shader_parameter("oscillation_rate", value)
+
+
+func set_oscillation_offset(value : float) -> void:
+	oscillation_offset = value
+	set_shader_parameter("oscillation_offset", value)

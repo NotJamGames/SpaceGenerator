@@ -2,22 +2,26 @@
 
 [ext_resource type="Script" path="res://GeneratorLayers/NebulaLayer/nebula_layer.gd" id="1_yds7p"]
 [ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://GeneratorLayers/NebulaLayer/Palettes/default_fg_palette.png" id="2_ixn55"]
-[ext_resource type="Shader" path="res://GeneratorLayers/NebulaLayer/nebula_dither_shader.gdshader" id="3_llrmn"]
+[ext_resource type="Shader" path="res://GeneratorLayers/NebulaLayer/nebula_dither_shader_v2.gdshader" id="3_4gl83"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qru2"]
-shader = ExtResource("3_llrmn")
-shader_parameter/contrast = 18.0
-shader_parameter/threshold = 7.445
-shader_parameter/alpha = 0.22
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lkc8f"]
+shader = ExtResource("3_4gl83")
+shader_parameter/threshold = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/oscillate = false
+shader_parameter/oscillation_intensity = 0.12
+shader_parameter/oscillation_rate = 0.2
+shader_parameter/oscillation_offset = 0.0
 
 [node name="NebulaLayer" type="TextureRect" node_paths=PackedStringArray("subviewport", "sprite")]
 texture_filter = 1
 custom_minimum_size = Vector2(1440, 1440)
 offset_top = -240.0
 offset_bottom = -240.0
+scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_ptxmb")
 expand_mode = 1
 stretch_mode = 1
@@ -25,12 +29,10 @@ script = ExtResource("1_yds7p")
 subviewport = NodePath("SubViewport")
 sprite = NodePath("SubViewport/Sprite2D")
 palette = ExtResource("2_ixn55")
-contrast = 18.0
-threshold = 7.445
-alpha = 0.22
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
+size = Vector2i(360, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_1qru2")
+material = SubResource("ShaderMaterial_lkc8f")
