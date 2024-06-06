@@ -7,6 +7,8 @@ extends Node
 @export var star_generator : StarLayer
 @export var nebula_layers : Array[NebulaLayer]
 
+@export var ui_manager : Control
+
 
 func _ready() -> void:
 	generate_space(Vector2i(360, 240))

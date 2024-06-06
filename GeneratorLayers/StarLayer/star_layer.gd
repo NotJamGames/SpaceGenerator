@@ -33,6 +33,8 @@ const LARGE_STAR_RESOURCES : Array[Resource] = \
 func generate_stars\
 		(max_stars : int, ratio : Array[float], viewport_size : Vector2)\
 		-> void:
+	clear_stars()
+
 	var ratio_sum : float = ratio.reduce\
 	(
 		func(accum : float, number : float) -> float: return accum + number,
@@ -63,5 +65,5 @@ func generate_stars\
 
 
 func clear_stars() -> void:
-	for i : Node in get_children():
+	for i : Node in root_2d.get_children():
 		i.queue_free()

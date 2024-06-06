@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://ckpi87fktn0od"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://ckpi87fktn0od"]
 
 [ext_resource type="FontFile" uid="uid://bf3fvjj3eddhk" path="res://UI/Fonts/Undead Pixel 8.ttf" id="1_v0t32"]
+[ext_resource type="Texture2D" uid="uid://cqlfncj86mydu" path="res://UI/Icons/slider_grabber.png" id="2_38jb3"]
+[ext_resource type="Texture2D" uid="uid://dnyu6u7slvpuq" path="res://UI/Icons/slider_grabber_hover.png" id="3_dfgjb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_awb0s"]
 
@@ -25,6 +27,18 @@ content_margin_bottom = 0.0
 bg_color = Color(0.6, 0.6, 0.6, 0.25098)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbpri"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wbjq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3p27"]
+bg_color = Color(1, 1, 1, 1)
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_savhp"]
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qm3a8"]
 
@@ -69,6 +83,15 @@ Button/styles/normal = SubResource("StyleBoxEmpty_h6q6t")
 Button/styles/pressed = SubResource("StyleBoxFlat_ogysf")
 HSeparator/constants/separation = 12
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_pbpri")
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = ExtResource("2_38jb3")
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource("3_dfgjb")
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_7wbjq")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_d3p27")
+HSlider/styles/slider = SubResource("StyleBoxFlat_savhp")
 LineEdit/colors/caret_color = Color(1, 1, 1, 1)
 LineEdit/colors/clear_button_color = Color(0, 0, 0, 1)
 LineEdit/colors/clear_button_color_pressed = Color(0, 0, 0, 1)

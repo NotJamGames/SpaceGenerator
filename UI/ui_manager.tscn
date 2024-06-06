@@ -142,6 +142,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_length = 20
 
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "STAR PARAMETERS"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Star Quantity: "
+
+[node name="HSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 256.0
+
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
 [node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
 visible = false
 layout_mode = 2
@@ -167,6 +188,9 @@ text = "Name:"
 layout_mode = 2
 size_flags_horizontal = 3
 max_length = 20
+
+[node name="HSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
 
 [node name="DeleteLayerDialogue" type="ColorRect" parent="."]
 visible = false
@@ -219,6 +243,9 @@ text = "Cancel"
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_panel" binds= ["left_panel"]]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_quantity_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_quantity_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_quantity"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]

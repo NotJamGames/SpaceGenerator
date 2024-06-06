@@ -52,3 +52,4 @@ func toggle_visible(new_state : bool) -> void:
 
 func delete() -> void:
 	request_deletion.emit(label.text, [matched_layer, self])
+
