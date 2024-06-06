@@ -1,9 +1,16 @@
 extends LayerControlPanel
 
 
+@export var star_quantity_slider : HSlider
+@export var star_ratio_sliders : Array[HSlider]
+
+
 var layer : StarLayer
 
 var num_stars : int = 0
+var ratio : Array[float] = [.0, .0, .0]
+
+var closed : bool = true
 
 
 func configure_and_open\
@@ -14,19 +21,36 @@ func configure_and_open\
 	if layer == null:
 		push_error("Error: layer not of type StarLayer")
 
+	star_quantity_slider.value = layer.max_stars
+
+	ratio.clear()
+	ratio.append_array(layer.ratio)
+	for i : int in ratio.size():
+		star_ratio_sliders[i].value = ratio[i]
+
+	closed = false
 	visible = true
+
+
+func close() -> void:
+	visible = false
+	closed = true
 
 
 func update_star_quantity(new_value : float) -> void:
 	num_stars = int(new_value)
 
 
-func push_star_quantity_update(value_changed : bool = true) -> void:
-	if !value_changed: return
+func update_star_ratio(new_value : float, index : int) -> void:
+	ratio[index] = new_value
+
+
+func push_star_layer_update(value_changed : bool = true) -> void:
+	if !value_changed or closed: return
 
 	# TODO: make this actually reflect star ratio
 	# and user-specified screen size
-	layer.generate_stars(num_stars, [.65, .25, .1], Vector2(360, 240))
+	layer.generate_stars(num_stars, ratio, Vector2(360, 240))
 
 
 func check_slider_click_and_release\

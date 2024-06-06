@@ -116,10 +116,12 @@ size_flags_horizontal = 3
 script = ExtResource("6_7edgt")
 panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel")]
 
-[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
+[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "name_edit")]
 visible = false
 layout_mode = 2
 script = ExtResource("7_vdxbv")
+star_quantity_slider = NodePath("ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider")
+star_ratio_sliders = [NodePath("ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider")]
 name_edit = NodePath("ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel"]
@@ -146,15 +148,18 @@ max_length = 20
 layout_mode = 2
 text = "STAR PARAMETERS"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+[node name="HSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2"]
+[node name="StarQuantity" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="StarQuantityTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Star Quantity: "
 
-[node name="HSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2"]
+[node name="StarQuantitySlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -162,6 +167,56 @@ max_value = 256.0
 
 [node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
+
+[node name="StarRatioTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "Star Ratio
+"
+
+[node name="SmallStars" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="SmallStarsTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Small Stars:"
+
+[node name="SmallStarsSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="MediumStars" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="MediumStarsTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Medium Stars:"
+
+[node name="MediumStarsSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="LargeStars" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="LargeStarsTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Large Stars:"
+
+[node name="LargeStarsSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+max_value = 1.0
+step = 0.01
 
 [node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
 visible = false
@@ -243,9 +298,18 @@ text = "Cancel"
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_panel" binds= ["left_panel"]]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
-[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_quantity_update"]
-[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_quantity_update"]]
-[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer2/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_quantity"]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_quantity_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_quantity"]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [0]]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [1]]
+[connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [2]]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]

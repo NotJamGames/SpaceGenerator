@@ -3,6 +3,8 @@ extends LayerControlPanel
 
 var layer : GeneratorLayer
 
+var closed : bool = true
+
 
 func configure_and_open\
 		(layer_control : LayerControl, new_layer : GeneratorLayer) -> void:
@@ -12,4 +14,10 @@ func configure_and_open\
 	if layer == null:
 		push_error("Error: layer not of type NebulaLayer")
 
+	closed = false
 	visible = true
+
+
+func close() -> void:
+	visible = false
+	closed = true

@@ -30,16 +30,24 @@ const LARGE_STAR_RESOURCES : Array[Resource] = \
 @export var root_2d : Node2D
 
 
+var max_stars : int
+var ratio : Array[float]
+
+
 func generate_stars\
-		(max_stars : int, ratio : Array[float], viewport_size : Vector2)\
+		(new_max_stars : int, new_ratio : Array[float],
+		viewport_size : Vector2)\
 		-> void:
 	clear_stars()
 
-	var ratio_sum : float = ratio.reduce\
+	var ratio_sum : float = new_ratio.reduce\
 	(
 		func(accum : float, number : float) -> float: return accum + number,
 		.0
 	)
+
+	max_stars = new_max_stars
+	ratio = new_ratio
 
 	for i : int in max_stars:
 		var new_seed : float = randf_range(.0, ratio_sum)

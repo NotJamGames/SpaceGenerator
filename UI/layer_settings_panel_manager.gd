@@ -18,5 +18,5 @@ func configure_and_open_panel\
 func close_panel() -> void:
 	if open_panel_index == -1: return
 
-	panels[open_panel_index].visible = false
+	panels[open_panel_index].close()
 	open_panel_index = -1
