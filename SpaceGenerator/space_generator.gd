@@ -18,7 +18,7 @@ func generate_space(new_size : Vector2i) -> void:
 	for layer : NebulaLayer in nebula_layers:
 		layer.build_nebula(Vector2i(new_size))
 
-	star_generator.generate_stars(97, [.65, .2, .15], new_size)
+	star_generator.generate_stars(192, [.65, .2, .15], new_size)
 
 
 func generate_pngs() -> void:
