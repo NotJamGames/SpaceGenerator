@@ -26,7 +26,9 @@ signal request_deletion()
 func check_toggle_selected(event : InputEvent) -> void:
 	event = event as InputEventMouseButton
 	if event == null: return
-	if not event.is_released(): return
+	if event.button_index != MOUSE_BUTTON_LEFT\
+	or !event.is_released():
+		return
 
 	if selected:
 		toggle_selected(false)
