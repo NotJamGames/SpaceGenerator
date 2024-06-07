@@ -117,6 +117,7 @@ script = ExtResource("6_7edgt")
 panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel")]
 
 [node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "scroll_speed_slider", "name_edit")]
+visible = false
 layout_mode = 2
 script = ExtResource("7_vdxbv")
 star_quantity_slider = NodePath("ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider")
@@ -135,7 +136,7 @@ alignment = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+[node name="NameTitle" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
 layout_mode = 2
 text = "Name:"
 
@@ -240,10 +241,17 @@ size_flags_horizontal = 3
 max_value = 128.0
 step = 0.1
 
-[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
+[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("threshold_slider", "alpha_slider", "oscillation_checkbox", "oscillation_intensity_slider", "oscillation_rate_slider", "oscillation_offset_slider", "speed_slider", "name_edit")]
 visible = false
 layout_mode = 2
 script = ExtResource("8_43iu2")
+threshold_slider = NodePath("ScrollContainer/RightPanelVBox/Threshold/ThresholdHSlider")
+alpha_slider = NodePath("ScrollContainer/RightPanelVBox/Alpha/AlphaHSlider")
+oscillation_checkbox = NodePath("ScrollContainer/RightPanelVBox/Oscillation/CheckBox")
+oscillation_intensity_slider = NodePath("ScrollContainer/RightPanelVBox/OscillationIntensity/OscillationIntensityHSlider")
+oscillation_rate_slider = NodePath("ScrollContainer/RightPanelVBox/OscillationRate/OscillationRateHSlider")
+oscillation_offset_slider = NodePath("ScrollContainer/RightPanelVBox/OscillationOffset/OscillationOffsetHSlider")
+speed_slider = NodePath("ScrollContainer/RightPanelVBox/Speed/SpeedHSlider")
 name_edit = NodePath("ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel"]
@@ -257,7 +265,7 @@ alignment = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
+[node name="NameTitle" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer"]
 layout_mode = 2
 text = "Name:"
 
@@ -267,6 +275,116 @@ size_flags_horizontal = 3
 max_length = 20
 
 [node name="HSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="NebulaSettingsTitle" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "NEBULA SETTINGS"
+
+[node name="PaletteDialogue" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Palette" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/PaletteDialogue"]
+layout_mode = 2
+text = "Palette:"
+
+[node name="Threshold" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="ThresholdLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Threshold"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Threshold:"
+
+[node name="ThresholdHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Threshold"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="Alpha" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="AlphaLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Alpha"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Alpha:"
+
+[node name="AlphaHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Alpha"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Oscillation" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Oscillation"]
+layout_mode = 2
+text = "Oscillation Enabled"
+icon_alignment = 2
+
+[node name="OscillationIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="OscillationIntensityLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Osc. Intensity:"
+
+[node name="OscillationIntensityHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2.0
+step = 0.01
+
+[node name="OscillationRate" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="OscillationRateLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationRate"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Osc. Rate:"
+
+[node name="OscillationRateHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationRate"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 16.0
+step = 0.01
+
+[node name="OscillationOffset" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="OscillationOffsetLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationOffset"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Osc. Offset:"
+
+[node name="OscillationOffsetHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationOffset"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 0.5
+step = 0.005
+
+[node name="HSeparator3" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+text = "LAYER SETTINGS"
+
+[node name="Speed" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed"]
+layout_mode = 2
+
+[node name="SpeedHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed"]
 layout_mode = 2
 
 [node name="DeleteLayerDialogue" type="ColorRect" parent="."]
@@ -334,6 +452,13 @@ text = "Cancel"
 [connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [2]]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_layer_speed"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Threshold/ThresholdHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_threshold"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Alpha/AlphaHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_alpha"]
+[connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Oscillation/CheckBox" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillate"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationIntensity/OscillationIntensityHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_intensity"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationRate/OscillationRateHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_rate"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationOffset/OscillationOffsetHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_offset"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed/SpeedHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_speed"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
 

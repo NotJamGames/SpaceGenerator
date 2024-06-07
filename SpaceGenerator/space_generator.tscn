@@ -51,11 +51,14 @@ speed = 18.0
 
 [node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
 
+[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="3" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../LowerNebula")
+
 [node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="4" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../../StarGenerator")
 
-[node name="StarsLayerControlPanel" parent="UIManager/MainUIHBox/RightPanel" index="0"]
-visible = false
+[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="5" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../UpperNebula")
 
 [editable path="UIManager"]
 [editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]
