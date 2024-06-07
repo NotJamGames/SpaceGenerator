@@ -29,7 +29,7 @@ vec4[2] closest_color(float lum, vec4 color)
 
 	float high = max(min(1.0, lum + color_size), .0);
 
-	if (lum > .0 && high < .0)
+	if (lum < .0 && high < .0)
 	{
 		return vec4[2]
 		(vec4(.0, .0, .0, .0), vec4(.0, .0, .0, .0));
