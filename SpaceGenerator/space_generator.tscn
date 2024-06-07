@@ -60,6 +60,47 @@ matched_layer = NodePath("../../../../../../../../StarGenerator")
 [node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="5" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../../UpperNebula")
 
+[node name="StarQuantitySlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="SmallStarsSlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/SmallStars" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="MediumStarsSlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/MediumStars" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="LargeStarsSlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="ScrollSpeedHSlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="ThresholdHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Threshold" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="AlphaHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Alpha" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="CheckBox" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Oscillation" index="0"]
+mouse_default_cursor_shape = 2
+
+[node name="OscillationIntensityHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationIntensity" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="OscillationRateHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationRate" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="OscillationOffsetHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationOffset" index="1"]
+mouse_default_cursor_shape = 2
+
+[node name="SpeedLabel" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed" index="0"]
+size_flags_horizontal = 3
+text = "Scroll Speed: "
+
+[node name="SpeedHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed" index="1"]
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+
 [editable path="UIManager"]
 [editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]
 [editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer"]
