@@ -27,7 +27,7 @@ vec4[2] closest_color(float lum, vec4 color)
 {
 	float color_size = 1.0 / float(textureSize(palette, 0).x);
 
-	float high = max(min(1.0, lum + color_size), .0);
+	float high = min(1.0, lum + color_size);
 
 	if (lum < .0 && high < .0)
 	{

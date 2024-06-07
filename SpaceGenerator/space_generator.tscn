@@ -26,7 +26,7 @@ ui_manager = NodePath("UIManager")
 texture = SubResource("ViewportTexture_kcvwn")
 palette = ExtResource("7_eqrwb")
 threshold = 0.255
-alpha = 0.8
+alpha = 0.86
 oscillate = true
 oscillation_intensity = 0.08
 oscillation_rate = 0.8
@@ -42,8 +42,8 @@ speed = 6.0
 
 [node name="UpperNebula" parent="." instance=ExtResource("2_ao41h")]
 texture = SubResource("ViewportTexture_q355h")
-threshold = 0.28
-alpha = 0.36
+threshold = 0.2
+alpha = 0.4
 oscillate = true
 oscillation_intensity = 0.04
 oscillation_rate = 0.5

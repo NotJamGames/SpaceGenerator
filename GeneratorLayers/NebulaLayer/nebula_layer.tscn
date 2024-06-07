@@ -7,12 +7,12 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lkc8f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gktk2"]
 shader = ExtResource("3_4gl83")
 shader_parameter/threshold = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/oscillate = false
-shader_parameter/oscillation_intensity = 0.12
+shader_parameter/oscillation_intensity = 0.24
 shader_parameter/oscillation_rate = 0.2
 shader_parameter/oscillation_offset = 0.0
 
@@ -35,4 +35,4 @@ transparent_bg = true
 size = Vector2i(360, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_lkc8f")
+material = SubResource("ShaderMaterial_gktk2")
