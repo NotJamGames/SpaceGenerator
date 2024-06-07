@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1fkxy7mx2oq5"]
+
+[ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_btiwy"]
+[ext_resource type="Script" path="res://UI/color_setting.gd" id="2_fdqay"]
+
+[node name="ColorSetting" type="VBoxContainer" node_paths=PackedStringArray("color_picker_button", "weight_spin_box")]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_btiwy")
+script = ExtResource("2_fdqay")
+color_picker_button = NodePath("Color/ColorPickerButton")
+weight_spin_box = NodePath("Weight/SpinBox")
+
+[node name="Color" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Color" type="Label" parent="Color"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Color:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Color"]
+custom_minimum_size = Vector2(64, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Weight" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Weight" type="Label" parent="Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Weight:"
+
+[node name="SpinBox" type="SpinBox" parent="Weight"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MoveUp" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="MoveDown" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16

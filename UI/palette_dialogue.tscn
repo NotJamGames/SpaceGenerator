@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://8n23gphu766b"]
+
+[ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hxkv4"]
+[ext_resource type="Script" path="res://UI/palette_dialogue.gd" id="2_0j1jo"]
+[ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://GeneratorLayers/NebulaLayer/Palettes/default_fg_palette.png" id="3_e58tq"]
+
+[node name="PaletteDialogue" type="Control" node_paths=PackedStringArray("color_setting_vbox")]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hxkv4")
+script = ExtResource("2_0j1jo")
+color_setting_vbox = NodePath("MarginContainer/ScrollContainer/VBoxContainer")
+palette = ExtResource("3_e58tq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
