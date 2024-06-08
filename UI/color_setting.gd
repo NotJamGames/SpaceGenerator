@@ -22,7 +22,7 @@ func set_color_and_push_update(new_color : Color) -> void:
 	color_changed.emit()
 
 
-func set_weight(new_weight : float) -> void:
+func set_weight(new_weight : int) -> void:
 	weight = new_weight
 	weight_spin_box.value = new_weight
 
