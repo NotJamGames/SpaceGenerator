@@ -10,16 +10,16 @@ uniform float oscillation_intensity : hint_range(.01, 1.0, .01) = .12;
 uniform float oscillation_rate : hint_range(.01, 4.0, .01) = .2;
 uniform float oscillation_offset : hint_range(.0, .5, .01) = .0;
 
-const int indexMatrix4x4[16] = int[](0,  8,  2,  10,
+const int bayer_matrix[16] = int[](0,  8,  2,  10,
                                      12, 4,  14, 6,
                                      3,  11, 1,  9,
                                      15, 7,  13, 5);
 
 float index_value(vec4 fragcoord)
 {
-	int x = int(mod(fragcoord.x, 4));
-	int y = int(mod(fragcoord.y, 4));
-	return float(indexMatrix4x4[(x + y * 4)]) / 16.0;
+	ivec2 matrix_pos = ivec2
+			(int(mod(fragcoord.x, 4)), int(mod(fragcoord.y, 4)));
+	return float(bayer_matrix[(matrix_pos.x + matrix_pos.y * 4)]) / 16.0;
 }
 
 
