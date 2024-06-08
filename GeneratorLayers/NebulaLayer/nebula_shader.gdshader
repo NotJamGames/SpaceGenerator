@@ -4,6 +4,7 @@ uniform sampler2D palette : filter_nearest;
 
 uniform float threshold : hint_range(.0, 1.0, .01) = .0;
 uniform float alpha : hint_range(.0, 1.0, .01) = 1.0;
+uniform bool dither_enabled = true;
 
 uniform bool oscillate = false;
 uniform float oscillation_intensity : hint_range(.01, 1.0, .01) = .12;
@@ -62,6 +63,7 @@ vec4 dither(vec4 color, vec4 fragcoord)
 		(color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114)
 		- new_threshold;
 	vec4 colors[2] = closest_color(lum, fragcoord);
+	if (!dither_enabled){return colors[0];}
 
 	float matrix_value = index_value(fragcoord);
 	return lum < matrix_value ? colors[0] : colors[1];

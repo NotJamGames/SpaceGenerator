@@ -9,13 +9,14 @@ extends GeneratorLayer
 
 
 const nebula_dither_shader : Shader = preload\
-		("res://GeneratorLayers/NebulaLayer/nebula_dither_shader_v2.gdshader")
+		("res://GeneratorLayers/NebulaLayer/nebula_shader.gdshader")
 
 
 @export_category("Nebula Parameters")
 @export var palette : Texture : set = set_palette
 @export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold
 @export_range(.0, 1.0) var alpha : float = 1.0 : set = set_alpha
+@export var dither_enabled : bool = true : set = set_dither_enabled
 
 @export var oscillate : bool = false : set = set_oscillate
 @export_range(.0, 2.0) var oscillation_intensity : float = .24 :\
@@ -81,6 +82,11 @@ func set_alpha(new_alpha : float) -> void:
 	set_shader_parameter("alpha", alpha)
 
 
+func set_dither_enabled(new_state : bool) -> void:
+	dither_enabled = new_state
+	set_shader_parameter("dither_enabled", dither_enabled)
+
+
 func set_oscillate(new_state : bool) -> void:
 	oscillate = new_state
 	set_shader_parameter("oscillate", oscillate)
@@ -99,3 +105,7 @@ func set_oscillation_rate(value : float) -> void:
 func set_oscillation_offset(value : float) -> void:
 	oscillation_offset = value
 	set_shader_parameter("oscillation_offset", value)
+
+
+func new_seed() -> void:
+	noise_texture.noise.seed = randi()
