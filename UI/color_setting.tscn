@@ -45,7 +45,9 @@ text = "Weight:"
 [node name="SpinBox" type="SpinBox" parent="Weight"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = 1.0
 max_value = 10.0
+value = 1.0
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -62,3 +64,6 @@ stretch_mode = 3
 [node name="HSeparator2" type="HSeparator" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 16
+
+[connection signal="color_changed" from="Color/ColorPickerButton" to="." method="set_color_and_push_update"]
+[connection signal="value_changed" from="Weight/SpinBox" to="." method="set_weight_and_push_update"]

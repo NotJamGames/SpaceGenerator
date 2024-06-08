@@ -20,6 +20,8 @@ var layer : GeneratorLayer
 
 var closed : bool = true
 
+signal open_palette_editor_requested()
+
 
 func configure_and_open\
 		(layer_control : LayerControl, new_layer : GeneratorLayer) -> void:
@@ -47,6 +49,10 @@ func configure_and_open\
 func close() -> void:
 	visible = false
 	closed = true
+
+
+func request_open_palette_editor() -> void:
+	open_palette_editor_requested.emit(layer)
 
 
 func update_threshold(new_value : float) -> void:

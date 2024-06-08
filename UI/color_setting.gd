@@ -9,7 +9,8 @@ extends VBoxContainer
 @export var weight_spin_box : SpinBox
 
 
-signal color_changed
+signal color_changed()
+signal weight_changed()
 
 
 func set_color(new_color : Color) -> void:
@@ -27,6 +28,8 @@ func set_weight(new_weight : int) -> void:
 	weight_spin_box.value = new_weight
 
 
-func set_weight_and_push_update(new_weight : float) -> void:
+func set_weight_and_push_update(new_weight : int) -> void:
+	var mod : int = new_weight - weight
 	set_weight(new_weight)
+	weight_changed.emit(mod)
 	color_changed.emit()

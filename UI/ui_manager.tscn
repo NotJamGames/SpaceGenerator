@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=11 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
 [ext_resource type="Script" path="res://UI/stars_layer_control_panel.gd" id="7_vdxbv"]
 [ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
+[ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfaio"]
 content_margin_left = 4.0
@@ -110,11 +111,12 @@ texture_normal = ExtResource("2_icj5e")
 texture_pressed = ExtResource("4_o5whv")
 stretch_mode = 5
 
-[node name="RightPanel" type="MarginContainer" parent="MainUIHBox" node_paths=PackedStringArray("panels")]
+[node name="RightPanel" type="MarginContainer" parent="MainUIHBox" node_paths=PackedStringArray("panels", "palette_editor")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("6_7edgt")
 panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel")]
+palette_editor = NodePath("PaletteDialogue")
 
 [node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "scroll_speed_slider", "name_edit")]
 visible = false
@@ -290,13 +292,6 @@ layout_mode = 2
 layout_mode = 2
 text = "NEBULA SETTINGS"
 
-[node name="PaletteDialogue" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
-layout_mode = 2
-
-[node name="Palette" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/PaletteDialogue"]
-layout_mode = 2
-text = "Palette:"
-
 [node name="Threshold" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
 
@@ -403,11 +398,20 @@ layout_mode = 2
 [node name="HSeparator4" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
 
+[node name="EditPalette" type="Button" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Edit Palette"
+
 [node name="NewSeed" type="Button" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "New Seed"
 alignment = 0
+
+[node name="PaletteDialogue" parent="MainUIHBox/RightPanel" instance=ExtResource("9_8nwe8")]
+visible = false
+layout_mode = 2
 
 [node name="DeleteLayerDialogue" type="ColorRect" parent="."]
 visible = false
@@ -474,6 +478,7 @@ text = "Cancel"
 [connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [2]]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_layer_speed"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
+[connection signal="open_palette_editor_requested" from="MainUIHBox/RightPanel/NebulaLayerControlPanel" to="MainUIHBox/RightPanel" method="open_palette_editor"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Threshold/ThresholdHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_threshold"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Alpha/AlphaHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_alpha"]
@@ -483,6 +488,7 @@ text = "Cancel"
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationRate/OscillationRateHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_rate"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationOffset/OscillationOffsetHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_offset"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed/SpeedHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_speed"]
+[connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/EditPalette" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_open_palette_editor"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_new_seed"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
