@@ -7,7 +7,6 @@ extends Control
 @export var delete_layer_dialogue : ColorRect
 @export var delete_layer_dialogue_label : Label
 
-
 var active_layer_control : LayerControl
 var queued_deletions : Array = []
 
@@ -19,8 +18,8 @@ func toggle_panel(new_state : bool, panel_ref : String) -> void:
 		return
 
 	panel.visible = new_state
-	if active_layer_control != null and !new_state:
-		active_layer_control.toggle_selected(false)
+	if right_panel.open_panel_index != -1:
+		right_panel.visible = new_state
 
 
 func toggle_layer\
@@ -34,7 +33,7 @@ func toggle_layer\
 	right_panel.configure_and_open_panel(layer_control, layer, layer_type)
 
 
-func toggle_palette_editor(layer : NebulaLayer) -> void:
+func open_palette_editor(layer : NebulaLayer) -> void:
 	right_panel.open_palette_editor(layer)
 
 

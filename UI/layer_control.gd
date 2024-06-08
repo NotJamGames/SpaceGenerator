@@ -15,7 +15,11 @@ enum LayerTypes {STARS_LAYER, NEBULA_LAYER}
 @export var matched_layer_type : LayerTypes
 
 
+@export var locked_icon : TextureRect
+
+
 var selected : bool = false
+var locked : bool = false
 
 
 signal was_selected()
@@ -23,9 +27,13 @@ signal was_deselected()
 signal request_deletion()
 
 
+func _ready() -> void:
+	add_to_group("LayerControls")
+
+
 func check_toggle_selected(event : InputEvent) -> void:
 	event = event as InputEventMouseButton
-	if event == null: return
+	if event == null or locked: return
 	if event.button_index != MOUSE_BUTTON_LEFT\
 	or !event.is_released():
 		return
@@ -55,3 +63,7 @@ func toggle_visible(new_state : bool) -> void:
 func delete() -> void:
 	request_deletion.emit(label.text, [matched_layer, self])
 
+
+func set_locked(new_state : bool) -> void:
+	locked = new_state
+	locked_icon.visible = locked
