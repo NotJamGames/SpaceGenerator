@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://GeneratorLayers/NebulaLayer/nebula_layer.gd" id="1_yds7p"]
 [ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://GeneratorLayers/NebulaLayer/Palettes/default_fg_palette.png" id="2_ixn55"]
-[ext_resource type="Shader" path="res://GeneratorLayers/NebulaLayer/nebula_dither_shader_v2.gdshader" id="3_4gl83"]
+[ext_resource type="Shader" path="res://GeneratorLayers/NebulaLayer/nebula_shader.gdshader" id="3_4gl83"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gktk2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65jmi"]
 shader = ExtResource("3_4gl83")
 shader_parameter/threshold = 0.0
 shader_parameter/alpha = 1.0
@@ -35,4 +35,4 @@ transparent_bg = true
 size = Vector2i(360, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_gktk2")
+material = SubResource("ShaderMaterial_65jmi")
