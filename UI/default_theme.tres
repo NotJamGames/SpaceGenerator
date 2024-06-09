@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=31 format=3 uid="uid://ckpi87fktn0od"]
+[gd_resource type="Theme" load_steps=32 format=3 uid="uid://ckpi87fktn0od"]
 
 [ext_resource type="FontFile" uid="uid://bf3fvjj3eddhk" path="res://UI/Fonts/Undead Pixel 8.ttf" id="1_v0t32"]
 [ext_resource type="Texture2D" uid="uid://cqlfncj86mydu" path="res://UI/Icons/slider_grabber.png" id="2_38jb3"]
 [ext_resource type="Texture2D" uid="uid://dgng7aki7cgh3" path="res://UI/Icons/checkbox_checked.png" id="2_qsbal"]
 [ext_resource type="Texture2D" uid="uid://ciltieg6m3fy2" path="res://UI/Icons/checkbox_unchecked.png" id="3_ajdsb"]
 [ext_resource type="Texture2D" uid="uid://dnyu6u7slvpuq" path="res://UI/Icons/slider_grabber_hover.png" id="3_dfgjb"]
+[ext_resource type="Texture2D" uid="uid://doj7m7v3woad7" path="res://UI/Icons/up_down_icon.png" id="6_241k8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_awb0s"]
 
@@ -224,5 +225,6 @@ MarginContainer/constants/margin_left = 24
 MarginContainer/constants/margin_right = 24
 MarginContainer/constants/margin_top = 24
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_g6gbm")
+SpinBox/icons/updown = ExtResource("6_241k8")
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_227wr")
