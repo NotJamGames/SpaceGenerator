@@ -490,6 +490,7 @@ text = "Cancel"
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed/SpeedHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_speed"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/EditPalette" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_open_palette_editor"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_new_seed"]
+[connection signal="editor_closed" from="MainUIHBox/RightPanel/PaletteDialogue" to="MainUIHBox/RightPanel" method="close_palette_editor"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
 

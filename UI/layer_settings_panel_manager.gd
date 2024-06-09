@@ -41,3 +41,10 @@ func close_palette_editor() -> void:
 	palette_editor.close()
 	if open_panel_index != -1:
 		panels[open_panel_index].visible = true
+
+	for layer_control : Node in get_tree().get_nodes_in_group("LayerControls"):
+		layer_control = layer_control as LayerControl
+		if layer_control == null:
+			push_error("Node %s not of type LayerControl" % layer_control.name)
+			continue
+		layer_control.set_locked(false)

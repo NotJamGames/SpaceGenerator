@@ -5,12 +5,14 @@ const COLOR_SETTING_RESOURCE : Resource = preload\
 		("res://UI/color_setting.tscn")
 
 @export var color_setting_vbox : VBoxContainer
-@export var palette : Texture
+var previous_palette : Texture
 var palette_size : int = 0
 
 var color_setting_nodes : Array[ColorSetting]
 
 var layer : NebulaLayer
+
+signal editor_closed()
 
 
 func configure_and_open(new_layer : NebulaLayer) -> void:
@@ -30,6 +32,7 @@ func close() -> void:
 
 
 func evaluate_palette(new_palette : Texture) -> void:
+	previous_palette = new_palette
 	var palette_image : Image = new_palette.get_image()
 
 	palette_size = palette_image.get_width()
@@ -71,6 +74,15 @@ func generate_palette() -> void:
 			x_pos += 1
 
 	layer.set_palette(ImageTexture.create_from_image(new_palette))
+
+
+func confirm_palette() -> void:
+	editor_closed.emit()
+
+
+func cancel_palette() -> void:
+	layer.set_palette(previous_palette)
+	editor_closed.emit()
 
 
 func add_color_setting() -> void:
