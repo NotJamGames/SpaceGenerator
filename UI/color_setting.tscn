@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1fkxy7mx2oq5"]
+[gd_scene load_steps=8 format=3 uid="uid://b1fkxy7mx2oq5"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_btiwy"]
 [ext_resource type="Script" path="res://UI/color_setting.gd" id="2_fdqay"]
@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cocmeyqqbthee" path="res://UI/Icons/move_up_disabled.png" id="4_qhup5"]
 [ext_resource type="Texture2D" uid="uid://ciqfumrgihtwx" path="res://UI/Icons/move_down.png" id="5_476ba"]
 [ext_resource type="Texture2D" uid="uid://c8tju1e1rmiu2" path="res://UI/Icons/move_down_disabled.png" id="6_ho03p"]
+[ext_resource type="Texture2D" uid="uid://dqqshsvoqdgoh" path="res://UI/Icons/delete_icon.png" id="7_gt56b"]
 
-[node name="ColorSetting" type="VBoxContainer" node_paths=PackedStringArray("color_picker_button", "weight_spin_box")]
+[node name="ColorSetting" type="VBoxContainer" node_paths=PackedStringArray("move_up_button", "move_down_button", "color_picker_button", "weight_spin_box")]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +17,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_btiwy")
 script = ExtResource("2_fdqay")
+move_up_button = NodePath("Color/HBoxContainer/MoveUp")
+move_down_button = NodePath("Color/HBoxContainer/MoveDown")
 color_picker_button = NodePath("Color/ColorPickerButton")
 weight_spin_box = NodePath("Weight/SpinBox")
 
@@ -30,10 +33,7 @@ custom_minimum_size = Vector2(14, 8)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("3_ch5gh")
-texture_pressed = ExtResource("3_ch5gh")
-texture_hover = ExtResource("3_ch5gh")
 texture_disabled = ExtResource("4_qhup5")
-texture_focused = ExtResource("3_ch5gh")
 stretch_mode = 5
 
 [node name="MoveDown" type="TextureButton" parent="Color/HBoxContainer"]
@@ -41,10 +41,7 @@ custom_minimum_size = Vector2(14, 8)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5_476ba")
-texture_pressed = ExtResource("5_476ba")
-texture_hover = ExtResource("5_476ba")
 texture_disabled = ExtResource("6_ho03p")
-texture_focused = ExtResource("5_476ba")
 stretch_mode = 5
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="Color"]
@@ -63,12 +60,13 @@ layout_mode = 2
 
 [node name="Weight" type="Label" parent="Weight"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 text = "Weight:"
 
 [node name="SpinBox" type="SpinBox" parent="Weight"]
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 min_value = 1.0
@@ -76,9 +74,24 @@ max_value = 10.0
 value = 1.0
 alignment = 2
 
+[node name="TextureButton" type="TextureButton" parent="Weight"]
+custom_minimum_size = Vector2(14, 12)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_gt56b")
+texture_pressed = ExtResource("7_gt56b")
+texture_hover = ExtResource("7_gt56b")
+texture_disabled = ExtResource("7_gt56b")
+texture_focused = ExtResource("7_gt56b")
+stretch_mode = 5
+
 [node name="HSeparator2" type="HSeparator" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 16
 
+[connection signal="pressed" from="Color/HBoxContainer/MoveUp" to="." method="move_position" binds= [-1]]
+[connection signal="pressed" from="Color/HBoxContainer/MoveDown" to="." method="move_position" binds= [1]]
 [connection signal="color_changed" from="Color/ColorPickerButton" to="." method="set_color_and_push_update"]
 [connection signal="value_changed" from="Weight/SpinBox" to="." method="set_weight_and_push_update"]
+[connection signal="pressed" from="Weight/TextureButton" to="." method="request_deletion"]

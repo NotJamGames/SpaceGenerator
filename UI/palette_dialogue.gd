@@ -8,8 +8,6 @@ const COLOR_SETTING_RESOURCE : Resource = preload\
 var previous_palette : Texture
 var palette_size : int = 0
 
-var color_setting_nodes : Array[ColorSetting]
-
 var layer : NebulaLayer
 
 signal editor_closed()
@@ -54,10 +52,16 @@ func evaluate_palette(new_palette : Texture) -> void:
 		new_color_setting.color = color_setting[0]
 		new_color_setting.weight = color_setting[1]
 		color_setting_vbox.add_child(new_color_setting)
-		color_setting_nodes.append(new_color_setting)
+		new_color_setting.position_moved.connect(nodes_reordered)
 
 		new_color_setting.weight_changed.connect(increment_palette_size)
 		new_color_setting.color_changed.connect(generate_palette)
+		new_color_setting.deletion_requested.connect(delete_color_setting)
+
+	for color_setting in color_setting_vbox.get_children():
+		color_setting = color_setting as ColorSetting
+		if color_setting == null: continue
+		color_setting.evaluate_position()
 
 
 func generate_palette() -> void:
@@ -76,6 +80,14 @@ func generate_palette() -> void:
 	layer.set_palette(ImageTexture.create_from_image(new_palette))
 
 
+func nodes_reordered() -> void:
+	generate_palette()
+	for color_setting in color_setting_vbox.get_children():
+		color_setting = color_setting as ColorSetting
+		if color_setting == null: continue
+		color_setting.evaluate_position()
+
+
 func confirm_palette() -> void:
 	editor_closed.emit()
 
@@ -89,9 +101,26 @@ func add_color_setting() -> void:
 	var new_color_setting : ColorSetting = COLOR_SETTING_RESOURCE.instantiate()
 	new_color_setting.color = Color.WHITE
 	new_color_setting.weight = 1
+	palette_size += new_color_setting.weight
 	color_setting_vbox.add_child(new_color_setting)
+	new_color_setting.position_moved.connect(nodes_reordered)
+
+	new_color_setting.weight_changed.connect(increment_palette_size)
+	new_color_setting.color_changed.connect(generate_palette)
+	new_color_setting.deletion_requested.connect(delete_color_setting)
 
 	generate_palette()
+
+
+func delete_color_setting(color_setting : ColorSetting) -> void:
+	# don't delete the last remaining color
+	if color_setting_vbox.get_child_count() == 1:
+		return
+
+	palette_size -= color_setting.weight
+	color_setting.queue_free()
+	await color_setting.tree_exited
+	nodes_reordered()
 
 
 func increment_palette_size(mod : int) -> void:
