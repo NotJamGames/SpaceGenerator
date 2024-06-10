@@ -33,18 +33,19 @@ func evaluate_palette(new_palette : Texture) -> void:
 	previous_palette = new_palette
 	var palette_image : Image = new_palette.get_image()
 
-	palette_size = palette_image.get_width()
+	palette_size = palette_image.get_width() * palette_image.get_height()
 	var palette_colors : Array[Array] = []
-	for i : int in palette_size:
-		var new_color : Color = palette_image.get_pixel(i, 0)
-		if palette_colors.size() == 0:
-			palette_colors.append([new_color, 1])
-		elif new_color.is_equal_approx(palette_colors.back()[0]):
-			var new_palette_entry : Array = palette_colors.pop_back()
-			new_palette_entry[1] = new_palette_entry[1] + 1
-			palette_colors.append(new_palette_entry)
-		else:
-			palette_colors.append([new_color, 1])
+	for y : int in palette_image.get_height():
+		for x : int in palette_image.get_width():
+			var new_color : Color = palette_image.get_pixel(x, y)
+			if palette_colors.size() == 0:
+				palette_colors.append([new_color, 1])
+			elif new_color.is_equal_approx(palette_colors.back()[0]):
+				var new_palette_entry : Array = palette_colors.pop_back()
+				new_palette_entry[1] = new_palette_entry[1] + 1
+				palette_colors.append(new_palette_entry)
+			else:
+				palette_colors.append([new_color, 1])
 
 	for color_setting : Array in palette_colors:
 		var new_color_setting : ColorSetting = \
@@ -125,3 +126,14 @@ func delete_color_setting(color_setting : ColorSetting) -> void:
 
 func increment_palette_size(mod : int) -> void:
 	palette_size += mod
+
+
+func upload_palette():
+	var new_palette_image : Image = await JavaScriptUtility.load_image()
+	if new_palette_image == null:
+		push_error("Error: file upload failed; see error messages")
+		return
+
+	var new_palette_texture : ImageTexture = \
+			ImageTexture.create_from_image(new_palette_image)
+	evaluate_palette(new_palette_texture)

@@ -14,6 +14,10 @@ config/name="Space Generator"
 run/main_scene="res://SpaceGenerator/space_generator.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
+[autoload]
+
+JavaScriptUtility="*res://Utilities/javascript_utility.gd"
+
 [display]
 
 window/size/viewport_width=720
@@ -25,4 +29,5 @@ window/stretch/scale_mode="integer"
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

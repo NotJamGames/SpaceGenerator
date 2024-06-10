@@ -61,5 +61,6 @@ mouse_default_cursor_shape = 2
 text = "Cancel"
 
 [connection signal="pressed" from="VBoxContainer/AddColorUpload/AddColor" to="." method="add_color_setting"]
+[connection signal="pressed" from="VBoxContainer/AddColorUpload/UploadPalette" to="." method="upload_palette"]
 [connection signal="pressed" from="VBoxContainer/ConfirmCancel/Confirm" to="." method="confirm_palette"]
 [connection signal="pressed" from="VBoxContainer/ConfirmCancel/Cancel" to="." method="cancel_palette"]
