@@ -28,6 +28,7 @@ material = SubResource("ShaderMaterial_gr54g")
 custom_minimum_size = Vector2(1440, 1440)
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_nrfxb")
 stretch_mode = 1
 script = ExtResource("1_cp568")

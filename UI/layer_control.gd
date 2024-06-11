@@ -11,8 +11,8 @@ const LAYER_CONTROL_UNSELECTED_STYLEBOX : StyleBox = preload\
 @export var label : Label
 @export var matched_layer : GeneratorLayer
 
-enum LayerTypes {STARS_LAYER, NEBULA_LAYER}
-@export var matched_layer_type : LayerTypes
+
+@export var matched_layer_type : SpaceGenerator.LayerTypes
 
 
 @export var locked_icon : TextureRect
@@ -29,6 +29,13 @@ signal request_deletion()
 
 func _ready() -> void:
 	add_to_group("LayerControls")
+
+	if label.text != "": return
+	match matched_layer_type:
+		SpaceGenerator.LayerTypes.STAR_LAYER:
+			label.text = "Star Layer"
+		SpaceGenerator.LayerTypes.NEBULA_LAYER:
+			label.text = "Nebula Layer"
 
 
 func check_toggle_selected(event : InputEvent) -> void:

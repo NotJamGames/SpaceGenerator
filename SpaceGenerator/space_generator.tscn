@@ -15,14 +15,25 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_q355h"]
 viewport_path = NodePath("SubViewport")
 
-[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("layers", "star_generator", "nebula_layers", "ui_manager")]
+[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("layers", "layer_container", "star_generator", "nebula_layers", "ui_manager")]
 script = ExtResource("1_8dqb6")
-layers = [NodePath("LowerNebula"), NodePath("StarGenerator"), NodePath("UpperNebula")]
-star_generator = NodePath("StarGenerator")
-nebula_layers = [NodePath("LowerNebula"), NodePath("UpperNebula")]
+layers = [NodePath("Layers/LowerNebula"), NodePath("Layers/StarGenerator"), NodePath("Layers/UpperNebula")]
+layer_container = NodePath("Layers")
+star_generator = NodePath("Layers/StarGenerator")
+nebula_layers = [NodePath("Layers/LowerNebula"), NodePath("Layers/UpperNebula")]
 ui_manager = NodePath("UIManager")
 
-[node name="LowerNebula" parent="." instance=ExtResource("2_ao41h")]
+[node name="Layers" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LowerNebula" parent="Layers" instance=ExtResource("2_ao41h")]
+layout_mode = 0
+offset_top = 0.0
+offset_right = 1440.0
+offset_bottom = 1200.0
 texture = SubResource("ViewportTexture_kcvwn")
 palette = ExtResource("7_eqrwb")
 threshold = 0.255
@@ -34,14 +45,18 @@ oscillation_rate = 0.8
 oscillation_offset = 0.5
 speed = 6.0
 
-[node name="StarGenerator" parent="." instance=ExtResource("2_d6qfi")]
+[node name="StarGenerator" parent="Layers" instance=ExtResource("2_d6qfi")]
+layout_mode = 0
 offset_right = 1440.0
 offset_bottom = 1440.0
-scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_ofv6x")
 speed = 6.0
 
-[node name="UpperNebula" parent="." instance=ExtResource("2_ao41h")]
+[node name="UpperNebula" parent="Layers" instance=ExtResource("2_ao41h")]
+layout_mode = 0
+offset_top = 0.0
+offset_right = 1440.0
+offset_bottom = 1200.0
 texture = SubResource("ViewportTexture_q355h")
 threshold = 0.2
 alpha = 0.4
@@ -53,14 +68,14 @@ speed = 18.0
 
 [node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
 
-[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="3" node_paths=PackedStringArray("matched_layer")]
-matched_layer = NodePath("../../../../../../../../LowerNebula")
+[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" index="0" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../../Layers/LowerNebula")
 
-[node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="4" node_paths=PackedStringArray("matched_layer")]
-matched_layer = NodePath("../../../../../../../../StarGenerator")
+[node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" index="1" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../../Layers/StarGenerator")
 
-[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox" index="5" node_paths=PackedStringArray("matched_layer")]
-matched_layer = NodePath("../../../../../../../../UpperNebula")
+[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" index="2" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../../Layers/UpperNebula")
 
 [node name="StarQuantitySlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity" index="1"]
 mouse_default_cursor_shape = 2
@@ -103,7 +118,9 @@ text = "Scroll Speed: "
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
+[connection signal="layer_added" from="UIManager" to="." method="add_layer"]
+
 [editable path="UIManager"]
-[editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerBelow"]
-[editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/StarLayer"]
-[editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersScrollContainer/LayersVBox/NebulaLayerAbove"]
+[editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow"]
+[editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer"]
+[editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove"]
