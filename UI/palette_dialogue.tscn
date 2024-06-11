@@ -33,17 +33,19 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
+[node name="UploadPalette" type="Button" parent="VBoxContainer/AddColorUpload"]
+layout_mode = 2
+size_flags_horizontal = 6
+tooltip_text = "Palettes should be in .png format,
+with 1px per color"
+mouse_default_cursor_shape = 2
+text = "Upload Palette"
+
 [node name="AddColor" type="Button" parent="VBoxContainer/AddColorUpload"]
 layout_mode = 2
 size_flags_horizontal = 6
 mouse_default_cursor_shape = 2
 text = "Add Color"
-
-[node name="UploadPalette" type="Button" parent="VBoxContainer/AddColorUpload"]
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_default_cursor_shape = 2
-text = "Upload Palette"
 
 [node name="ConfirmCancel" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -60,7 +62,7 @@ size_flags_horizontal = 6
 mouse_default_cursor_shape = 2
 text = "Cancel"
 
-[connection signal="pressed" from="VBoxContainer/AddColorUpload/AddColor" to="." method="add_color_setting"]
 [connection signal="pressed" from="VBoxContainer/AddColorUpload/UploadPalette" to="." method="upload_palette"]
+[connection signal="pressed" from="VBoxContainer/AddColorUpload/AddColor" to="." method="add_color_setting"]
 [connection signal="pressed" from="VBoxContainer/ConfirmCancel/Confirm" to="." method="confirm_palette"]
 [connection signal="pressed" from="VBoxContainer/ConfirmCancel/Cancel" to="." method="cancel_palette"]

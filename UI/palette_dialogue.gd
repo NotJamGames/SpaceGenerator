@@ -29,7 +29,15 @@ func close() -> void:
 	visible = false
 
 
+func clear_palette() -> void:
+	if color_setting_vbox.get_child_count() == 0: return
+	for color_palette in color_setting_vbox.get_children():
+		color_palette.queue_free()
+
+
 func evaluate_palette(new_palette : Texture) -> void:
+	clear_palette()
+
 	previous_palette = new_palette
 	var palette_image : Image = new_palette.get_image()
 
