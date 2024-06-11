@@ -145,3 +145,6 @@ func upload_palette():
 	var new_palette_texture : ImageTexture = \
 			ImageTexture.create_from_image(new_palette_image)
 	evaluate_palette(new_palette_texture)
+
+	await get_tree().process_frame
+	generate_palette()
