@@ -52,6 +52,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="LeftPanelExpanded" type="PanelContainer" parent="MainUIHBox/LeftPanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -89,21 +90,12 @@ size_flags_vertical = 3
 layout_mode = 2
 matched_layer_type = 1
 
-[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow/HBoxContainer" index="0"]
-text = "Lower Nebula"
-
 [node name="StarLayer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" instance=ExtResource("5_e23ao")]
 layout_mode = 2
-
-[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer/HBoxContainer" index="0"]
-text = "Stars"
 
 [node name="NebulaLayerAbove" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 matched_layer_type = 1
-
-[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove/HBoxContainer" index="0"]
-text = "Upper Nebula"
 
 [node name="HSeparator3" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
 layout_mode = 2
@@ -539,12 +531,15 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Cancel"
 
+[connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="request_layer_reorder"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="query_delete_layer"]
 [connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="close_layer_panel"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="toggle_layer"]
+[connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="request_layer_reorder"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="query_delete_layer"]
 [connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="close_layer_panel"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/StarLayer" to="." method="toggle_layer"]
+[connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="request_layer_reorder"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="query_delete_layer"]
 [connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="close_layer_panel"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="toggle_layer"]

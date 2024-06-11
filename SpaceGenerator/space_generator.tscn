@@ -117,6 +117,7 @@ mouse_default_cursor_shape = 2
 
 [connection signal="layer_added" from="UIManager" to="." method="add_layer"]
 [connection signal="layer_duplicated" from="UIManager" to="." method="duplicate_layer"]
+[connection signal="reorder_requested" from="UIManager" to="." method="reorder_layer"]
 
 [editable path="UIManager"]
 [editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow"]

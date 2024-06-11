@@ -90,3 +90,7 @@ func duplicate_nebula_layer(source_layer : NebulaLayer) -> void:
 	new_layer.noise_texture.noise.seed = source_layer.noise_texture.noise.seed
 
 	ui_manager.add_layer_control(new_layer, LayerTypes.NEBULA_LAYER)
+
+
+func reorder_layer(layer : GeneratorLayer, direction : int) -> void:
+	layer_container.move_child(layer, layer.get_index() + direction)

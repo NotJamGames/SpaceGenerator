@@ -20,6 +20,7 @@ var queued_deletions : Array = []
 
 signal layer_added(layer_type : SpaceGenerator.LayerTypes)
 signal layer_duplicated(source_layer : GeneratorLayer)
+signal reorder_requested(layer : GeneratorLayer, direction : int)
 
 
 func toggle_left_panel(new_state : bool) -> void:
@@ -66,6 +67,10 @@ func duplicate_layer() -> void:
 	layer_duplicated.emit(active_layer_control.matched_layer)
 
 
+func request_layer_reorder(layer : GeneratorLayer, direction : int) -> void:
+	reorder_requested.emit(layer, direction)
+
+
 func add_layer_control\
 		(layer : GeneratorLayer, layer_type : SpaceGenerator.LayerTypes)\
 		-> void:
@@ -75,8 +80,10 @@ func add_layer_control\
 	new_layer_control.request_deletion.connect(query_delete_layer)
 	new_layer_control.was_deselected.connect(close_layer_panel)
 	new_layer_control.was_selected.connect(toggle_layer)
+	new_layer_control.reorder_requested.connect(request_layer_reorder)
 	layer_controls_vbox.add_child(new_layer_control)
 	new_layer_control.toggle_selected(true)
+	new_layer_control.evaluate_position()
 	toggle_layer(new_layer_control, layer, layer_type)
 
 

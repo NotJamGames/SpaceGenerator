@@ -1,34 +1,64 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqqvcg3pmvy88"]
+[gd_scene load_steps=11 format=3 uid="uid://bqqvcg3pmvy88"]
 
 [ext_resource type="Script" path="res://UI/layer_control.gd" id="1_0j8gu"]
 [ext_resource type="Texture2D" uid="uid://171w0mnnmdr3" path="res://UI/Icons/visible_icon_true.png" id="1_dvjv0"]
 [ext_resource type="StyleBox" uid="uid://b2g0li4ggp5k8" path="res://UI/Styleboxes/layer_control_unselected.tres" id="1_moycf"]
 [ext_resource type="Texture2D" uid="uid://bn4mdgkrojikg" path="res://UI/Icons/visible_icon_false.png" id="2_qdsd4"]
 [ext_resource type="Texture2D" uid="uid://dqqshsvoqdgoh" path="res://UI/Icons/delete_icon.png" id="3_bqmrg"]
+[ext_resource type="Texture2D" uid="uid://dttxnw5qjvy8t" path="res://UI/Icons/move_up_small.png" id="3_vs7cs"]
+[ext_resource type="Texture2D" uid="uid://dkhj7i4ib6sky" path="res://UI/Icons/move_up_small_disabled.png" id="4_e1jv6"]
+[ext_resource type="Texture2D" uid="uid://b6wx7dsa6hvsw" path="res://UI/Icons/move_down_small.png" id="5_ib54j"]
 [ext_resource type="Texture2D" uid="uid://2q3w22s86xam" path="res://UI/Icons/locked_icon.png" id="6_8tkux"]
+[ext_resource type="Texture2D" uid="uid://bfrt8dyytat2w" path="res://UI/Icons/move_down_small_disabled.png" id="6_q26q5"]
 
-[node name="LayerControl" type="PanelContainer" node_paths=PackedStringArray("label", "locked_icon")]
+[node name="LayerControl" type="PanelContainer" node_paths=PackedStringArray("label", "move_up_button", "move_down_button", "locked_icon")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_default_cursor_shape = 2
 theme_override_styles/panel = ExtResource("1_moycf")
 script = ExtResource("1_0j8gu")
-label = NodePath("HBoxContainer/Label")
-locked_icon = NodePath("HBoxContainer/LockedIcon")
+label = NodePath("HBoxContainer/HBoxContainer/Label")
+move_up_button = NodePath("HBoxContainer/VBoxContainer/MoveUp")
+move_down_button = NodePath("HBoxContainer/VBoxContainer/MoveDown")
+locked_icon = NodePath("HBoxContainer/HBoxContainer/LockedIcon")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MoveUp" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(6, 4)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_vs7cs")
+texture_disabled = ExtResource("4_e1jv6")
+stretch_mode = 5
+
+[node name="MoveDown" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(6, 4)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_ib54j")
+texture_disabled = ExtResource("6_q26q5")
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LockedIcon" type="TextureRect" parent="HBoxContainer"]
+[node name="LockedIcon" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(14, 12)
 layout_mode = 2
@@ -37,7 +67,7 @@ size_flags_vertical = 0
 texture = ExtResource("6_8tkux")
 stretch_mode = 4
 
-[node name="ToggleVisible" type="TextureButton" parent="HBoxContainer"]
+[node name="ToggleVisible" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(14, 12)
 layout_mode = 2
 size_flags_vertical = 0
@@ -47,7 +77,7 @@ texture_normal = ExtResource("1_dvjv0")
 texture_pressed = ExtResource("2_qdsd4")
 stretch_mode = 4
 
-[node name="Delete" type="TextureButton" parent="HBoxContainer"]
+[node name="Delete" type="TextureButton" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(14, 12)
 layout_mode = 2
 size_flags_vertical = 0
@@ -59,6 +89,8 @@ texture_disabled = ExtResource("3_bqmrg")
 texture_focused = ExtResource("3_bqmrg")
 stretch_mode = 4
 
-[connection signal="gui_input" from="." to="." method="check_toggle_selected"]
-[connection signal="toggled" from="HBoxContainer/ToggleVisible" to="." method="toggle_visible"]
-[connection signal="pressed" from="HBoxContainer/Delete" to="." method="delete"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MoveUp" to="." method="reorder_layer" binds= [-1]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MoveDown" to="." method="reorder_layer" binds= [1]]
+[connection signal="gui_input" from="HBoxContainer/HBoxContainer" to="." method="check_toggle_selected"]
+[connection signal="toggled" from="HBoxContainer/HBoxContainer/ToggleVisible" to="." method="toggle_visible"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/Delete" to="." method="delete"]
