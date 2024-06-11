@@ -23,6 +23,10 @@ signal layer_duplicated(source_layer : GeneratorLayer)
 signal reorder_requested(layer : GeneratorLayer, direction : int)
 
 
+func _ready() -> void:
+	layer_controls_reevaluate_positions()
+
+
 func toggle_left_panel(new_state : bool) -> void:
 	left_panel.visible = new_state
 
@@ -69,6 +73,17 @@ func duplicate_layer() -> void:
 
 func request_layer_reorder(layer : GeneratorLayer, direction : int) -> void:
 	reorder_requested.emit(layer, direction)
+	layer_controls_reevaluate_positions()
+
+
+func layer_controls_reevaluate_positions() -> void:
+	for layer_control : Node in layer_controls_vbox.get_children():
+		layer_control = layer_control as LayerControl
+		if layer_control == null:
+			push_error("Error: layer_controls_vbox has child not of type LayerControl")
+			continue
+
+		layer_control.evaluate_position()
 
 
 func add_layer_control\
