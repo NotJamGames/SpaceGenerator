@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=12 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
 [ext_resource type="Texture2D" uid="uid://bcut6rqrk5w23" path="res://UI/Icons/plus_icon.png" id="2_icj5e"]
+[ext_resource type="Script" path="res://UI/duplicate_layer.gd" id="4_0kcov"]
 [ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
 [ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
 [ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
@@ -16,7 +17,7 @@ content_margin_top = 4.0
 content_margin_right = 2.0
 content_margin_bottom = 0.0
 
-[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label")]
+[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "duplicate_layer_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,6 +32,7 @@ layer_controls_vbox = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpa
 add_layer_dialogue = NodePath("AddLayerDialogue")
 delete_layer_dialogue = NodePath("DeleteLayerDialogue")
 delete_layer_dialogue_label = NodePath("DeleteLayerDialogue/PanelContainer/VBoxContainer/Label")
+duplicate_layer_button = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer/DuplicateLayer")
 
 [node name="MainUIHBox" type="HBoxContainer" parent="."]
 texture_filter = 1
@@ -50,7 +52,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="LeftPanelExpanded" type="PanelContainer" parent="MainUIHBox/LeftPanel/VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -107,10 +108,23 @@ text = "Upper Nebula"
 [node name="HSeparator3" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
 layout_mode = 2
 
-[node name="AddLayer" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="AddLayer" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 text = "Add Layer"
+
+[node name="DuplicateLayer" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+disabled = true
+text = "Duplicate Layer"
+script = ExtResource("4_0kcov")
 
 [node name="Control" type="Control" parent="MainUIHBox/LeftPanel/VBoxContainer"]
 layout_mode = 2
@@ -534,7 +548,8 @@ text = "Cancel"
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="query_delete_layer"]
 [connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="close_layer_panel"]
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="toggle_layer"]
-[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/AddLayer" to="." method="query_create_layer"]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer/AddLayer" to="." method="query_create_layer"]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/HBoxContainer/DuplicateLayer" to="." method="duplicate_layer"]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_left_panel"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]

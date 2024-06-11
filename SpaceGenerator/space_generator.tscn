@@ -38,7 +38,6 @@ texture = SubResource("ViewportTexture_kcvwn")
 palette = ExtResource("7_eqrwb")
 threshold = 0.255
 alpha = 0.86
-dither_enabled = true
 oscillate = true
 oscillation_intensity = 0.08
 oscillation_rate = 0.8
@@ -59,8 +58,6 @@ offset_right = 1440.0
 offset_bottom = 1200.0
 texture = SubResource("ViewportTexture_q355h")
 threshold = 0.2
-alpha = 0.4
-dither_enabled = true
 oscillate = true
 oscillation_intensity = 0.04
 oscillation_rate = 0.5
@@ -119,6 +116,7 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
 [connection signal="layer_added" from="UIManager" to="." method="add_layer"]
+[connection signal="layer_duplicated" from="UIManager" to="." method="duplicate_layer"]
 
 [editable path="UIManager"]
 [editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/LayersVBox/LayersScrollContainer/VBoxContainer/NebulaLayerBelow"]

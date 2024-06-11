@@ -13,10 +13,13 @@ const LAYER_CONTROL_RESOURCE : Resource = \
 @export var delete_layer_dialogue : ColorRect
 @export var delete_layer_dialogue_label : Label
 
+@export var duplicate_layer_button : DuplicateLayerButton
+
 var active_layer_control : LayerControl
 var queued_deletions : Array = []
 
 signal layer_added(layer_type : SpaceGenerator.LayerTypes)
+signal layer_duplicated(source_layer : GeneratorLayer)
 
 
 func toggle_left_panel(new_state : bool) -> void:
@@ -33,12 +36,14 @@ func toggle_layer\
 		active_layer_control.toggle_selected(false)
 
 	active_layer_control = layer_control
+	duplicate_layer_button.set_disabled_with_cursor_override(false)
 
 	right_panel.configure_and_open_panel(layer_control, layer, layer_type)
 
 
 func close_layer_panel() -> void:
 	right_panel.close_panel()
+	duplicate_layer_button.set_disabled_with_cursor_override(true)
 
 
 func query_create_layer() -> void:
@@ -55,6 +60,10 @@ func create_layer(new_layer_type : SpaceGenerator.LayerTypes) -> void:
 
 func cancel_create_layer() -> void:
 	add_layer_dialogue.visible = false
+
+
+func duplicate_layer() -> void:
+	layer_duplicated.emit(active_layer_control.matched_layer)
 
 
 func add_layer_control\
