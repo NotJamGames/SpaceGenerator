@@ -27,6 +27,13 @@ func _ready() -> void:
 	layer_controls_reevaluate_positions()
 
 
+func _input(event : InputEvent) -> void:
+	if !event is InputEventKey: return
+
+	if event.is_action_pressed("duplicate") and Input.is_action_pressed("ctrl"):
+		duplicate_layer()
+
+
 func toggle_left_panel(new_state : bool) -> void:
 	left_panel.visible = new_state
 
@@ -68,6 +75,7 @@ func cancel_create_layer() -> void:
 
 
 func duplicate_layer() -> void:
+	if active_layer_control == null: return
 	layer_duplicated.emit(active_layer_control.matched_layer)
 
 
