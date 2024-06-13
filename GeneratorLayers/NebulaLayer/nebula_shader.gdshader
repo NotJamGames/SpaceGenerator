@@ -6,6 +6,12 @@ uniform float threshold : hint_range(.0, 1.0, .01) = .0;
 uniform float alpha : hint_range(.0, 1.0, .01) = 1.0;
 uniform bool dither_enabled = true;
 
+uniform sampler2D modulation_noise_texture;
+uniform bool modulation_enabled;
+uniform vec4 modulation_color;
+uniform float modulation_intensity : hint_range(.0, 1.0, .01) = .5;
+uniform float modulation_steps : hint_range(1.0, 16.0, 1.0);
+
 uniform bool oscillate = false;
 uniform float oscillation_intensity : hint_range(.01, 1.0, .01) = .12;
 uniform float oscillation_rate : hint_range(.01, 4.0, .01) = .2;
@@ -15,6 +21,13 @@ const int bayer_matrix[16] = int[](0,  8,  2,  10,
                                      12, 4,  14, 6,
                                      3,  11, 1,  9,
                                      15, 7,  13, 5);
+
+
+float get_luminosity(vec4 color)
+{
+	return (color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114);
+}
+
 
 float index_value(vec4 fragcoord)
 {
@@ -50,7 +63,7 @@ vec4[2] closest_color(float lum, vec4 color)
 }
 
 
-vec4 dither(vec4 color, vec4 fragcoord)
+vec4 match_color(vec4 color, vec4 fragcoord)
 {
 	float new_threshold = threshold;
 	if (oscillate)
@@ -59,20 +72,33 @@ vec4 dither(vec4 color, vec4 fragcoord)
 		* oscillation_intensity) + threshold;
 	}
 
-	float lum = 
-		(color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114)
-		- new_threshold;
-	vec4 colors[2] = closest_color(lum, fragcoord);
+	float luminosity = get_luminosity(color) - new_threshold;
+	vec4 colors[2] = closest_color(luminosity, fragcoord);
+
 	if (!dither_enabled){return colors[0];}
 
+	// dither, if enabled
 	float matrix_value = index_value(fragcoord);
-	return lum < matrix_value ? colors[0] : colors[1];
+	return luminosity < matrix_value ? colors[0] : colors[1];
+}
+
+
+vec4 modulate(vec4 color, vec2 fragcoord)
+{
+	vec4 lum_source = texture(modulation_noise_texture, fragcoord.xy);
+	float luminosity = 
+			floor(min(get_luminosity(lum_source), .999) * modulation_steps) 
+			/ modulation_steps;
+	vec4 adjusted_modulation_color = modulation_color * luminosity;
+	adjusted_modulation_color.a = color.a;
+	return mix(color, adjusted_modulation_color, modulation_intensity);
 }
 
 
 void fragment()
 {
-	vec4 new_color = vec4(dither(COLOR, FRAGCOORD));
+	vec4 new_color = vec4(match_color(COLOR, FRAGCOORD));
+	if (modulation_enabled){new_color = modulate(new_color, UV);}
 	new_color.a *= alpha;
 	COLOR = new_color;
 }

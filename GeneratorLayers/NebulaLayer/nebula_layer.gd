@@ -17,6 +17,11 @@ const nebula_dither_shader : Shader = preload\
 @export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold
 @export_range(.0, 1.0) var alpha : float = 1.0 : set = set_alpha
 @export var dither_enabled : bool = true : set = set_dither_enabled
+@export var modulation_enabled : bool = false : set = set_modulation_enabled
+@export var modulation_color : Color = Color.WHITE : set = set_modulation_color
+@export_range(.0, 1.0) var modulation_intensity : float = .5 :\
+		set = set_modulation_intensity
+@export_range(2, 16) var modulation_steps : int = 4 : set = set_modulation_steps
 
 @export var oscillate : bool = false : set = set_oscillate
 @export_range(.0, 2.0) var oscillation_intensity : float = .24 :\
@@ -28,6 +33,7 @@ const nebula_dither_shader : Shader = preload\
 
 
 @onready var noise_texture : NoiseTexture2D = NoiseTexture2D.new()
+@onready var modulation_noise_texture : NoiseTexture2D = NoiseTexture2D.new()
 @onready var shader_material : ShaderMaterial = ShaderMaterial.new()
 
 
@@ -37,6 +43,10 @@ func _ready() -> void:
 
 	set_threshold(threshold)
 	set_alpha(alpha)
+	set_dither_enabled(dither_enabled)
+	set_modulation_enabled(modulation_enabled)
+	set_modulation_color(modulation_color)
+	set_modulation_steps(modulation_steps)
 	set_oscillate(oscillate)
 	set_oscillation_intensity(oscillation_intensity)
 	set_oscillation_rate(oscillation_rate)
@@ -58,6 +68,14 @@ func build_nebula(new_base_size : Vector2i) -> void:
 
 	sprite.texture = noise_texture
 	sprite.centered = false
+
+	modulation_noise_texture = NoiseTexture2D.new()
+	modulation_noise_texture.width = new_base_size.x
+	modulation_noise_texture.height = new_base_size.y
+	modulation_noise_texture.seamless = true
+	modulation_noise_texture.noise = FastNoiseLite.new()
+	set_shader_parameter\
+			("modulation_noise_texture", modulation_noise_texture)
 
 
 func set_palette(new_palette : Texture) -> void:
@@ -87,6 +105,27 @@ func set_dither_enabled(new_state : bool) -> void:
 	set_shader_parameter("dither_enabled", dither_enabled)
 
 
+func set_modulation_enabled(new_state : bool) -> void:
+	modulation_enabled = new_state
+	set_shader_parameter("modulation_enabled", modulation_enabled)
+
+
+func set_modulation_color(new_color : Color) -> void:
+	modulation_color = new_color
+	set_shader_parameter("modulation_color", modulation_color)
+
+
+func set_modulation_intensity(new_value : float) -> void:
+	modulation_intensity = new_value
+	set_shader_parameter("modulation_intensity", modulation_intensity)
+
+
+func set_modulation_steps(new_value : int) -> void:
+	new_value = clampi(new_value, 2, 16)
+	modulation_steps = new_value
+	set_shader_parameter("modulation_steps", float(modulation_steps))
+
+
 func set_oscillate(new_state : bool) -> void:
 	oscillate = new_state
 	set_shader_parameter("oscillate", oscillate)
@@ -109,3 +148,4 @@ func set_oscillation_offset(value : float) -> void:
 
 func new_seed() -> void:
 	noise_texture.noise.seed = randi()
+	modulation_noise_texture.noise.seed = randi()
