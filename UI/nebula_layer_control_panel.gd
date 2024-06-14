@@ -9,6 +9,11 @@ extends LayerControlPanel
 @export var alpha_slider : HSlider
 @export var dither_checkbox : CheckBox
 
+@export var modulation_checkbox : CheckBox
+@export var modulation_color_picker_button : ColorPickerButton
+@export var modulation_intensity_slider : HSlider
+@export var modulation_steps_spin_box : SpinBox
+
 @export var oscillation_checkbox : CheckBox
 @export var oscillation_intensity_slider : HSlider
 @export var oscillation_rate_slider : HSlider
@@ -34,6 +39,11 @@ func configure_and_open\
 	threshold_slider.value = layer.threshold
 	alpha_slider.value = layer.alpha
 	dither_checkbox.button_pressed = layer.dither_enabled
+
+	modulation_checkbox.button_pressed = layer.modulation_enabled
+	modulation_color_picker_button.color = layer.modulation_color
+	modulation_intensity_slider.value = layer.modulation_intensity
+	modulation_steps_spin_box.value = layer.modulation_steps
 
 	oscillation_checkbox.button_pressed = layer.oscillate
 	oscillation_intensity_slider.value = layer.oscillation_intensity
@@ -81,6 +91,22 @@ func update_oscillation_rate(new_value : float) -> void:
 
 func update_oscillation_offset(new_value : float) -> void:
 	layer.oscillation_offset = new_value
+
+
+func update_modulation_enabled(new_state : bool) -> void:
+	layer.modulation_enabled = new_state
+
+
+func update_modulation_color(new_color : Color) -> void:
+	layer.modulation_color = new_color
+
+
+func update_modulation_intensity(new_value : float) -> void:
+	layer.modulation_intensity = new_value
+
+
+func update_modulation_steps(new_value : int) -> void:
+	layer.modulation_steps = new_value
 
 
 func update_speed(new_value : float) -> void:

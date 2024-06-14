@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b18xsn8oiptpo"]
+[gd_scene load_steps=6 format=3 uid="uid://b18xsn8oiptpo"]
 
 [ext_resource type="Script" path="res://GeneratorLayers/NebulaLayer/nebula_layer.gd" id="1_yds7p"]
 [ext_resource type="Texture2D" uid="uid://bftuej38oq5pq" path="res://GeneratorLayers/NebulaLayer/Palettes/default_fg_palette.png" id="2_ixn55"]
@@ -7,15 +7,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_marlb"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yinen"]
-width = 360
-height = 240
-seamless = true
-noise = SubResource("FastNoiseLite_marlb")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_157hj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0h0m"]
 shader = ExtResource("3_4gl83")
 shader_parameter/threshold = 0.0
 shader_parameter/alpha = 0.48
@@ -28,7 +20,6 @@ shader_parameter/oscillate = false
 shader_parameter/oscillation_intensity = 0.24
 shader_parameter/oscillation_rate = 0.2
 shader_parameter/oscillation_offset = 0.0
-shader_parameter/modulation_noise_texture = SubResource("NoiseTexture2D_yinen")
 
 [node name="NebulaLayer" type="TextureRect" node_paths=PackedStringArray("subviewport", "sprite")]
 texture_filter = 1
@@ -44,14 +35,10 @@ subviewport = NodePath("SubViewport")
 sprite = NodePath("SubViewport/Sprite2D")
 palette = ExtResource("2_ixn55")
 alpha = 0.48
-modulation_enabled = null
-modulation_color = null
-modulation_intensity = null
-modulation_steps = null
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 size = Vector2i(360, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_157hj")
+material = SubResource("ShaderMaterial_v0h0m")

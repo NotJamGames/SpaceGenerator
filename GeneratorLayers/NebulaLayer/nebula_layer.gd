@@ -17,6 +17,7 @@ const nebula_dither_shader : Shader = preload\
 @export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold
 @export_range(.0, 1.0) var alpha : float = 1.0 : set = set_alpha
 @export var dither_enabled : bool = true : set = set_dither_enabled
+
 @export var modulation_enabled : bool = false : set = set_modulation_enabled
 @export var modulation_color : Color = Color.WHITE : set = set_modulation_color
 @export_range(.0, 1.0) var modulation_intensity : float = .5 :\

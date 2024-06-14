@@ -38,10 +38,6 @@ texture = SubResource("ViewportTexture_kcvwn")
 palette = ExtResource("7_eqrwb")
 threshold = 0.255
 alpha = 0.86
-modulation_enabled = false
-modulation_color = Color(1, 1, 1, 1)
-modulation_intensity = 0.5
-modulation_steps = 4
 oscillate = true
 oscillation_intensity = 0.08
 oscillation_rate = 0.8
@@ -63,9 +59,9 @@ offset_bottom = 1200.0
 texture = SubResource("ViewportTexture_q355h")
 threshold = 0.2
 modulation_enabled = true
-modulation_color = Color(1, 0.415686, 1, 1)
-modulation_intensity = 0.54
-modulation_steps = 12
+modulation_color = Color(1, 0.419608, 0.807843, 1)
+modulation_intensity = 0.658
+modulation_steps = 8
 oscillate = true
 oscillation_intensity = 0.04
 oscillation_rate = 0.5
@@ -95,32 +91,6 @@ mouse_default_cursor_shape = 2
 mouse_default_cursor_shape = 2
 
 [node name="ScrollSpeedHSlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox" index="1"]
-mouse_default_cursor_shape = 2
-
-[node name="ThresholdHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Threshold" index="1"]
-mouse_default_cursor_shape = 2
-
-[node name="AlphaHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Alpha" index="1"]
-mouse_default_cursor_shape = 2
-
-[node name="CheckBox" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Oscillation" index="0"]
-mouse_default_cursor_shape = 2
-
-[node name="OscillationIntensityHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationIntensity" index="1"]
-mouse_default_cursor_shape = 2
-
-[node name="OscillationRateHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationRate" index="1"]
-mouse_default_cursor_shape = 2
-
-[node name="OscillationOffsetHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/OscillationOffset" index="1"]
-mouse_default_cursor_shape = 2
-
-[node name="SpeedLabel" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed" index="0"]
-size_flags_horizontal = 3
-text = "Scroll Speed: "
-
-[node name="SpeedHSlider" parent="UIManager/MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/RightPanelVBox/Speed" index="1"]
-size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
 [connection signal="layer_added" from="UIManager" to="." method="add_layer"]

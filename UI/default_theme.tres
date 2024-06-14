@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=32 format=3 uid="uid://ckpi87fktn0od"]
+[gd_resource type="Theme" load_steps=36 format=3 uid="uid://ckpi87fktn0od"]
 
 [ext_resource type="FontFile" uid="uid://bf3fvjj3eddhk" path="res://UI/Fonts/Undead Pixel 8.ttf" id="1_v0t32"]
 [ext_resource type="Texture2D" uid="uid://cqlfncj86mydu" path="res://UI/Icons/slider_grabber.png" id="2_38jb3"]
@@ -104,6 +104,19 @@ content_margin_top = 12.0
 content_margin_right = 12.0
 content_margin_bottom = 12.0
 bg_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n58m3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yoh5m"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhshh"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ayquf"]
+content_margin_left = 1.0
+content_margin_right = 1.0
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_227wr"]
 
@@ -229,5 +242,16 @@ MarginContainer/constants/margin_right = 24
 MarginContainer/constants/margin_top = 24
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_g6gbm")
 SpinBox/icons/updown = ExtResource("6_241k8")
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/decrement_pressed = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/icons/increment_pressed = null
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_n58m3")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_yoh5m")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_mhshh")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_ayquf")
+VScrollBar/styles/scroll_focus = null
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_227wr")
