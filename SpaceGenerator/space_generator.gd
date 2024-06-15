@@ -11,8 +11,8 @@ const STAR_LAYER_RESOURCE : Resource = \
 		preload("res://GeneratorLayers/StarLayer/star_layer.tscn")
 const NEBULA_LAYER_RESOURCE : Resource = \
 		preload("res://GeneratorLayers/NebulaLayer/nebula_layer.tscn")
-@export var star_generator : StarLayer
 @export var nebula_layers : Array[NebulaLayer]
+@export var star_layers : Array[StarLayer]
 
 @export var export_resolution : Vector2i = Vector2i(360, 240)
 
@@ -27,7 +27,8 @@ func generate_space(new_size : Vector2i) -> void:
 	for layer : NebulaLayer in nebula_layers:
 		layer.build_nebula(Vector2i(new_size))
 
-	star_generator.generate_stars(192, [.65, .2, .15], new_size)
+	for layer : StarLayer in star_layers:
+		layer.generate_stars(192, [.65, .2, .15], new_size)
 
 
 func generate_pngs() -> void:
@@ -43,12 +44,15 @@ func add_layer(layer_type : LayerTypes) -> void:
 			layer_container.add_child(new_layer)
 			var ratio : Array[float] = [.65, .2, .15]
 			new_layer.generate_stars(192, ratio, export_resolution)
+			star_layers.append(new_layer)
 		LayerTypes.NEBULA_LAYER:
 			new_layer = NEBULA_LAYER_RESOURCE.instantiate()
 			layer_container.add_child(new_layer)
 			new_layer.build_nebula(export_resolution)
+			nebula_layers.append(new_layer)
 
 	ui_manager.add_layer_control(new_layer, layer_type)
+	layers.append(new_layer)
 
 
 func duplicate_layer(source_layer : GeneratorLayer) -> void:
@@ -70,6 +74,7 @@ func duplicate_star_layer(source_layer : StarLayer) -> void:
 	new_layer.speed = source_layer.speed
 
 	ui_manager.add_layer_control(new_layer, LayerTypes.STAR_LAYER)
+	layers.append(new_layer)
 
 
 func duplicate_nebula_layer(source_layer : NebulaLayer) -> void:
@@ -94,6 +99,8 @@ func duplicate_nebula_layer(source_layer : NebulaLayer) -> void:
 	new_layer.noise_texture.noise.seed = source_layer.noise_texture.noise.seed
 
 	ui_manager.add_layer_control(new_layer, LayerTypes.NEBULA_LAYER)
+	layers.append(new_layer)
+	nebula_layers.append(new_layer)
 
 
 func reorder_layer(layer : GeneratorLayer, direction : int) -> void:

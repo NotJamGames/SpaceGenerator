@@ -15,12 +15,12 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_q355h"]
 viewport_path = NodePath("SubViewport")
 
-[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("layers", "layer_container", "star_generator", "nebula_layers", "ui_manager")]
+[node name="SpaceGenerator" type="Node" node_paths=PackedStringArray("layers", "layer_container", "nebula_layers", "star_layers", "ui_manager")]
 script = ExtResource("1_8dqb6")
 layers = [NodePath("Layers/LowerNebula"), NodePath("Layers/StarGenerator"), NodePath("Layers/UpperNebula")]
 layer_container = NodePath("Layers")
-star_generator = NodePath("Layers/StarGenerator")
 nebula_layers = [NodePath("Layers/LowerNebula"), NodePath("Layers/UpperNebula")]
+star_layers = [NodePath("Layers/StarGenerator")]
 ui_manager = NodePath("UIManager")
 
 [node name="Layers" type="Control" parent="."]
