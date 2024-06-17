@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr608r75fxhyk"]
+
+[ext_resource type="Script" path="res://GeneratorLayers/PlanetLayer/planet_layer.gd" id="1_sutae"]
+
+[node name="PlanetLayer" type="TextureRect"]
+texture_filter = 1
+script = ExtResource("1_sutae")

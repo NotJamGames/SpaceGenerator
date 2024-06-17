@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyonammobqfy8"]
+
+[ext_resource type="Texture2D" uid="uid://cqlfncj86mydu" path="res://UI/Icons/slider_grabber.png" id="1_ntebo"]
+[ext_resource type="Script" path="res://UI/CustomElements/double_value_slider.gd" id="1_u457f"]
+[ext_resource type="Script" path="res://UI/CustomElements/custom_grabber.gd" id="2_3iiai"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7tyv"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("lower_grabber", "upper_grabber")]
+custom_minimum_size = Vector2(0, 16)
+offset_left = 240.0
+offset_top = 120.0
+offset_right = 480.0
+offset_bottom = 136.0
+size_flags_vertical = 0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("1_u457f")
+lower_grabber = NodePath("GrabberManager/LowerGrabber")
+upper_grabber = NodePath("GrabberManager/UpperGrabber")
+minimum_minimum_value = 3.0
+maximum_maximum_value = 10.0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7tyv")
+
+[node name="GrabberManager" type="Node2D" parent="."]
+
+[node name="LowerGrabber" type="Sprite2D" parent="GrabberManager" node_paths=PackedStringArray("parent_container")]
+scale = Vector2(2, 1)
+texture = ExtResource("1_ntebo")
+centered = false
+script = ExtResource("2_3iiai")
+parent_container = NodePath("../..")
+
+[node name="Control" type="Control" parent="GrabberManager/LowerGrabber"]
+custom_minimum_size = Vector2(2, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+
+[node name="UpperGrabber" type="Sprite2D" parent="GrabberManager" node_paths=PackedStringArray("parent_container")]
+position = Vector2(5, 0)
+scale = Vector2(2, 1)
+texture = ExtResource("1_ntebo")
+centered = false
+script = ExtResource("2_3iiai")
+parent_container = NodePath("../..")
+
+[node name="Control" type="Control" parent="GrabberManager/UpperGrabber"]
+custom_minimum_size = Vector2(2, 16)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+
+[connection signal="gui_input" from="." to="." method="move_undefined_slider"]
+[connection signal="ready" from="." to="GrabberManager" method="configure_grabber_parameters"]
+[connection signal="resized" from="." to="." method="configure_grabber_parameters"]
+[connection signal="gui_input" from="GrabberManager/LowerGrabber/Control" to="GrabberManager/LowerGrabber" method="_on_control_gui_input"]
+[connection signal="gui_input" from="GrabberManager/UpperGrabber/Control" to="GrabberManager/UpperGrabber" method="_on_control_gui_input"]

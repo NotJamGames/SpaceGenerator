@@ -6,13 +6,17 @@ extends Node
 @export var layer_container : Control
 
 
-enum LayerTypes {STAR_LAYER, NEBULA_LAYER}
+enum LayerTypes {STAR_LAYER, NEBULA_LAYER, PLANET_LAYER}
 const STAR_LAYER_RESOURCE : Resource = \
 		preload("res://GeneratorLayers/StarLayer/star_layer.tscn")
 const NEBULA_LAYER_RESOURCE : Resource = \
 		preload("res://GeneratorLayers/NebulaLayer/nebula_layer.tscn")
+const PLANET_LAYER_RESOURCE : Resource = \
+		preload("res://GeneratorLayers/PlanetLayer/planet_layer.tscn")
+
 @export var nebula_layers : Array[NebulaLayer]
 @export var star_layers : Array[StarLayer]
+@export var planet_layers : Array[PlanetLayer]
 
 @export var export_resolution : Vector2i = Vector2i(360, 240)
 
@@ -24,11 +28,17 @@ func _ready() -> void:
 
 
 func generate_space(new_size : Vector2i) -> void:
+	# this should work for resetting resolution, I think?
+	export_resolution = new_size
+
 	for layer : NebulaLayer in nebula_layers:
 		layer.build_nebula(Vector2i(new_size))
 
 	for layer : StarLayer in star_layers:
 		layer.generate_stars(192, [.65, .2, .15], new_size)
+
+	for layer : PlanetLayer in planet_layers:
+		layer.set_size(new_size)
 
 
 func generate_pngs() -> void:
@@ -50,6 +60,10 @@ func add_layer(layer_type : LayerTypes) -> void:
 			layer_container.add_child(new_layer)
 			new_layer.build_nebula(export_resolution)
 			nebula_layers.append(new_layer)
+		LayerTypes.PLANET_LAYER:
+			new_layer = PLANET_LAYER_RESOURCE.instantiate()
+			new_layer.set_size(export_resolution)
+			planet_layers.append(new_layer)
 
 	ui_manager.add_layer_control(new_layer, layer_type)
 	layers.append(new_layer)
@@ -61,6 +75,9 @@ func duplicate_layer(source_layer : GeneratorLayer) -> void:
 		return
 	elif source_layer is NebulaLayer:
 		duplicate_nebula_layer(source_layer)
+		return
+	elif source_layer is PlanetLayer:
+		duplicate_planet_layer(source_layer)
 		return
 	push_error("Error: no method defined to duplicate provided layer")
 
@@ -101,6 +118,20 @@ func duplicate_nebula_layer(source_layer : NebulaLayer) -> void:
 	ui_manager.add_layer_control(new_layer, LayerTypes.NEBULA_LAYER)
 	layers.append(new_layer)
 	nebula_layers.append(new_layer)
+
+
+func duplicate_planet_layer(source_layer : PlanetLayer) -> void:
+	var new_layer : PlanetLayer = PLANET_LAYER_RESOURCE.instantiate()
+	layer_container.add_child(new_layer)
+
+	new_layer.export_resolution = export_resolution
+	new_layer.max_concurrent_planets = source_layer.max_concurrent_planets
+	new_layer.min_spawn_frequency = source_layer.min_spawn_frequency
+	new_layer.max_spawn_frequency = source_layer.max_spawn_frequency
+
+	# TODO: add a control for the layer to the UI manager
+	layers.append(new_layer)
+	planet_layers.append(new_layer)
 
 
 func reorder_layer(layer : GeneratorLayer, direction : int) -> void:
