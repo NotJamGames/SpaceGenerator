@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=13 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://UI/stars_layer_control_panel.gd" id="7_vdxbv"]
 [ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
 [ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
+[ext_resource type="Script" path="res://UI/planet_layer_control_panel.gd" id="10_cejk5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfaio"]
 content_margin_left = 4.0
@@ -137,7 +138,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("6_7edgt")
-panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel")]
+panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel"), NodePath("PlanetLayerControlPanel")]
 palette_editor = NodePath("PaletteDialogue")
 
 [node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "scroll_speed_slider", "name_edit")]
@@ -516,6 +517,7 @@ alignment = 0
 [node name="PlanetLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel"]
 visible = false
 layout_mode = 2
+script = ExtResource("10_cejk5")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel"]
 layout_mode = 2
@@ -598,6 +600,14 @@ layout_mode = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Nebula Layer"
+
+[node name="VSeparator2" type="VSeparator" parent="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PlanetLayer" type="Button" parent="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Planet Layer"
 
 [node name="Cancel" type="Button" parent="AddLayerDialogue/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -700,6 +710,7 @@ text = "Cancel"
 [connection signal="editor_closed" from="MainUIHBox/RightPanel/PaletteDialogue" to="MainUIHBox/RightPanel" method="close_palette_editor"]
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/StarLayer" to="." method="create_layer" binds= [0]]
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/NebulaLayer" to="." method="create_layer" binds= [1]]
+[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/PlanetLayer" to="." method="create_layer" binds= [2]]
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/Cancel" to="." method="cancel_create_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]

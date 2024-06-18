@@ -5,6 +5,10 @@ extends VBoxContainer
 @export var lower_grabber : Grabber
 @export var upper_grabber : Grabber
 
+@export var out_of_bounds_left : Panel
+@export var in_bounds : Panel
+@export var out_of_bounds_right : Panel
+
 
 @export var minimum_minimum_value : float
 var minimum_value : float
@@ -45,6 +49,10 @@ func lower_grabber_moved() -> void:
 				* (maximum_maximum_value - minimum_minimum_value)
 			)
 
+	in_bounds.position.x = lower_grabber.position.x + 3.0
+	in_bounds.size.x = upper_grabber.position.x - lower_grabber.position.x
+	out_of_bounds_left.size.x = lower_grabber.position.x + 3.0
+
 
 func upper_grabber_moved() -> void:
 	lower_grabber.x_confine_upper = upper_grabber.position.x - 6.0
@@ -54,6 +62,10 @@ func upper_grabber_moved() -> void:
 				(upper_grabber.position.x / size.x) \
 				* (maximum_maximum_value - minimum_minimum_value) 
 			)
+
+	in_bounds.size.x = upper_grabber.position.x - lower_grabber.position.x
+	out_of_bounds_right.position.x = upper_grabber.position.x + 3.0
+	out_of_bounds_right.size.x = size.x - upper_grabber.position.x - 3.0
 
 
 func move_undefined_slider(event : InputEvent) -> void:

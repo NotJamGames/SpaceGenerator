@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyonammobqfy8"]
+[gd_scene load_steps=6 format=3 uid="uid://dyonammobqfy8"]
 
 [ext_resource type="Texture2D" uid="uid://cqlfncj86mydu" path="res://UI/Icons/slider_grabber.png" id="1_ntebo"]
 [ext_resource type="Script" path="res://UI/CustomElements/double_value_slider.gd" id="1_u457f"]
@@ -9,7 +9,11 @@ bg_color = Color(0.12549, 0.12549, 0.12549, 1)
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("lower_grabber", "upper_grabber")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uji5l"]
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("lower_grabber", "upper_grabber", "out_of_bounds_left", "in_bounds", "out_of_bounds_right")]
 custom_minimum_size = Vector2(0, 16)
 offset_left = 240.0
 offset_top = 120.0
@@ -21,11 +25,46 @@ mouse_default_cursor_shape = 2
 script = ExtResource("1_u457f")
 lower_grabber = NodePath("GrabberManager/LowerGrabber")
 upper_grabber = NodePath("GrabberManager/UpperGrabber")
+out_of_bounds_left = NodePath("Control/OutOfBoundsLeft")
+in_bounds = NodePath("Control/InBounds")
+out_of_bounds_right = NodePath("Control/OutOfBoundsRight")
 minimum_minimum_value = 3.0
 maximum_maximum_value = 10.0
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_filter = 2
+
+[node name="OutOfBoundsLeft" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_right = 240.0
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7tyv")
+
+[node name="InBounds" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_right = 240.0
+grow_vertical = 2
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uji5l")
+
+[node name="OutOfBoundsRight" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_right = 240.0
+grow_vertical = 2
 size_flags_vertical = 6
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_k7tyv")

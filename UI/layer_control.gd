@@ -39,6 +39,8 @@ func _ready() -> void:
 			label.text = "Star Layer"
 		SpaceGenerator.LayerTypes.NEBULA_LAYER:
 			label.text = "Nebula Layer"
+		SpaceGenerator.LayerTypes.PLANET_LAYER:
+			label.text = "Planet Layer"
 
 
 func check_toggle_selected(event : InputEvent) -> void:
