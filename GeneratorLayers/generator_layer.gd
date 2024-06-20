@@ -3,7 +3,7 @@ extends TextureRect
 
 
 @export_category("Layer Settings")
-@export var speed : float = 32.0
+@export var speed : float = 32.0 : set = set_speed
 
 
 func _process(delta : float) -> void:
@@ -12,3 +12,7 @@ func _process(delta : float) -> void:
 	if position.y > .0:
 		# don't divide size by 2 - consider scaling!
 		position.y = position.y - (size.y)
+
+
+func set_speed(new_value : float) -> void:
+	speed = new_value

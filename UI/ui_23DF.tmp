@@ -497,8 +497,6 @@ text = "Scroll Speed:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
-max_value = 128.0
-step = 0.1
 
 [node name="HSeparator5" type="HSeparator" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
 layout_mode = 2
@@ -516,11 +514,10 @@ mouse_default_cursor_shape = 2
 text = "New Seed"
 alignment = 0
 
-[node name="PlanetLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("name_edit")]
+[node name="PlanetLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel"]
 visible = false
 layout_mode = 2
 script = ExtResource("10_cejk5")
-name_edit = NodePath("ScrollContainer/MarginContainer/VBoxContainer/PlanetTitle/LineEdit")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel"]
 layout_mode = 2
@@ -554,25 +551,6 @@ autowrap_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "LAYER SETTINGS"
-
-[node name="Speed" type="HBoxContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer/Speed"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Scroll Speed:"
-
-[node name="HSlider" type="HSlider" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer/Speed"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-max_value = 128.0
-step = 0.1
 
 [node name="PaletteDialogue" parent="MainUIHBox/RightPanel" instance=ExtResource("9_8nwe8")]
 visible = false
@@ -729,7 +707,6 @@ text = "Cancel"
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/EditPalette" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_open_palette_editor"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_new_seed"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer/PlanetTitle/LineEdit" to="." method="update_layer_name"]
-[connection signal="value_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/MarginContainer/VBoxContainer/Speed/HSlider" to="MainUIHBox/RightPanel/PlanetLayerControlPanel" method="update_speed"]
 [connection signal="editor_closed" from="MainUIHBox/RightPanel/PaletteDialogue" to="MainUIHBox/RightPanel" method="close_palette_editor"]
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/StarLayer" to="." method="create_layer" binds= [0]]
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/NebulaLayer" to="." method="create_layer" binds= [1]]

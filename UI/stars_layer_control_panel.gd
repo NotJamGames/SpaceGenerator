@@ -12,8 +12,6 @@ var num_stars : int = 0
 var ratio : Array[float] = [.0, .0, .0]
 var speed : float
 
-var closed : bool = true
-
 
 func configure_and_open\
 		(layer_control : LayerControl, new_layer : GeneratorLayer) -> void:
@@ -34,11 +32,6 @@ func configure_and_open\
 
 	closed = false
 	visible = true
-
-
-func close() -> void:
-	visible = false
-	closed = true
 
 
 func update_star_quantity(new_value : float) -> void:

@@ -20,10 +20,7 @@ extends LayerControlPanel
 @export var oscillation_offset_slider : HSlider
 @export var speed_slider : HSlider
 
-
-var layer : GeneratorLayer
-
-var closed : bool = true
+var layer : NebulaLayer
 
 signal open_palette_editor_requested()
 
@@ -50,15 +47,9 @@ func configure_and_open\
 	oscillation_rate_slider.value = layer.oscillation_rate
 	oscillation_offset_slider.value = layer.oscillation_rate
 	speed_slider.value = layer.speed
-	
 
 	closed = false
 	visible = true
-
-
-func close() -> void:
-	visible = false
-	closed = true
 
 
 func request_open_palette_editor() -> void:

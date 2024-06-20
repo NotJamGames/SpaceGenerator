@@ -7,14 +7,15 @@ var curr_planet_index : int = 0
 var export_resolution : Vector2i = Vector2i(360, 240)
 
 
-@export var min_spawn_frequency : float = 3.6
-@export var max_spawn_frequency : float = 7.2
-@export var max_concurrent_planets : int = 0 : set = set_max_concurrent_planets
+@export var min_spawn_frequency : float = 9.0
+@export var max_spawn_frequency : float = 18.0
+@export var max_concurrent_planets : int = 2 : set = set_max_concurrent_planets
 
-var num_enabled_planets : int = 0
+@export var num_enabled_planets : int = 0
 
 
 func _ready() -> void:
+	instantiate_planets(max_concurrent_planets)
 	check_respawn()
 
 
@@ -39,6 +40,7 @@ func set_max_concurrent_planets(new_value : int) -> void:
 
 
 func set_speed(new_value : float) -> void:
+	speed = new_value
 	for planet : Planet in active_planets:
 		planet.speed = new_value
 
