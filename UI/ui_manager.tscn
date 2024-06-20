@@ -275,7 +275,7 @@ size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 text = "New Seed"
 
-[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("threshold_slider", "alpha_slider", "dither_checkbox", "modulation_checkbox", "modulation_color_picker_button", "modulation_intensity_slider", "modulation_steps_spin_box", "oscillation_checkbox", "oscillation_intensity_slider", "oscillation_rate_slider", "oscillation_offset_slider", "speed_slider", "name_edit")]
+[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("threshold_slider", "alpha_slider", "dither_checkbox", "modulation_checkbox", "modulation_color_picker_button", "modulation_intensity_slider", "modulation_steps_spin_box", "oscillation_checkbox", "modulation_settings_submenu", "oscillation_settings_submenu", "oscillation_intensity_slider", "oscillation_rate_slider", "oscillation_offset_slider", "speed_slider", "name_edit")]
 visible = false
 layout_mode = 2
 script = ExtResource("8_43iu2")
@@ -283,13 +283,15 @@ threshold_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Thre
 alpha_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Alpha/AlphaHSlider")
 dither_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/EnableDither")
 modulation_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationEnabled")
-modulation_color_picker_button = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor/ColorPickerButton")
-modulation_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity/ModulationIntensitySlider")
-modulation_steps_spin_box = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps/SpinBox")
+modulation_color_picker_button = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationColor/ColorPickerButton")
+modulation_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationIntensity/ModulationIntensitySlider")
+modulation_steps_spin_box = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationSteps/SpinBox")
 oscillation_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Oscillation/CheckBox")
-oscillation_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity/OscillationIntensityHSlider")
-oscillation_rate_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate/OscillationRateHSlider")
-oscillation_offset_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset/OscillationOffsetHSlider")
+modulation_settings_submenu = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu")
+oscillation_settings_submenu = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings")
+oscillation_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationIntensity/OscillationIntensityHSlider")
+oscillation_rate_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationRate/OscillationRateHSlider")
+oscillation_offset_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationOffset/OscillationOffsetHSlider")
 speed_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Speed/SpeedHSlider")
 name_edit = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/HBoxContainer/LineEdit")
 
@@ -373,48 +375,52 @@ layout_mode = 2
 
 [node name="CheckBox" type="CheckBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Oscillation"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Oscillation Enabled"
 icon_alignment = 2
 
-[node name="OscillationIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+[node name="OscillationSettings" type="VBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
 layout_mode = 2
 
-[node name="OscillationIntensityLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity"]
+[node name="OscillationIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings"]
+layout_mode = 2
+
+[node name="OscillationIntensityLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationIntensity"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Osc. Intensity:"
 
-[node name="OscillationIntensityHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity"]
+[node name="OscillationIntensityHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationIntensity"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 max_value = 2.0
 step = 0.01
 
-[node name="OscillationRate" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+[node name="OscillationRate" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings"]
 layout_mode = 2
 
-[node name="OscillationRateLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate"]
+[node name="OscillationRateLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationRate"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Osc. Rate:"
 
-[node name="OscillationRateHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate"]
+[node name="OscillationRateHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationRate"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 max_value = 16.0
 step = 0.01
 
-[node name="OscillationOffset" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+[node name="OscillationOffset" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings"]
 layout_mode = 2
 
-[node name="OscillationOffsetLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset"]
+[node name="OscillationOffsetLabel" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationOffset"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Osc. Offset:"
 
-[node name="OscillationOffsetHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset"]
+[node name="OscillationOffsetHSlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationOffset"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -430,46 +436,49 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Modulation Enabled"
 
-[node name="ModulationColor" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+[node name="ModulationSettingsSubmenu" type="VBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor"]
+[node name="ModulationColor" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationColor"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Mod. Color:"
 vertical_alignment = 2
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationColor"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 
-[node name="ModulationIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+[node name="ModulationIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity"]
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationIntensity"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Mod. Intensity:"
 
-[node name="ModulationIntensitySlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity"]
+[node name="ModulationIntensitySlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationIntensity"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 max_value = 1.0
 step = 0.01
 
-[node name="ModulationSteps" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox"]
+[node name="ModulationSteps" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps"]
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationSteps"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Mod. Steps"
 
-[node name="SpinBox" type="SpinBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps"]
+[node name="SpinBox" type="SpinBox" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationSteps"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 2.0
@@ -718,13 +727,13 @@ text = "Cancel"
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Alpha/AlphaHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_alpha"]
 [connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/EnableDither" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_dither_enabled"]
 [connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Oscillation/CheckBox" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillate"]
-[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationIntensity/OscillationIntensityHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_intensity"]
-[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationRate/OscillationRateHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_rate"]
-[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationOffset/OscillationOffsetHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_offset"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationIntensity/OscillationIntensityHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_intensity"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationRate/OscillationRateHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_rate"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/OscillationSettings/OscillationOffset/OscillationOffsetHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_oscillation_offset"]
 [connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationEnabled" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_enabled"]
-[connection signal="color_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationColor/ColorPickerButton" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_color"]
-[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationIntensity/ModulationIntensitySlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_intensity"]
-[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSteps/SpinBox" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_steps"]
+[connection signal="color_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationColor/ColorPickerButton" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_color"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationIntensity/ModulationIntensitySlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_intensity"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationSteps/SpinBox" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_steps"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Speed/SpeedHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_speed"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/EditPalette" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_open_palette_editor"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_new_seed"]

@@ -1,10 +1,6 @@
 extends LayerControlPanel
 
 
-# TODO: figure out how to implement palettes
-# and fix this
-@export var palette_button : Control
-
 @export var threshold_slider : HSlider
 @export var alpha_slider : HSlider
 @export var dither_checkbox : CheckBox
@@ -15,6 +11,8 @@ extends LayerControlPanel
 @export var modulation_steps_spin_box : SpinBox
 
 @export var oscillation_checkbox : CheckBox
+@export var modulation_settings_submenu : VBoxContainer
+@export var oscillation_settings_submenu : VBoxContainer
 @export var oscillation_intensity_slider : HSlider
 @export var oscillation_rate_slider : HSlider
 @export var oscillation_offset_slider : HSlider
@@ -70,6 +68,7 @@ func update_dither_enabled(new_state : bool) -> void:
 
 func update_oscillate(new_state : bool) -> void:
 	layer.oscillate = new_state
+	oscillation_settings_submenu.visible = new_state
 
 
 func update_oscillation_intensity(new_value : float) -> void:
@@ -86,6 +85,7 @@ func update_oscillation_offset(new_value : float) -> void:
 
 func update_modulation_enabled(new_state : bool) -> void:
 	layer.modulation_enabled = new_state
+	modulation_settings_submenu.visible = new_state
 
 
 func update_modulation_color(new_color : Color) -> void:
