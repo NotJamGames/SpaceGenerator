@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyonammobqfy8"]
 
 [ext_resource type="Texture2D" uid="uid://cqlfncj86mydu" path="res://UI/Icons/slider_grabber.png" id="1_ntebo"]
-[ext_resource type="Script" path="res://UI/CustomElements/double_value_slider.gd" id="1_u457f"]
+[ext_resource type="Script" path="res://UI/CustomElements/h_range_slider.gd" id="1_u457f"]
 [ext_resource type="Script" path="res://UI/CustomElements/custom_grabber.gd" id="2_3iiai"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7tyv"]
