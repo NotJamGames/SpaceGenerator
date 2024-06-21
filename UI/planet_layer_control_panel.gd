@@ -19,10 +19,13 @@ func configure_and_open\
 	if layer == null:
 		push_error("Error: layer not of type PlanetLayer")
 
-	scroll_speed_slider.value = layer.speed
-
 	closed = false
 	visible = true
+
+	spawn_interval_hrange_slider.minimum_value = layer.min_spawn_frequency
+	spawn_interval_hrange_slider.maximum_value = layer.max_spawn_frequency
+	max_concurrent_planets_spin_box.value = layer.max_concurrent_planets
+	scroll_speed_slider.value = layer.speed
 
 
 func update_spawn_interval(new_min : float, new_max : float) -> void:

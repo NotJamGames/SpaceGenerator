@@ -13,12 +13,13 @@ expand_margin_bottom = 1.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("lower_grabber", "upper_grabber", "out_of_bounds_left", "in_bounds", "out_of_bounds_right")]
+[node name="HRangeSlider" type="VBoxContainer" node_paths=PackedStringArray("lower_grabber", "upper_grabber", "out_of_bounds_left", "in_bounds", "out_of_bounds_right")]
 custom_minimum_size = Vector2(0, 16)
 offset_left = 240.0
 offset_top = 120.0
-offset_right = 480.0
+offset_right = 240.0
 offset_bottom = 136.0
+size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 0
 mouse_default_cursor_shape = 2

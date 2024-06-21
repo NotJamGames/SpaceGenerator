@@ -20,6 +20,9 @@ var is_clicked : bool = false
 var selected_grabber : Grabber
 
 
+signal range_updated(min : float, max : float)
+
+
 func _ready() -> void:
 	lower_grabber.moved.connect(lower_grabber_moved)
 	upper_grabber.moved.connect(upper_grabber_moved)
@@ -31,6 +34,20 @@ func _input(event : InputEvent) -> void:
 
 
 func configure_grabber_parameters() -> void:
+	if is_zero_approx(size.x): return
+
+	upper_grabber.position.x = \
+			(((maximum_value - minimum_minimum_value) \
+			/ (maximum_maximum_value - minimum_minimum_value)) \
+			* size.x) - 3
+	upper_grabber_moved()
+
+	lower_grabber.position.x = \
+			((minimum_value - minimum_minimum_value) \
+			/ (maximum_maximum_value - minimum_minimum_value)) \
+			* size.x
+	lower_grabber_moved()
+
 	lower_grabber.x_origin = position.x
 	lower_grabber.x_confine_lower = .0
 	lower_grabber.x_confine_upper = upper_grabber.position.x - 1.0
@@ -53,6 +70,8 @@ func lower_grabber_moved() -> void:
 	in_bounds.size.x = upper_grabber.position.x - lower_grabber.position.x
 	out_of_bounds_left.size.x = lower_grabber.position.x + 3.0
 
+	range_updated.emit(minimum_value, maximum_value)
+
 
 func upper_grabber_moved() -> void:
 	lower_grabber.x_confine_upper = upper_grabber.position.x - 6.0
@@ -66,6 +85,8 @@ func upper_grabber_moved() -> void:
 	in_bounds.size.x = upper_grabber.position.x - lower_grabber.position.x
 	out_of_bounds_right.position.x = upper_grabber.position.x + 3.0
 	out_of_bounds_right.size.x = size.x - upper_grabber.position.x - 3.0
+
+	range_updated.emit(minimum_value, maximum_value)
 
 
 func move_undefined_slider(event : InputEvent) -> void:

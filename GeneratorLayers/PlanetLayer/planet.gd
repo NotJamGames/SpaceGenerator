@@ -36,4 +36,3 @@ func respawn() -> void:
 			(randi_range(1, export_resolution.x - texture.get_width() - 1) * 2,
 			- texture.get_height() * 2)
 	enabled = true
-	was_enabled.emit(1)

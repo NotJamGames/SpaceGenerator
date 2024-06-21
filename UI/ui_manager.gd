@@ -108,6 +108,7 @@ func add_layer_control\
 	new_layer_control.toggle_selected(true)
 	new_layer_control.evaluate_position()
 	toggle_layer(new_layer_control, layer, layer_type)
+	layer_controls_reevaluate_positions()
 
 
 func query_delete_layer(layer_name : String, to_delete : Array) -> void:
@@ -119,10 +120,13 @@ func query_delete_layer(layer_name : String, to_delete : Array) -> void:
 func confirm_delete_layer() -> void:
 	for node : Node in queued_deletions:
 		node.queue_free()
+		await node.tree_exited
 
 	delete_layer_dialogue.visible = false
 	right_panel.close_panel()
 	right_panel.close_palette_editor()
+
+	layer_controls_reevaluate_positions()
 
 
 func cancel_delete_layer() -> void:

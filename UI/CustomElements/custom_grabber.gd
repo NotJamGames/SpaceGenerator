@@ -18,13 +18,12 @@ func _input(event : InputEvent) -> void:
 		is_clicked = false
 
 	if event is InputEventMouseMotion and is_clicked:
-		update_position(event.position.x, x_origin)
+		update_position(event.position.x, -get_parent().global_position.x)
 
 
 func update_position(target_x_pos : float, x_offset : float = .0) -> void:
 	position.x = clamp\
-			(target_x_pos - x_offset,
-			x_confine_lower, x_confine_upper)
+			(target_x_pos + x_offset, x_confine_lower, x_confine_upper)
 	moved.emit()
 
 

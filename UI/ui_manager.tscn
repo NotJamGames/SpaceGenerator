@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=14 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
 [ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
 [ext_resource type="Script" path="res://UI/planet_layer_control_panel.gd" id="10_cejk5"]
+[ext_resource type="PackedScene" uid="uid://dyonammobqfy8" path="res://UI/CustomElements/h_range_slider.tscn" id="11_xvp22"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jfaio"]
 content_margin_left = 4.0
@@ -525,10 +526,12 @@ mouse_default_cursor_shape = 2
 text = "New Seed"
 alignment = 0
 
-[node name="PlanetLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("scroll_speed_slider", "name_edit")]
+[node name="PlanetLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("spawn_interval_hrange_slider", "max_concurrent_planets_spin_box", "scroll_speed_slider", "name_edit")]
 visible = false
 layout_mode = 2
 script = ExtResource("10_cejk5")
+spawn_interval_hrange_slider = NodePath("ScrollContainer/VBoxContainer/SpawnFrequency/HRangeSlider")
+max_concurrent_planets_spin_box = NodePath("ScrollContainer/VBoxContainer/MaxConcurrentPlanets/SpinBox")
 scroll_speed_slider = NodePath("ScrollContainer/VBoxContainer/Speed/ScollSpeedSlider")
 name_edit = NodePath("ScrollContainer/VBoxContainer/PlanetTitle/LineEdit")
 
@@ -549,6 +552,7 @@ text = "Name:"
 
 [node name="LineEdit" type="LineEdit" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/PlanetTitle"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -560,6 +564,40 @@ text = "Note: planet layers cannot be exported. Sprites are available via the do
 autowrap_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "PLANET SETTINGS"
+
+[node name="SpawnFrequency" type="HBoxContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/SpawnFrequency"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spawn Frequency:"
+
+[node name="HRangeSlider" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/SpawnFrequency" instance=ExtResource("11_xvp22")]
+layout_mode = 2
+maximum_maximum_value = 18.0
+
+[node name="MaxConcurrentPlanets" type="HBoxContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/MaxConcurrentPlanets"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max Planets:"
+
+[node name="SpinBox" type="SpinBox" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/MaxConcurrentPlanets"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 9.0
+value = 3.0
+
+[node name="HSeparator3" type="HSeparator" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
@@ -736,6 +774,8 @@ text = "Cancel"
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/EditPalette" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_open_palette_editor"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_new_seed"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/PlanetTitle/LineEdit" to="." method="update_layer_name"]
+[connection signal="range_updated" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/SpawnFrequency/HRangeSlider" to="MainUIHBox/RightPanel/PlanetLayerControlPanel" method="update_spawn_interval"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/MaxConcurrentPlanets/SpinBox" to="MainUIHBox/RightPanel/PlanetLayerControlPanel" method="update_max_concurrent_planets"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/Speed/ScollSpeedSlider" to="MainUIHBox/RightPanel/PlanetLayerControlPanel" method="update_speed"]
 [connection signal="editor_closed" from="MainUIHBox/RightPanel/PaletteDialogue" to="MainUIHBox/RightPanel" method="close_palette_editor"]
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/StarLayer" to="." method="create_layer" binds= [0]]
