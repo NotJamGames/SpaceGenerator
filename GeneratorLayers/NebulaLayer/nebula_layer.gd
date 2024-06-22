@@ -15,6 +15,7 @@ const nebula_dither_shader : Shader = preload\
 @export_category("Nebula Parameters")
 @export var palette : Texture : set = set_palette
 @export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold
+@export_range(.0, 1.0) var density : float = .01 : set = set_density
 @export_range(.0, 1.0) var alpha : float = 1.0 : set = set_alpha
 @export var dither_enabled : bool = true : set = set_dither_enabled
 
@@ -43,6 +44,7 @@ func _ready() -> void:
 	sprite.material = shader_material
 
 	set_threshold(threshold)
+	set_density(density)
 	set_alpha(alpha)
 	set_dither_enabled(dither_enabled)
 	set_modulation_enabled(modulation_enabled)
@@ -65,6 +67,7 @@ func build_nebula(new_base_size : Vector2i) -> void:
 
 	var noise : FastNoiseLite = FastNoiseLite.new()
 	noise.seed = randi()
+	noise.frequency = density
 	noise_texture.noise = noise
 
 	sprite.texture = noise_texture
@@ -75,6 +78,7 @@ func build_nebula(new_base_size : Vector2i) -> void:
 	modulation_noise_texture.height = new_base_size.y
 	modulation_noise_texture.seamless = true
 	modulation_noise_texture.noise = FastNoiseLite.new()
+	modulation_noise_texture.noise.frequency = density
 	set_shader_parameter\
 			("modulation_noise_texture", modulation_noise_texture)
 
@@ -94,6 +98,15 @@ func set_shader_parameter(param_name : String, value : Variant) -> void:
 func set_threshold(new_threshold : float) -> void:
 	threshold = new_threshold
 	set_shader_parameter("threshold", threshold)
+
+
+func set_density(new_value : float) -> void:
+	density = new_value
+	if noise_texture == null or modulation_noise_texture == null: return
+	if noise_texture.noise != null:
+		noise_texture.noise.frequency = new_value
+	if modulation_noise_texture.noise != null:
+		modulation_noise_texture.noise.frequency = new_value
 
 
 func set_alpha(new_alpha : float) -> void:

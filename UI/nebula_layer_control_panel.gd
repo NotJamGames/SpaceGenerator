@@ -2,6 +2,7 @@ extends LayerControlPanel
 
 
 @export var threshold_slider : HSlider
+@export var density_slider : HSlider
 @export var alpha_slider : HSlider
 @export var dither_checkbox : CheckBox
 
@@ -32,6 +33,7 @@ func configure_and_open\
 		push_error("Error: layer not of type NebulaLayer")
 
 	threshold_slider.value = layer.threshold
+	density_slider.value = layer.density
 	alpha_slider.value = layer.alpha
 	dither_checkbox.button_pressed = layer.dither_enabled
 
@@ -56,6 +58,10 @@ func request_open_palette_editor() -> void:
 
 func update_threshold(new_value : float) -> void:
 	layer.threshold = new_value
+
+
+func update_density(new_value : float) -> void:
+	layer.density = new_value
 
 
 func update_alpha(new_value : float) -> void:
