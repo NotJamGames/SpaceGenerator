@@ -10,6 +10,7 @@ uniform sampler2D modulation_noise_texture;
 uniform bool modulation_enabled;
 uniform vec4 modulation_color;
 uniform float modulation_intensity : hint_range(.0, 1.0, .01) = .5;
+uniform float modulation_alpha_intensity : hint_range(.0, 1.0, 0.01) = .0;
 uniform float modulation_steps : hint_range(1.0, 16.0, 1.0);
 
 uniform bool oscillate = false;
@@ -90,6 +91,7 @@ vec4 modulate(vec4 color, vec2 fragcoord)
 			floor(min(get_luminosity(lum_source), .999) * modulation_steps) 
 			/ modulation_steps;
 	vec4 adjusted_modulation_color = modulation_color * luminosity;
+	color.a *= 1.0 - ((1.0 - luminosity) * modulation_alpha_intensity);
 	adjusted_modulation_color.a = color.a;
 	return mix(color, adjusted_modulation_color, modulation_intensity);
 }

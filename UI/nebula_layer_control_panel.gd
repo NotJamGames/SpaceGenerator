@@ -9,6 +9,7 @@ extends LayerControlPanel
 @export var modulation_checkbox : CheckBox
 @export var modulation_color_picker_button : ColorPickerButton
 @export var modulation_intensity_slider : HSlider
+@export var modulation_alpha_intensity_slider : HSlider
 @export var modulation_steps_spin_box : SpinBox
 
 @export var oscillation_checkbox : CheckBox
@@ -40,6 +41,7 @@ func configure_and_open\
 	modulation_checkbox.button_pressed = layer.modulation_enabled
 	modulation_color_picker_button.color = layer.modulation_color
 	modulation_intensity_slider.value = layer.modulation_intensity
+	modulation_alpha_intensity_slider.value = layer.modulation_alpha_intensity
 	modulation_steps_spin_box.value = layer.modulation_steps
 
 	oscillation_checkbox.button_pressed = layer.oscillate
@@ -100,6 +102,10 @@ func update_modulation_color(new_color : Color) -> void:
 
 func update_modulation_intensity(new_value : float) -> void:
 	layer.modulation_intensity = new_value
+
+
+func update_modulation_alpha_intensity(new_value : float) -> void:
+	layer.modulation_alpha_intensity = new_value
 
 
 func update_modulation_steps(new_value : int) -> void:

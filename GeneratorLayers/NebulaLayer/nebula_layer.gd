@@ -23,6 +23,8 @@ const nebula_dither_shader : Shader = preload\
 @export var modulation_color : Color = Color.WHITE : set = set_modulation_color
 @export_range(.0, 1.0) var modulation_intensity : float = .5 :\
 		set = set_modulation_intensity
+@export_range(.0, 1.0) var modulation_alpha_intensity : float = .0 :\
+		set = set_modulation_alpha_intensity
 @export_range(2, 16) var modulation_steps : int = 4 : set = set_modulation_steps
 
 @export var oscillate : bool = false : set = set_oscillate
@@ -49,6 +51,8 @@ func _ready() -> void:
 	set_dither_enabled(dither_enabled)
 	set_modulation_enabled(modulation_enabled)
 	set_modulation_color(modulation_color)
+	set_modulation_intensity(modulation_intensity)
+	set_modulation_alpha_intensity(modulation_alpha_intensity)
 	set_modulation_steps(modulation_steps)
 	set_oscillate(oscillate)
 	set_oscillation_intensity(oscillation_intensity)
@@ -105,6 +109,7 @@ func set_density(new_value : float) -> void:
 	if noise_texture == null or modulation_noise_texture == null: return
 	if noise_texture.noise != null:
 		noise_texture.noise.frequency = new_value
+	# TODO: let's separate this
 	if modulation_noise_texture.noise != null:
 		modulation_noise_texture.noise.frequency = new_value
 
@@ -132,6 +137,12 @@ func set_modulation_color(new_color : Color) -> void:
 func set_modulation_intensity(new_value : float) -> void:
 	modulation_intensity = new_value
 	set_shader_parameter("modulation_intensity", modulation_intensity)
+
+
+func set_modulation_alpha_intensity(new_value : float) -> void:
+	modulation_alpha_intensity = new_value
+	set_shader_parameter\
+			("modulation_alpha_intensity", modulation_alpha_intensity)
 
 
 func set_modulation_steps(new_value : int) -> void:

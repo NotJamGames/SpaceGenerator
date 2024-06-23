@@ -276,7 +276,7 @@ size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 text = "New Seed"
 
-[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("threshold_slider", "density_slider", "alpha_slider", "dither_checkbox", "modulation_checkbox", "modulation_color_picker_button", "modulation_intensity_slider", "modulation_steps_spin_box", "oscillation_checkbox", "modulation_settings_submenu", "oscillation_settings_submenu", "oscillation_intensity_slider", "oscillation_rate_slider", "oscillation_offset_slider", "speed_slider", "name_edit")]
+[node name="NebulaLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("threshold_slider", "density_slider", "alpha_slider", "dither_checkbox", "modulation_checkbox", "modulation_color_picker_button", "modulation_intensity_slider", "modulation_alpha_intensity_slider", "modulation_steps_spin_box", "oscillation_checkbox", "modulation_settings_submenu", "oscillation_settings_submenu", "oscillation_intensity_slider", "oscillation_rate_slider", "oscillation_offset_slider", "speed_slider", "name_edit")]
 visible = false
 layout_mode = 2
 script = ExtResource("8_43iu2")
@@ -287,6 +287,7 @@ dither_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Enabl
 modulation_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationEnabled")
 modulation_color_picker_button = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationColor/ColorPickerButton")
 modulation_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationIntensity/ModulationIntensitySlider")
+modulation_alpha_intensity_slider = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationAlphaIntensity/ModulationAlphaIntensitySlider")
 modulation_steps_spin_box = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationSteps/SpinBox")
 oscillation_checkbox = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/Oscillation/CheckBox")
 modulation_settings_submenu = NodePath("ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu")
@@ -484,6 +485,21 @@ size_flags_horizontal = 3
 text = "Mod. Intensity:"
 
 [node name="ModulationIntensitySlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.01
+
+[node name="ModulationAlphaIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationAlphaIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mod. Alpha:"
+
+[node name="ModulationAlphaIntensitySlider" type="HSlider" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationAlphaIntensity"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -789,6 +805,7 @@ text = "Cancel"
 [connection signal="toggled" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationEnabled" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_enabled"]
 [connection signal="color_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationColor/ColorPickerButton" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_color"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationIntensity/ModulationIntensitySlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_intensity"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationAlphaIntensity/ModulationAlphaIntensitySlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_alpha_intensity"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu/ModulationSteps/SpinBox" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_modulation_steps"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/Speed/SpeedHSlider" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="update_speed"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/EditPalette" to="MainUIHBox/RightPanel/NebulaLayerControlPanel" method="request_open_palette_editor"]
