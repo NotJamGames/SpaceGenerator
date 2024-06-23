@@ -73,6 +73,15 @@ speed = 18.0
 
 [node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
 
+[node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" index="0" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../../../../Layers/LowerNebula")
+
+[node name="StarLayer" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" index="1" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../../../../Layers/StarGenerator")
+
+[node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" index="2" node_paths=PackedStringArray("matched_layer")]
+matched_layer = NodePath("../../../../../../../../../../../Layers/UpperNebula")
+
 [node name="StarQuantitySlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity" index="1"]
 mouse_default_cursor_shape = 2
 
