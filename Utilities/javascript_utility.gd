@@ -87,7 +87,8 @@ func load_image() -> Image:
 
 
 func save_image(image : Image, fileName : String = "export.png") -> void:
-	if OS.get_name() != "HTML5" or !OS.has_feature('JavaScript'):
+	if OS.get_name() != "Web":
+		push_error("Error: cannot export png from platforms other than web")
 		return
 
 	image.clear_mipmaps()

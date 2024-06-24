@@ -97,6 +97,7 @@ mouse_default_cursor_shape = 2
 [node name="ScrollSpeedHSlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox" index="1"]
 mouse_default_cursor_shape = 2
 
+[connection signal="export_requested" from="UIManager" to="." method="evaluate_export_request"]
 [connection signal="layer_added" from="UIManager" to="." method="add_layer"]
 [connection signal="layer_duplicated" from="UIManager" to="." method="duplicate_layer"]
 [connection signal="reorder_requested" from="UIManager" to="." method="reorder_layer"]

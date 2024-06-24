@@ -143,3 +143,21 @@ func duplicate_planet_layer(source_layer : PlanetLayer) -> void:
 
 func reorder_layer(layer : GeneratorLayer, direction : int) -> void:
 	layer_container.move_child(layer, layer.get_index() + direction)
+
+
+func evaluate_export_request(export_type : ExportTypes) -> void:
+	match export_type:
+		ExportTypes.PNG:
+			export_as_png()
+		ExportTypes.PACKED_SCENE:
+			export_as_packed_scene()
+
+
+func export_as_png() -> void:
+	for layer : GeneratorLayer in layers:
+		if layer is PlanetLayer: continue
+		JavaScriptUtility.save_image(layer.texture.get_image())
+
+
+func export_as_packed_scene() -> void:
+	pass
