@@ -103,11 +103,15 @@ func duplicate_nebula_layer(source_layer : NebulaLayer) -> void:
 
 	new_layer.set_palette(source_layer.palette)
 	new_layer.set_threshold(source_layer.threshold)
+	new_layer.set_density(source_layer.density)
 	new_layer.set_alpha(source_layer.alpha)
 	new_layer.set_dither_enabled(source_layer.dither_enabled)
 	new_layer.set_modulation_enabled(source_layer.modulation_enabled)
 	new_layer.set_modulation_color(source_layer.modulation_color)
 	new_layer.set_modulation_intensity(source_layer.modulation_intensity)
+	new_layer.set_modulation_alpha_intensity\
+			(source_layer.modulation_alpha_intensity)
+	new_layer.set_modulation_density(source_layer.modulation_density)
 	new_layer.set_modulation_steps(source_layer.modulation_steps)
 	new_layer.set_oscillate(source_layer.oscillate)
 	new_layer.set_oscillation_intensity(source_layer.oscillation_intensity)
