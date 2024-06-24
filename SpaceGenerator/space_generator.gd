@@ -20,6 +20,8 @@ const PLANET_LAYER_RESOURCE : Resource = \
 
 @export var export_resolution : Vector2i = Vector2i(360, 240)
 
+enum ExportTypes {PNG, PACKED_SCENE}
+
 @export var ui_manager : Control
 
 
