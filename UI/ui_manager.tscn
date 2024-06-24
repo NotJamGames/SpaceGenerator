@@ -518,8 +518,11 @@ text = "Mod. Density:"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+min_value = 0.001
 max_value = 1.0
 step = 0.0
+value = 0.001
+exp_edit = true
 
 [node name="ModulationSteps" type="HBoxContainer" parent="MainUIHBox/RightPanel/NebulaLayerControlPanel/ScrollContainer/MarginContainer/RightPanelVBox/ModulationSettingsSubmenu"]
 layout_mode = 2
