@@ -25,6 +25,8 @@ const nebula_dither_shader : Shader = preload\
 		set = set_modulation_intensity
 @export_range(.0, 1.0) var modulation_alpha_intensity : float = .0 :\
 		set = set_modulation_alpha_intensity
+@export_range(.0, 1.0) var modulation_density : float = .01 :\
+		set = set_modulation_density
 @export_range(2, 16) var modulation_steps : int = 4 : set = set_modulation_steps
 
 @export var oscillate : bool = false : set = set_oscillate
@@ -53,6 +55,7 @@ func _ready() -> void:
 	set_modulation_color(modulation_color)
 	set_modulation_intensity(modulation_intensity)
 	set_modulation_alpha_intensity(modulation_alpha_intensity)
+	set_modulation_density(modulation_density)
 	set_modulation_steps(modulation_steps)
 	set_oscillate(oscillate)
 	set_oscillation_intensity(oscillation_intensity)
@@ -82,7 +85,7 @@ func build_nebula(new_base_size : Vector2i) -> void:
 	modulation_noise_texture.height = new_base_size.y
 	modulation_noise_texture.seamless = true
 	modulation_noise_texture.noise = FastNoiseLite.new()
-	modulation_noise_texture.noise.frequency = density
+	modulation_noise_texture.noise.frequency = modulation_density
 	set_shader_parameter\
 			("modulation_noise_texture", modulation_noise_texture)
 
@@ -106,12 +109,9 @@ func set_threshold(new_threshold : float) -> void:
 
 func set_density(new_value : float) -> void:
 	density = new_value
-	if noise_texture == null or modulation_noise_texture == null: return
+	if noise_texture == null: return
 	if noise_texture.noise != null:
 		noise_texture.noise.frequency = new_value
-	# TODO: let's separate this
-	if modulation_noise_texture.noise != null:
-		modulation_noise_texture.noise.frequency = new_value
 
 
 func set_alpha(new_alpha : float) -> void:
@@ -143,6 +143,13 @@ func set_modulation_alpha_intensity(new_value : float) -> void:
 	modulation_alpha_intensity = new_value
 	set_shader_parameter\
 			("modulation_alpha_intensity", modulation_alpha_intensity)
+
+
+func set_modulation_density(new_value : float) -> void:
+	modulation_density = new_value
+	if modulation_noise_texture == null: return
+	if modulation_noise_texture.noise != null:
+		modulation_noise_texture.noise.frequency = new_value
 
 
 func set_modulation_steps(new_value : int) -> void:

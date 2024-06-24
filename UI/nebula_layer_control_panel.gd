@@ -108,6 +108,10 @@ func update_modulation_alpha_intensity(new_value : float) -> void:
 	layer.modulation_alpha_intensity = new_value
 
 
+func update_modulation_density(new_value : float) -> void:
+	layer.modulation_density = new_value
+
+
 func update_modulation_steps(new_value : int) -> void:
 	layer.modulation_steps = new_value
 
