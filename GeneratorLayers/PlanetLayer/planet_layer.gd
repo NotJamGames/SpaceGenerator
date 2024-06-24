@@ -4,12 +4,13 @@ extends GeneratorLayer
 
 var planets : Array[Planet] = []
 var curr_planet_index : int = 0
-var timer : SceneTreeTimer
+var distance_since_spawn : float = .0
+var distance_to_next_spawn : float
 var export_resolution : Vector2i = Vector2i(360, 240)
 
 
-@export var min_spawn_frequency : float = 9.0
-@export var max_spawn_frequency : float = 18.0
+@export var min_spawn_frequency : float = 64.0
+@export var max_spawn_frequency : float = 512.0
 @export var max_concurrent_planets : int = 3 : set = set_max_concurrent_planets
 
 
@@ -18,10 +19,9 @@ func _ready() -> void:
 	check_respawn()
 
 
-func _process(_delta : float) -> void:
-	# we override this here as we'll be moving planets individually 
-	# and resetting their positions once they exit screen space
-	pass
+func _process(delta : float) -> void:
+	distance_since_spawn += delta * speed
+	if distance_since_spawn > distance_to_next_spawn: check_respawn()
 
 
 func set_export_resolution(new_resolution : Vector2i) -> void:
@@ -46,9 +46,9 @@ func check_respawn() -> void:
 	curr_planet_index = wrapi\
 			(curr_planet_index + 1, 0, max_concurrent_planets)
 
-	timer = get_tree().create_timer\
-			(randf_range(min_spawn_frequency, max_spawn_frequency))
-	timer.timeout.connect(check_respawn)
+	distance_since_spawn = .0
+	distance_to_next_spawn = randf_range\
+			(min_spawn_frequency, max_spawn_frequency)
 
 
 func instantiate_planets(num_planets : int) -> void:

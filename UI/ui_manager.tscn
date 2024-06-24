@@ -630,7 +630,8 @@ text = "Spawn Frequency:"
 
 [node name="HRangeSlider" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/SpawnFrequency" instance=ExtResource("11_xvp22")]
 layout_mode = 2
-maximum_maximum_value = 18.0
+minimum_minimum_value = 64.0
+maximum_maximum_value = 512.0
 
 [node name="MaxConcurrentPlanets" type="HBoxContainer" parent="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
