@@ -29,6 +29,11 @@ func _ready() -> void:
 	generate_space(export_resolution)
 
 
+func _input(event : InputEvent) -> void:
+	if event.is_action_pressed("hide_ui"):
+		ui_manager.visible = !ui_manager.visible
+
+
 func generate_space(new_size : Vector2i) -> void:
 	# this should work for resetting resolution, I think?
 	export_resolution = new_size
