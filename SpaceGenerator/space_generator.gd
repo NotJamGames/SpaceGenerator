@@ -20,12 +20,17 @@ const PLANET_LAYER_RESOURCE : Resource = \
 
 @export var export_resolution : Vector2i = Vector2i(360, 240)
 
-enum ExportTypes {PNG, PACKED_SCENE}
+enum ExportTypes {PNG, PACKED_SCENE, PRESET}
 
 @export var ui_manager : Control
 
 
 func _ready() -> void:
+	# export var doesn't work on web export for this one variable
+	# I don't know why
+	# This catches it, which will do for now 
+	if layer_container == null: layer_container = $Layers
+
 	generate_space(export_resolution)
 
 
@@ -55,6 +60,8 @@ func generate_pngs() -> void:
 
 func add_layer(layer_type : LayerTypes) -> void:
 	var new_layer : GeneratorLayer
+	print("called")
+	print(layer_container)
 	match layer_type:
 		LayerTypes.STAR_LAYER:
 			new_layer = STAR_LAYER_RESOURCE.instantiate()
@@ -156,6 +163,8 @@ func evaluate_export_request(export_type : ExportTypes) -> void:
 			export_as_png()
 		ExportTypes.PACKED_SCENE:
 			export_as_packed_scene()
+		ExportTypes.PRESET:
+			export_as_preset()
 
 
 func export_as_png() -> void:
@@ -166,3 +175,8 @@ func export_as_png() -> void:
 
 func export_as_packed_scene() -> void:
 	pass
+
+
+func export_as_preset() -> void:
+	JavaScriptUtility.save_preset\
+			(PresetUtiltity.generate_preset(layer_container.get_children()))

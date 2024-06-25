@@ -26,7 +26,7 @@ func _define_js() -> void:
 		canceled = true;
 		var input = document.createElement('INPUT'); 
 		input.setAttribute("type", "file");
-		input.setAttribute("accept", "image/png, image/jpeg, image/webp");
+		input.setAttribute("accept", "image/png, image/jpeg, image/webp, application/json");
 		input.click();
 		input.addEventListener('change', event => {
 			if (event.target.files.length > 0){
@@ -59,7 +59,6 @@ func load_image() -> Image:
 		return null
 
 	js_interface.upload(js_callback)
-
 	await read_completed
 
 	var imageType : String = js_interface.fileType 
@@ -86,6 +85,19 @@ func load_image() -> Image:
 	return image
 
 
+func load_preset() -> Dictionary:
+	if OS.get_name() != "Web":
+		push_error\
+				("Error: uploads only available in web builds "
+				+ "with JavaScript enabled")
+		return {}
+
+	js_interface.upload(js_callback)
+	await read_completed
+
+	return {}
+
+
 func save_image(image : Image, fileName : String = "export.png") -> void:
 	if OS.get_name() != "Web":
 		push_error("Error: cannot export png from platforms other than web")
@@ -94,3 +106,17 @@ func save_image(image : Image, fileName : String = "export.png") -> void:
 	image.clear_mipmaps()
 	var buffer : PackedByteArray = image.save_png_to_buffer()
 	JavaScriptBridge.download_buffer(buffer, fileName)
+
+
+func save_packed_scene() -> void:
+	pass
+
+
+func save_preset(preset : Dictionary) -> void:
+	if OS.get_name() != "Web":
+		push_error("Error: cannot export preset from platforms other than web")
+		return
+
+	var json : String = JSON.stringify(preset)
+	var buffer : PackedByteArray = json.to_utf8_buffer()
+	JavaScriptBridge.download_buffer(buffer, "preset.json", "application/json")

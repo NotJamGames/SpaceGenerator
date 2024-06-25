@@ -11,7 +11,6 @@ extends GeneratorLayer
 const nebula_dither_shader : Shader = preload\
 		("res://GeneratorLayers/NebulaLayer/nebula_shader.gdshader")
 
-
 @export_category("Nebula Parameters")
 @export var palette : Texture : set = set_palette
 @export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold

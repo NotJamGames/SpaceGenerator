@@ -125,6 +125,11 @@ layout_mode = 2
 text = "Export .png"
 alignment = 0
 
+[node name="ExportPreset" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export"]
+layout_mode = 2
+text = "Export Preset"
+alignment = 0
+
 [node name="Control" type="Control" parent="MainUIHBox/LeftPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -801,6 +806,7 @@ text = "Cancel"
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/AddLayer" to="." method="query_create_layer"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/DuplicateLayer" to="." method="duplicate_layer"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPng" to="." method="request_export" binds= [0]]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPreset" to="." method="request_export" binds= [2]]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_left_panel"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]

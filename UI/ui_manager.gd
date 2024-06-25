@@ -140,3 +140,4 @@ func update_layer_name(new_name : String) -> void:
 
 func request_export(export_type : SpaceGenerator.ExportTypes) -> void:
 	export_requested.emit(export_type)
+
