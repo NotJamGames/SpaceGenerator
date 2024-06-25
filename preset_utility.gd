@@ -14,12 +14,19 @@ static func generate_preset(layers : Array[Node]) -> Dictionary:
 		unique_id += 1
 
 		if layer is StarLayer:
-			preset_contents[str(unique_id)] = encode_star_layer(layer)
+			preset_contents["StarLayer%s" % unique_id] \
+					= encode_star_layer(layer)
 		elif layer is NebulaLayer:
-			preset_contents[str(unique_id)] = encode_nebula_layer(layer)
+			preset_contents["NebulaLayer%s" % unique_id] \
+					= encode_nebula_layer(layer)
 		elif layer is PlanetLayer:
-			preset_contents[str(unique_id)] = encode_planet_layer(layer)
+			preset_contents["PlanetLayer%s" % unique_id] \
+					= encode_planet_layer(layer)
 	return preset_contents
+
+
+static func decode_preset() -> Array[GeneratorLayer]:
+	return []
 
 
 static func encode_star_layer(layer : StarLayer) -> Dictionary:
@@ -28,6 +35,10 @@ static func encode_star_layer(layer : StarLayer) -> Dictionary:
 	star_layer_data["ratio"] = layer.ratio
 	star_layer_data["speed"] = layer.speed
 	return star_layer_data
+
+
+static func decode_star_layer(layer_data : Dictionary) -> StarLayer:
+	return null
 
 
 static func encode_nebula_layer(layer : NebulaLayer) -> Dictionary:

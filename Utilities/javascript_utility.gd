@@ -95,6 +95,32 @@ func load_preset() -> Dictionary:
 	js_interface.upload(js_callback)
 	await read_completed
 
+	var data_type : String = js_interface.fileType 
+	var json_data : Variant = JavaScriptBridge.eval\
+			("_HTML5FileExchange.result", true) # interface doesn't work as expected for some reason
+
+	if data_type != "application/json":
+		push_error("Error: file not of type .json")
+		return {}
+
+	json_data = json_data as PackedByteArray
+	if json_data == null:
+		push_error("Error: .json file cannot be parsed")
+		return {}
+	var json_string : String = json_data.get_string_from_utf8()
+
+	var json : JSON = JSON.new()
+	var error : Error = json.parse(json_string)
+	if error == Error.OK:
+		if typeof(json.data) != TYPE_DICTIONARY:
+			push_error("Error: JSON data cannot be parsed as dictionary")
+			return {}
+		return json.data
+	else:
+		push_error\
+				("JSON Parse Error: ", json.get_error_message(), " in ",
+				json_string, " at line ", json.get_error_line())
+
 	return {}
 
 

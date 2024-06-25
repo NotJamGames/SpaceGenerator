@@ -60,7 +60,6 @@ func generate_pngs() -> void:
 
 func add_layer(layer_type : LayerTypes) -> void:
 	var new_layer : GeneratorLayer
-	print("called")
 	print(layer_container)
 	match layer_type:
 		LayerTypes.STAR_LAYER:
@@ -155,6 +154,11 @@ func duplicate_planet_layer(source_layer : PlanetLayer) -> void:
 
 func reorder_layer(layer : GeneratorLayer, direction : int) -> void:
 	layer_container.move_child(layer, layer.get_index() + direction)
+
+
+func upload_preset() -> void:
+	var preset_data : Dictionary = await JavaScriptUtility.load_preset()
+	print(preset_data)
 
 
 func evaluate_export_request(export_type : ExportTypes) -> void:

@@ -21,6 +21,7 @@ var queued_deletions : Array = []
 signal layer_added(layer_type : SpaceGenerator.LayerTypes)
 signal layer_duplicated(source_layer : GeneratorLayer)
 signal reorder_requested(layer : GeneratorLayer, direction : int)
+signal preset_upload_requested()
 signal export_requested(export_type : SpaceGenerator.ExportTypes)
 
 
@@ -138,6 +139,9 @@ func update_layer_name(new_name : String) -> void:
 	active_layer_control.label.text = new_name
 
 
+func request_preset_upload() -> void:
+	preset_upload_requested.emit()
+
+
 func request_export(export_type : SpaceGenerator.ExportTypes) -> void:
 	export_requested.emit(export_type)
-
