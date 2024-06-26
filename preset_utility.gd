@@ -43,12 +43,15 @@ static func decode_star_layer(layer_data : Dictionary) -> StarLayer:
 
 static func encode_nebula_layer(layer : NebulaLayer) -> Dictionary:
 	var nebula_layer_data : Dictionary = {}
+	nebula_layer_data["seed"] = layer.noise_texture.noise.seed
 	nebula_layer_data["palette"] = \
 			layer.palette.get_image().save_png_to_buffer()
 	nebula_layer_data["threshold"] = layer.threshold
 	nebula_layer_data["density"] = layer.density
 	nebula_layer_data["alpha"] = layer.alpha
 	nebula_layer_data["dither_enabled"] = layer.dither_enabled
+	nebula_layer_data["modulation_seed"] = \
+			layer.modulation_noise_texture.noise.seed
 	nebula_layer_data["modulation_enabled"] = layer.modulation_enabled
 	nebula_layer_data["modulation_color"] = layer.modulation_color
 	nebula_layer_data["modulation_intensity"] = layer.modulation_intensity
