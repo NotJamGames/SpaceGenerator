@@ -38,6 +38,10 @@ static func decode_preset(preset_data : Dictionary) -> Array[GeneratorLayer]:
 	for key in preset_data:
 		if key.begins_with("StarLayer"):
 			new_layers.append(decode_star_layer(preset_data[key]))
+		if key.begins_with("NebulaLayer"):
+			continue
+		if key.begins_with("PlanetLayer"):
+			new_layers.append(decode_planet_layer(preset_data[key]))
 	return new_layers
 
 
@@ -97,4 +101,9 @@ static func encode_planet_layer(layer : PlanetLayer) -> Dictionary:
 
 
 static func decode_planet_layer(layer_data : Dictionary) -> PlanetLayer:
-	return null
+	var new_planet_layer : PlanetLayer = PLANET_LAYER_RESOURCE.instantiate()
+	new_planet_layer.min_spawn_frequency = layer_data["min_spawn_frequency"]
+	new_planet_layer.max_spawn_frequency = layer_data["max_spawn_frequency"]
+	new_planet_layer.max_concurrent_planets = \
+			layer_data["max_concurrent_planets"]
+	return new_planet_layer
