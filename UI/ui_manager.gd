@@ -9,9 +9,12 @@ const LAYER_CONTROL_RESOURCE : Resource = \
 		preload("res://UI/layer_control.tscn")
 @export var layer_controls_vbox : VBoxContainer
 
+@export var preset_manager : PresetManager
+
 @export var add_layer_dialogue : ColorRect
 @export var delete_layer_dialogue : ColorRect
 @export var delete_layer_dialogue_label : Label
+@export var load_preset_dialogue : LoadPresetDialogue
 
 @export var duplicate_layer_button : DuplicateLayerButton
 
@@ -21,6 +24,7 @@ var queued_deletions : Array = []
 signal layer_added(layer_type : SpaceGenerator.LayerTypes)
 signal layer_duplicated(source_layer : GeneratorLayer)
 signal reorder_requested(layer : GeneratorLayer, direction : int)
+signal preset_load_requested(preset_data : Dictionary)
 signal preset_upload_requested()
 signal export_requested(export_type : SpaceGenerator.ExportTypes)
 
@@ -135,8 +139,19 @@ func cancel_delete_layer() -> void:
 	delete_layer_dialogue.visible = false
 
 
+func delete_all_layer_controls() -> void:
+	for layer_control : Node in layer_controls_vbox.get_children():
+		layer_control.queue_free()
+
+
 func update_layer_name(new_name : String) -> void:
 	active_layer_control.label.text = new_name
+
+
+func confirm_load_preset(preset_data : Dictionary) -> void:
+	if await load_preset_dialogue.confirm_load_preset():
+		preset_load_requested.emit(preset_data)
+	return
 
 
 func request_preset_upload() -> void:

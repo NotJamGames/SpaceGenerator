@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=15 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
 [ext_resource type="Texture2D" uid="uid://bcut6rqrk5w23" path="res://UI/Icons/plus_icon.png" id="2_icj5e"]
 [ext_resource type="Script" path="res://UI/duplicate_layer.gd" id="4_0kcov"]
 [ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
+[ext_resource type="Script" path="res://UI/preset_manager.gd" id="5_b2kux"]
 [ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
 [ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
 [ext_resource type="Script" path="res://UI/stars_layer_control_panel.gd" id="7_vdxbv"]
@@ -12,8 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
 [ext_resource type="Script" path="res://UI/planet_layer_control_panel.gd" id="10_cejk5"]
 [ext_resource type="PackedScene" uid="uid://dyonammobqfy8" path="res://UI/CustomElements/h_range_slider.tscn" id="11_xvp22"]
+[ext_resource type="Script" path="res://UI/load_preset_dialogue.gd" id="14_tdsny"]
 
-[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "duplicate_layer_button")]
+[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "preset_manager", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "load_preset_dialogue", "duplicate_layer_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,9 +27,11 @@ script = ExtResource("2_4wugv")
 left_panel = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded")
 right_panel = NodePath("MainUIHBox/RightPanel")
 layer_controls_vbox = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer")
+preset_manager = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets")
 add_layer_dialogue = NodePath("AddLayerDialogue")
 delete_layer_dialogue = NodePath("DeleteLayerDialogue")
 delete_layer_dialogue_label = NodePath("DeleteLayerDialogue/PanelContainer/VBoxContainer/Label")
+load_preset_dialogue = NodePath("LoadPresetDialogue")
 duplicate_layer_button = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/DuplicateLayer")
 
 [node name="MainUIHBox" type="HBoxContainer" parent="."]
@@ -115,6 +119,7 @@ layout_mode = 2
 [node name="Presets" type="VBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+script = ExtResource("5_b2kux")
 
 [node name="UploadPreset" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets"]
 layout_mode = 2
@@ -796,6 +801,62 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Cancel"
 
+[node name="LoadPresetDialogue" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+script = ExtResource("14_tdsny")
+
+[node name="PanelContainer" type="PanelContainer" parent="LoadPresetDialogue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -59.0
+offset_right = 360.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoadPresetDialogue/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="LoadPresetDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Loading a preset will permanently
+erase the current configuration.
+Are you sure you wish to proceed?"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="LoadPresetDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LoadPresetDialogue/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OK" type="Button" parent="LoadPresetDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "OK"
+
+[node name="VSeparator" type="VSeparator" parent="LoadPresetDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="LoadPresetDialogue/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Cancel"
+
 [connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="request_layer_reorder"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="query_delete_layer"]
 [connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="close_layer_panel"]
@@ -810,6 +871,7 @@ text = "Cancel"
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/AddLayer" to="." method="query_create_layer"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/DuplicateLayer" to="." method="duplicate_layer"]
+[connection signal="load_preset_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets" to="." method="confirm_load_preset"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets/UploadPreset" to="." method="request_preset_upload"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPng" to="." method="request_export" binds= [0]]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPreset" to="." method="request_export" binds= [2]]
@@ -859,6 +921,8 @@ text = "Cancel"
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/Cancel" to="." method="cancel_create_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]
+[connection signal="pressed" from="LoadPresetDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="LoadPresetDialogue" method="confirm"]
+[connection signal="pressed" from="LoadPresetDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="LoadPresetDialogue" method="cancel"]
 
 [editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow"]
 [editable path="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/StarLayer"]

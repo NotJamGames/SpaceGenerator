@@ -100,6 +100,7 @@ mouse_default_cursor_shape = 2
 [connection signal="export_requested" from="UIManager" to="." method="evaluate_export_request"]
 [connection signal="layer_added" from="UIManager" to="." method="add_layer"]
 [connection signal="layer_duplicated" from="UIManager" to="." method="duplicate_layer"]
+[connection signal="preset_load_requested" from="UIManager" to="." method="load_preset"]
 [connection signal="preset_upload_requested" from="UIManager" to="." method="upload_preset"]
 [connection signal="reorder_requested" from="UIManager" to="." method="reorder_layer"]
 

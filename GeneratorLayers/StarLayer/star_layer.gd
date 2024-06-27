@@ -31,12 +31,11 @@ const LARGE_STAR_RESOURCES : Array[Resource] = \
 
 
 var max_stars : int
-var ratio : Array[float]
+var ratio : Array
 
 
 func generate_stars\
-		(new_max_stars : int, new_ratio : Array[float],
-		viewport_size : Vector2)\
+		(new_max_stars : int, new_ratio : Array, viewport_size : Vector2)\
 		-> void:
 	clear_stars()
 
@@ -52,6 +51,7 @@ func generate_stars\
 
 	for i : int in max_stars:
 		var new_seed : float = randf_range(.0, ratio_sum)
+		print(new_seed)
 		var new_star_id : int = 0
 
 		for f : float in ratio:
@@ -67,6 +67,7 @@ func generate_stars\
 				randf_range(.0 + MARGIN, viewport_size.y - MARGIN)).floor()
 
 		var poss_textures = star_resources[new_star_id]
+		print(poss_textures.size())
 		new_star_sprite.texture = \
 				poss_textures[randi_range(0, poss_textures.size() - 1)]
 

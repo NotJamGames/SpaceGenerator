@@ -156,9 +156,31 @@ func reorder_layer(layer : GeneratorLayer, direction : int) -> void:
 	layer_container.move_child(layer, layer.get_index() + direction)
 
 
+func load_preset(preset_data : Dictionary) -> void:
+	for layer : Node in layer_container.get_children():
+		layer.queue_free()
+	ui_manager.delete_all_layer_controls()
+
+	var new_layers : Array[GeneratorLayer] = \
+			PresetUtiltity.decode_preset(preset_data)
+
+	for layer : GeneratorLayer in new_layers:
+		layers.append(layer)
+		layer_container.add_child(layer)
+		if layer is StarLayer:
+			layer.generate_stars\
+					(layer.max_stars, layer.ratio.duplicate(),
+					export_resolution)
+			ui_manager.add_layer_control(layer, LayerTypes.STAR_LAYER)
+		elif layer is NebulaLayer:
+			ui_manager.add_layer_control(layer, LayerTypes.NEBULA_LAYER)
+		elif layer is PlanetLayer:
+			ui_manager.add_layer_control(layer, LayerTypes.PLANET_LAYER)
+
+
 func upload_preset() -> void:
 	var preset_data : Dictionary = await JavaScriptUtility.load_preset()
-	print(preset_data)
+	ui_manager.preset_manager.add_preset_button(preset_data)
 
 
 func evaluate_export_request(export_type : ExportTypes) -> void:
@@ -184,3 +206,4 @@ func export_as_packed_scene() -> void:
 func export_as_preset() -> void:
 	JavaScriptUtility.save_preset\
 			(PresetUtiltity.generate_preset(layer_container.get_children()))
+
