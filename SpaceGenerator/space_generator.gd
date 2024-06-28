@@ -47,7 +47,7 @@ func generate_space(new_size : Vector2i) -> void:
 		layer.build_nebula(Vector2i(new_size))
 
 	for layer : StarLayer in star_layers:
-		layer.generate_stars(192, [.65, .2, .15], new_size)
+		layer.generate_stars(256, [.65, .2, .15], new_size)
 
 	for layer : PlanetLayer in planet_layers:
 		layer.set_size(new_size)

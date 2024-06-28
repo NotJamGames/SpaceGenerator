@@ -221,7 +221,7 @@ text = "Star Quantity: "
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-max_value = 256.0
+max_value = 360.0
 
 [node name="HSeparator3" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
