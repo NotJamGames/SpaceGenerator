@@ -4,6 +4,8 @@ extends TextureRect
 
 @export_category("Layer Settings")
 var index : int
+@export var title : String
+@export var resolution : Vector2i = Vector2i.ZERO : set = set_resolution
 @export var speed : float = 32.0 : set = set_speed
 
 
@@ -13,6 +15,10 @@ func _process(delta : float) -> void:
 	if position.y > .0:
 		# don't divide size by 2 - consider scaling!
 		position.y = position.y - (size.y)
+
+
+func set_resolution(new_resolution : Vector2i) -> void:
+	resolution = new_resolution
 
 
 func set_speed(new_value : float) -> void:

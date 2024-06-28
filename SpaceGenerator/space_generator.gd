@@ -60,25 +60,32 @@ func generate_pngs() -> void:
 
 func add_layer(layer_type : LayerTypes) -> void:
 	var new_layer : GeneratorLayer
+	var layer_title : String
 	match layer_type:
 		LayerTypes.STAR_LAYER:
 			new_layer = STAR_LAYER_RESOURCE.instantiate()
 			layer_container.add_child(new_layer)
 			var ratio : Array[float] = [.65, .2, .15]
 			new_layer.generate_stars(192, ratio, export_resolution)
+			layer_title = "Star Layer"
+			new_layer.title = layer_title
 			star_layers.append(new_layer)
 		LayerTypes.NEBULA_LAYER:
 			new_layer = NEBULA_LAYER_RESOURCE.instantiate()
 			layer_container.add_child(new_layer)
 			new_layer.build_nebula(export_resolution)
+			layer_title = "Nebula Layer"
+			new_layer.title = layer_title
 			nebula_layers.append(new_layer)
 		LayerTypes.PLANET_LAYER:
 			new_layer = PLANET_LAYER_RESOURCE.instantiate()
 			layer_container.add_child(new_layer)
 			new_layer.set_size(export_resolution)
+			layer_title = "Planet Layer"
+			new_layer.title = layer_title
 			planet_layers.append(new_layer)
 
-	ui_manager.add_layer_control(new_layer, layer_type)
+	ui_manager.add_layer_control(new_layer, layer_type, layer_title)
 	layers.append(new_layer)
 
 
@@ -101,9 +108,11 @@ func duplicate_star_layer(source_layer : StarLayer) -> void:
 
 	new_layer.generate_stars\
 			(source_layer.max_stars, source_layer.ratio, export_resolution)
+	new_layer.title = "%s Copy" % source_layer.title
 	new_layer.speed = source_layer.speed
 
-	ui_manager.add_layer_control(new_layer, LayerTypes.STAR_LAYER)
+	ui_manager.add_layer_control\
+			(new_layer, LayerTypes.STAR_LAYER, new_layer.title)
 	layers.append(new_layer)
 
 
@@ -127,12 +136,15 @@ func duplicate_nebula_layer(source_layer : NebulaLayer) -> void:
 	new_layer.set_oscillation_intensity(source_layer.oscillation_intensity)
 	new_layer.set_oscillation_rate(source_layer.oscillation_rate)
 	new_layer.set_oscillation_offset(source_layer.oscillation_offset)
+	new_layer.title = "%s Copy" % source_layer.title
+	new_layer.resolution = source_layer.resolution
 	new_layer.speed = source_layer.speed
 
 	new_layer.build_nebula(export_resolution)
 	new_layer.noise_texture.noise.seed = source_layer.noise_texture.noise.seed
 
-	ui_manager.add_layer_control(new_layer, LayerTypes.NEBULA_LAYER)
+	ui_manager.add_layer_control\
+			(new_layer, LayerTypes.NEBULA_LAYER, new_layer.title)
 	layers.append(new_layer)
 	nebula_layers.append(new_layer)
 
@@ -141,7 +153,7 @@ func duplicate_planet_layer(source_layer : PlanetLayer) -> void:
 	var new_layer : PlanetLayer = PLANET_LAYER_RESOURCE.instantiate()
 	layer_container.add_child(new_layer)
 
-	new_layer.export_resolution = export_resolution
+	new_layer.resolution = export_resolution
 	new_layer.max_concurrent_planets = source_layer.max_concurrent_planets
 	new_layer.min_spawn_frequency = source_layer.min_spawn_frequency
 	new_layer.max_spawn_frequency = source_layer.max_spawn_frequency
@@ -175,12 +187,15 @@ func load_preset(preset_data : Dictionary) -> void:
 			layer.generate_stars\
 					(layer.max_stars, layer.ratio.duplicate(),
 					export_resolution)
-			ui_manager.add_layer_control(layer, LayerTypes.STAR_LAYER)
+			ui_manager.add_layer_control\
+					(layer, LayerTypes.STAR_LAYER, layer.title)
 		elif layer is NebulaLayer:
-			ui_manager.add_layer_control(layer, LayerTypes.NEBULA_LAYER)
+			ui_manager.add_layer_control\
+					(layer, LayerTypes.NEBULA_LAYER, layer.title)
 			layer.build_nebula(export_resolution)
 		elif layer is PlanetLayer:
-			ui_manager.add_layer_control(layer, LayerTypes.PLANET_LAYER)
+			ui_manager.add_layer_control\
+					(layer, LayerTypes.PLANET_LAYER, layer.title)
 
 
 func upload_preset() -> void:

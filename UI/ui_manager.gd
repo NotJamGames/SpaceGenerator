@@ -101,9 +101,10 @@ func layer_controls_reevaluate_positions() -> void:
 
 
 func add_layer_control\
-		(layer : GeneratorLayer, layer_type : SpaceGenerator.LayerTypes)\
-		-> void:
+		(layer : GeneratorLayer, layer_type : SpaceGenerator.LayerTypes,
+		layer_title : String) -> void:
 	var new_layer_control : LayerControl = LAYER_CONTROL_RESOURCE.instantiate()
+	new_layer_control.label.text = layer_title
 	new_layer_control.matched_layer = layer
 	new_layer_control.matched_layer_type = layer_type
 	new_layer_control.request_deletion.connect(query_delete_layer)

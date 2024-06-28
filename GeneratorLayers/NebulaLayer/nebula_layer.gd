@@ -12,14 +12,14 @@ const nebula_dither_shader : Shader = preload\
 		("res://GeneratorLayers/NebulaLayer/nebula_shader.gdshader")
 
 @export_category("Nebula Parameters")
-var nebula_seed : int = -1
+@export var nebula_seed : int = -1
 @export var palette : Texture : set = set_palette
 @export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold
 @export_range(.0, 1.0) var density : float = .01 : set = set_density
 @export_range(.0, 1.0) var alpha : float = 1.0 : set = set_alpha
 @export var dither_enabled : bool = true : set = set_dither_enabled
 
-var modulation_seed : int = -1
+@export var modulation_seed : int = -1
 @export var modulation_enabled : bool = false : set = set_modulation_enabled
 @export var modulation_color : Color = Color.WHITE : set = set_modulation_color
 @export_range(.0, 1.0) var modulation_intensity : float = .5 :\
@@ -63,6 +63,9 @@ func _ready() -> void:
 	set_oscillation_rate(oscillation_rate)
 	set_oscillation_offset(oscillation_offset)
 
+	if !resolution == Vector2i.ZERO:
+		build_nebula(resolution)
+
 
 func build_nebula(new_base_size : Vector2i) -> void:
 	subviewport.size = new_base_size
@@ -91,6 +94,8 @@ func build_nebula(new_base_size : Vector2i) -> void:
 	modulation_noise_texture.noise.frequency = modulation_density
 	set_shader_parameter\
 			("modulation_noise_texture", modulation_noise_texture)
+
+	resolution = new_base_size
 
 
 func set_palette(new_palette : Texture) -> void:

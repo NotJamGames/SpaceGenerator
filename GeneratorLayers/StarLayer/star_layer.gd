@@ -34,6 +34,11 @@ var max_stars : int
 var ratio : Array
 
 
+func _ready() -> void:
+	if !resolution == Vector2i.ZERO:
+		generate_stars(max_stars, ratio, resolution)
+
+
 func generate_stars\
 		(new_max_stars : int, new_ratio : Array, viewport_size : Vector2)\
 		-> void:
@@ -48,6 +53,7 @@ func generate_stars\
 	max_stars = new_max_stars
 	ratio.clear()
 	ratio.append_array(new_ratio)
+	resolution = viewport_size
 
 	for i : int in max_stars:
 		var new_seed : float = randf_range(.0, ratio_sum)

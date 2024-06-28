@@ -85,12 +85,21 @@ size_flags_vertical = 3
 layout_mode = 2
 matched_layer_type = 1
 
+[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow/HBoxContainer/HBoxContainer" index="0"]
+text = "Background Nebula"
+
 [node name="StarLayer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" instance=ExtResource("5_e23ao")]
 layout_mode = 2
+
+[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/StarLayer/HBoxContainer/HBoxContainer" index="0"]
+text = "Star Layer"
 
 [node name="NebulaLayerAbove" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" instance=ExtResource("5_e23ao")]
 layout_mode = 2
 matched_layer_type = 1
+
+[node name="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerAbove/HBoxContainer/HBoxContainer" index="0"]
+text = "Foreground Nebula"
 
 [node name="HSeparator3" type="HSeparator" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers"]
 layout_mode = 2
@@ -875,8 +884,6 @@ text = "Cancel"
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/DuplicateLayer" to="." method="duplicate_layer"]
 [connection signal="load_preset_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets" to="." method="confirm_load_preset"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets/UploadPreset" to="." method="request_preset_upload"]
-[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPng" to="." method="request_export" binds= [0]]
-[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPreset" to="." method="request_export" binds= [2]]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_left_panel"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
@@ -917,9 +924,6 @@ text = "Cancel"
 [connection signal="value_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/MaxConcurrentPlanets/SpinBox" to="MainUIHBox/RightPanel/PlanetLayerControlPanel" method="update_max_concurrent_planets"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/PlanetLayerControlPanel/ScrollContainer/VBoxContainer/Speed/ScollSpeedSlider" to="MainUIHBox/RightPanel/PlanetLayerControlPanel" method="update_speed"]
 [connection signal="editor_closed" from="MainUIHBox/RightPanel/PaletteDialogue" to="MainUIHBox/RightPanel" method="close_palette_editor"]
-[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/StarLayer" to="." method="create_layer" binds= [0]]
-[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/NebulaLayer" to="." method="create_layer" binds= [1]]
-[connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/PlanetLayer" to="." method="create_layer" binds= [2]]
 [connection signal="pressed" from="AddLayerDialogue/PanelContainer/VBoxContainer/Cancel" to="." method="cancel_create_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/OK" to="." method="confirm_delete_layer"]
 [connection signal="pressed" from="DeleteLayerDialogue/PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="cancel_delete_layer"]

@@ -11,6 +11,7 @@ const PLANET_LAYER_RESOURCE : Resource = \
 
 
 static func generate_preset(layers : Array[Node]) -> Dictionary:
+	#TODO: add a global settings section, resolution audio etc.
 	var preset_contents : Dictionary = {}
 
 	var unique_id : int = -1
@@ -36,6 +37,7 @@ static func generate_preset(layers : Array[Node]) -> Dictionary:
 
 
 static func decode_preset(preset_data : Dictionary) -> Array[GeneratorLayer]:
+	#TODO: add a global settings section, resolution audio etc.
 	var new_layers : Array[GeneratorLayer] = []
 	for key in preset_data:
 		if key.begins_with("StarLayer"):
@@ -52,6 +54,8 @@ static func encode_star_layer(layer : StarLayer, index : int) -> Dictionary:
 	star_layer_data["index"] = index
 	star_layer_data["max_stars"] = layer.max_stars
 	star_layer_data["ratio"] = layer.ratio
+	star_layer_data["title"] = layer.title
+	star_layer_data["resolution"] = layer.resolution
 	star_layer_data["speed"] = layer.speed
 	return star_layer_data
 
@@ -60,6 +64,7 @@ static func decode_star_layer(layer_data : Dictionary) -> StarLayer:
 	var new_star_layer : StarLayer = STAR_LAYER_RESOURCE.instantiate()
 	new_star_layer.index = layer_data["index"]
 	new_star_layer.max_stars = layer_data["max_stars"]
+	new_star_layer.title = "Star Layer" # layer_data["title"]
 	new_star_layer.ratio = layer_data["ratio"]
 	new_star_layer.speed = layer_data["speed"]
 	return new_star_layer
@@ -92,6 +97,8 @@ static func encode_nebula_layer(layer : NebulaLayer, index : int) -> Dictionary:
 	nebula_layer_data["oscillation_intensity"] = layer.oscillation_intensity
 	nebula_layer_data["oscillation_rate"] = layer.oscillation_rate
 	nebula_layer_data["oscillation_offset"] = layer.oscillation_offset
+	nebula_layer_data["title"] = layer.title
+	nebula_layer_data["resolution"] = layer.resolution
 	nebula_layer_data["speed"] = layer.speed
 	return nebula_layer_data
 
@@ -126,6 +133,8 @@ static func decode_nebula_layer(layer_data : Dictionary) -> NebulaLayer:
 			layer_data["oscillation_intensity"]
 	new_nebula_layer.oscillation_rate = layer_data["oscillation_rate"]
 	new_nebula_layer.oscillation_offset = layer_data["oscillation_offset"]
+	new_nebula_layer.title = "Nebula Layer" # layer_data["title"]
+	#new_nebula_layer.resolution = layer_data["resolution"]
 	new_nebula_layer.speed = layer_data["speed"]
 	return new_nebula_layer
 
@@ -136,6 +145,8 @@ static func encode_planet_layer(layer : PlanetLayer, index : int) -> Dictionary:
 	planet_layer_data["min_spawn_frequency"] = layer.min_spawn_frequency
 	planet_layer_data["max_spawn_frequency"] = layer.max_spawn_frequency
 	planet_layer_data["max_concurrent_planets"] = layer.max_concurrent_planets
+	planet_layer_data["title"] = layer.title
+	planet_layer_data["resolution"] = layer.resolution
 	planet_layer_data["speed"] = layer.speed
 	return planet_layer_data
 
@@ -147,5 +158,8 @@ static func decode_planet_layer(layer_data : Dictionary) -> PlanetLayer:
 	new_planet_layer.max_spawn_frequency = layer_data["max_spawn_frequency"]
 	new_planet_layer.max_concurrent_planets = \
 			layer_data["max_concurrent_planets"]
+	# TODO: fix!
+	new_planet_layer.title = "Planet Layer"#layer_data["title"]
+	new_planet_layer.resolution = layer_data["resolution"]
 	new_planet_layer.speed = layer_data["speed"]
 	return new_planet_layer

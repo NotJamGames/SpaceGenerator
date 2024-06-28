@@ -43,8 +43,6 @@ func _ready() -> void:
 			label.text = "Planet Layer"
 
 
-
-
 func check_toggle_selected(event : InputEvent) -> void:
 	event = event as InputEventMouseButton
 	if event == null or locked: return

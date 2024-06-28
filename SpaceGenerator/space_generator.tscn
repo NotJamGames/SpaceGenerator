@@ -45,6 +45,7 @@ oscillate = true
 oscillation_intensity = 0.08
 oscillation_rate = 0.8
 oscillation_offset = 0.5
+title = "Background Nebula"
 speed = 6.0
 
 [node name="StarGenerator" parent="Layers" instance=ExtResource("2_d6qfi")]
@@ -52,6 +53,7 @@ layout_mode = 0
 offset_right = 1440.0
 offset_bottom = 1440.0
 texture = SubResource("ViewportTexture_ofv6x")
+title = "Star Layer"
 speed = 6.0
 
 [node name="UpperNebula" parent="Layers" instance=ExtResource("2_ao41h")]
@@ -69,6 +71,7 @@ modulation_steps = 8
 oscillate = true
 oscillation_intensity = 0.04
 oscillation_rate = 0.5
+title = "Foreground Nebula"
 speed = 18.0
 
 [node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]

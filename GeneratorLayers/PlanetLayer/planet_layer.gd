@@ -6,7 +6,6 @@ var planets : Array[Planet] = []
 var curr_planet_index : int = 0
 var distance_since_spawn : float = .0
 var distance_to_next_spawn : float
-var export_resolution : Vector2i = Vector2i(360, 240)
 
 
 @export var min_spawn_frequency : float = 64.0
@@ -22,10 +21,6 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	distance_since_spawn += delta * speed
 	if distance_since_spawn > distance_to_next_spawn: check_respawn()
-
-
-func set_export_resolution(new_resolution : Vector2i) -> void:
-	export_resolution = new_resolution
 
 
 func set_max_concurrent_planets(new_value : int) -> void:
@@ -57,7 +52,7 @@ func instantiate_planets(num_planets : int) -> void:
 		new_planet.centered = false
 		new_planet.scale = Vector2i(2, 2)
 		new_planet.speed = speed
-		new_planet.export_resolution = export_resolution
+		new_planet.export_resolution = resolution
 		new_planet.position = Vector2i(-1920, -1080) # safely offscreen
 		add_child(new_planet)
 		planets.append(new_planet)
