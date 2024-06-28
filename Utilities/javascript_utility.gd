@@ -132,7 +132,7 @@ func save_image(image : Image, file_name : String = "export.png") -> void:
 	image.clear_mipmaps()
 	var buffer : PackedByteArray = image.save_png_to_buffer()
 	file_name = "%s.png" % file_name if file_name != "export.png" else file_name
-	JavaScriptBridge.download_buffer(buffer, file_name)
+	JavaScriptBridge.download_buffer(buffer, file_name.validate_filename())
 
 
 func save_preset(preset : Dictionary) -> void:

@@ -79,8 +79,8 @@ func add_layer(layer_type : LayerTypes) -> void:
 			nebula_layers.append(new_layer)
 		LayerTypes.PLANET_LAYER:
 			new_layer = PLANET_LAYER_RESOURCE.instantiate()
+			new_layer.resolution = export_resolution
 			layer_container.add_child(new_layer)
-			new_layer.set_size(export_resolution)
 			layer_title = "Planet Layer"
 			new_layer.title = layer_title
 			planet_layers.append(new_layer)
