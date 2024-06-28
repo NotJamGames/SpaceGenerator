@@ -176,10 +176,14 @@ func reorder_layer(layer : GeneratorLayer, direction : int) -> void:
 func load_preset(preset_data : Dictionary) -> void:
 	for layer : Node in layer_container.get_children():
 		layer.queue_free()
+	star_layers.clear()
+	nebula_layers.clear()
+	planet_layers.clear()
 	ui_manager.delete_all_layer_controls()
 
-	var new_layers : Array[GeneratorLayer] = \
+	var parsed_preset_data : Dictionary =\
 			PresetUtiltity.decode_preset(preset_data)
+	var new_layers : Array[GeneratorLayer] = parsed_preset_data["new_layers"]
 
 	var ordered_new_layers : Array[GeneratorLayer] = []
 	for i : int in new_layers.size(): ordered_new_layers.append(null)
@@ -190,18 +194,24 @@ func load_preset(preset_data : Dictionary) -> void:
 		layers.append(layer)
 		layer_container.add_child(layer)
 		if layer is StarLayer:
+			ui_manager.add_layer_control\
+					(layer, LayerTypes.STAR_LAYER, layer.title)
 			layer.generate_stars\
 					(layer.max_stars, layer.ratio.duplicate(),
 					export_resolution)
-			ui_manager.add_layer_control\
-					(layer, LayerTypes.STAR_LAYER, layer.title)
+			star_layers.append(layer)
 		elif layer is NebulaLayer:
 			ui_manager.add_layer_control\
 					(layer, LayerTypes.NEBULA_LAYER, layer.title)
 			layer.build_nebula(export_resolution)
+			nebula_layers.append(layer)
 		elif layer is PlanetLayer:
 			ui_manager.add_layer_control\
 					(layer, LayerTypes.PLANET_LAYER, layer.title)
+			planet_layers.append(layer)
+
+	ui_manager.resolution_interface.update_display\
+			(parsed_preset_data["resolution"])
 
 
 func upload_preset() -> void:
@@ -229,5 +239,6 @@ func export_as_packed_scene() -> void:
 
 func export_as_preset() -> void:
 	JavaScriptUtility.save_preset\
-			(PresetUtiltity.generate_preset(layer_container.get_children()))
+			(PresetUtiltity.generate_preset\
+					(layer_container.get_children(), export_resolution))
 

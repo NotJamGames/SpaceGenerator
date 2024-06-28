@@ -10,18 +10,17 @@ const PLANET_LAYER_RESOURCE : Resource = \
 		preload("res://GeneratorLayers/PlanetLayer/planet_layer.tscn")
 
 
-static func generate_preset(layers : Array[Node]) -> Dictionary:
+static func generate_preset(layers : Array[Node], resolution : Vector2i)\
+		-> Dictionary:
 	#TODO: add a global settings section, resolution audio etc.
 	var preset_contents : Dictionary = {}
+	preset_contents["resolution"] = resolution
 
 	var unique_id : int = -1
 
 	for i in layers.size():
 		var layer : Node = layers[i]
 
-		# TODO: get the user defined name, rather than just generating one
-		# ensure that each layer name is unique! otherwise we'll overwrite
-		# layers with matching names
 		unique_id += 1
 
 		if layer is StarLayer:
@@ -36,7 +35,7 @@ static func generate_preset(layers : Array[Node]) -> Dictionary:
 	return preset_contents
 
 
-static func decode_preset(preset_data : Dictionary) -> Array[GeneratorLayer]:
+static func decode_preset(preset_data : Dictionary) -> Dictionary:
 	#TODO: add a global settings section, resolution audio etc.
 	var new_layers : Array[GeneratorLayer] = []
 	for key in preset_data:
@@ -46,7 +45,12 @@ static func decode_preset(preset_data : Dictionary) -> Array[GeneratorLayer]:
 			new_layers.append(decode_nebula_layer(preset_data[key]))
 		if key.begins_with("PlanetLayer"):
 			new_layers.append(decode_planet_layer(preset_data[key]))
-	return new_layers
+	return \
+	{
+		"resolution" : TypeConversionUtility.string_to_vector2i\
+				(preset_data["resolution"]),
+		"new_layers" : new_layers,
+	}
 
 
 static func encode_star_layer(layer : StarLayer, index : int) -> Dictionary:
