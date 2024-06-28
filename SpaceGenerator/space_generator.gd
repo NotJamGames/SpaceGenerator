@@ -32,6 +32,7 @@ func _ready() -> void:
 	if layer_container == null: layer_container = $Layers
 
 	generate_space(export_resolution)
+	ui_manager.resolution_interface.update_display(export_resolution)
 
 
 func _input(event : InputEvent) -> void:
@@ -47,7 +48,12 @@ func generate_space(new_size : Vector2i) -> void:
 		layer.build_nebula(Vector2i(new_size))
 
 	for layer : StarLayer in star_layers:
-		layer.generate_stars(256, [.65, .2, .15], new_size)
+		if layer.max_stars == 0 or layer.ratio.size() == 0:
+			layer.generate_stars\
+					(256, [.65, .2, .15], new_size)
+		else:
+			layer.generate_stars\
+					(layer.max_stars, layer.ratio.duplicate(), new_size)
 
 	for layer : PlanetLayer in planet_layers:
 		layer.set_size(new_size)

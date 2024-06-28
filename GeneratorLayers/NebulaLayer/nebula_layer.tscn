@@ -7,7 +7,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdlo2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5r7c3"]
 shader = ExtResource("3_4gl83")
 shader_parameter/threshold = 0.0
 shader_parameter/alpha = 0.48
@@ -15,6 +15,7 @@ shader_parameter/dither_enabled = true
 shader_parameter/modulation_enabled = false
 shader_parameter/modulation_color = null
 shader_parameter/modulation_intensity = 0.5
+shader_parameter/modulation_alpha_intensity = 0.0
 shader_parameter/modulation_steps = 4.0
 shader_parameter/oscillate = false
 shader_parameter/oscillation_intensity = 0.24
@@ -34,7 +35,6 @@ script = ExtResource("1_yds7p")
 subviewport = NodePath("SubViewport")
 sprite = NodePath("SubViewport/Sprite2D")
 palette = ExtResource("2_ixn55")
-density = null
 alpha = 0.48
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -42,4 +42,4 @@ transparent_bg = true
 size = Vector2i(360, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_xdlo2")
+material = SubResource("ShaderMaterial_5r7c3")

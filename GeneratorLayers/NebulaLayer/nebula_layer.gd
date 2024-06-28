@@ -70,13 +70,13 @@ func _ready() -> void:
 func build_nebula(new_base_size : Vector2i) -> void:
 	subviewport.size = new_base_size
 
-	noise_texture.seamless = true
 	noise_texture.width = new_base_size.x
 	noise_texture.height = new_base_size.y
 
 	set_palette(palette)
 
 	var noise : FastNoiseLite = FastNoiseLite.new()
+	noise_texture.seamless = true
 	noise.seed = randi() if nebula_seed == -1 else nebula_seed
 	noise.frequency = density
 	noise_texture.noise = noise
@@ -87,8 +87,8 @@ func build_nebula(new_base_size : Vector2i) -> void:
 	modulation_noise_texture = NoiseTexture2D.new()
 	modulation_noise_texture.width = new_base_size.x
 	modulation_noise_texture.height = new_base_size.y
-	modulation_noise_texture.seamless = true
 	modulation_noise_texture.noise = FastNoiseLite.new()
+	modulation_noise_texture.seamless = true
 	modulation_noise_texture.noise.seed = randi() if modulation_seed == -1 \
 			else modulation_seed
 	modulation_noise_texture.noise.frequency = modulation_density
@@ -96,6 +96,7 @@ func build_nebula(new_base_size : Vector2i) -> void:
 			("modulation_noise_texture", modulation_noise_texture)
 
 	resolution = new_base_size
+	subviewport.size = new_base_size
 
 
 func set_palette(new_palette : Texture) -> void:

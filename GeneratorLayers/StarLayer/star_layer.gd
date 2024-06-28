@@ -28,6 +28,7 @@ const LARGE_STAR_RESOURCES : Array[Resource] = \
 
 
 @export var root_2d : Node2D
+@export var subviewport : SubViewport
 
 
 var max_stars : int
@@ -49,6 +50,7 @@ func generate_stars\
 	ratio.clear()
 	ratio.append_array(new_ratio)
 	resolution = viewport_size
+	subviewport.size = viewport_size
 
 	for i : int in max_stars:
 		var new_seed : float = randf_range(.0, ratio_sum)

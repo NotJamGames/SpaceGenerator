@@ -22,7 +22,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_15hbl")
 [sub_resource type="ViewportTexture" id="ViewportTexture_nrfxb"]
 viewport_path = NodePath("SubViewport")
 
-[node name="StarLayer" type="TextureRect" node_paths=PackedStringArray("root_2d")]
+[node name="StarLayer" type="TextureRect" node_paths=PackedStringArray("root_2d", "subviewport")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_gr54g")
 custom_minimum_size = Vector2(1440, 1440)
@@ -33,6 +33,7 @@ texture = SubResource("ViewportTexture_nrfxb")
 stretch_mode = 1
 script = ExtResource("1_cp568")
 root_2d = NodePath("SubViewport/StarGenerator")
+subviewport = NodePath("SubViewport")
 speed = 12.0
 
 [node name="SubViewport" type="SubViewport" parent="."]

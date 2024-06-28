@@ -39,7 +39,6 @@ offset_bottom = 1200.0
 texture = SubResource("ViewportTexture_kcvwn")
 palette = ExtResource("7_eqrwb")
 threshold = 0.114
-density = 0.01
 alpha = 1.0
 dither_enabled = false
 modulation_enabled = true
@@ -69,7 +68,6 @@ offset_right = 1440.0
 offset_bottom = 1200.0
 texture = SubResource("ViewportTexture_q355h")
 threshold = 0.315
-density = 0.01
 alpha = 0.55
 dither_enabled = false
 modulation_seed = 8
@@ -85,7 +83,8 @@ oscillation_rate = 0.5
 title = "Foreground Nebula"
 speed = 24.0
 
-[node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
+[node name="UIManager" parent="." node_paths=PackedStringArray("resolution_interface") instance=ExtResource("5_q4bfc")]
+resolution_interface = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution")
 
 [node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" index="0" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../../../../../Layers/LowerNebula")
@@ -117,6 +116,7 @@ mouse_default_cursor_shape = 2
 [connection signal="preset_load_requested" from="UIManager" to="." method="load_preset"]
 [connection signal="preset_upload_requested" from="UIManager" to="." method="upload_preset"]
 [connection signal="reorder_requested" from="UIManager" to="." method="reorder_layer"]
+[connection signal="resolution_confirmed" from="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution" to="." method="generate_space"]
 
 [editable path="UIManager"]
 [editable path="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=17 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://UI/duplicate_layer.gd" id="4_0kcov"]
 [ext_resource type="Texture2D" uid="uid://cp3eoiai7iylw" path="res://UI/Icons/minus_icon.png" id="4_o5whv"]
 [ext_resource type="Script" path="res://UI/preset_manager.gd" id="5_b2kux"]
+[ext_resource type="Script" path="res://UI/resolution_interface.gd" id="5_bpvui"]
 [ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
 [ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
 [ext_resource type="JSON" path="res://Presets/blue_planet.json" id="6_acawr"]
@@ -125,6 +126,54 @@ script = ExtResource("4_0kcov")
 [node name="Settings" type="VBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="ResolutionTitle" type="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+text = "Resolution:"
+
+[node name="Resolution" type="HBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings" node_paths=PackedStringArray("x_line_edit", "y_line_edit")]
+layout_mode = 2
+script = ExtResource("5_bpvui")
+x_line_edit = NodePath("XLineEdit")
+y_line_edit = NodePath("YLineEdit")
+
+[node name="X" type="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution"]
+layout_mode = 2
+text = "X:"
+
+[node name="XLineEdit" type="LineEdit" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Confirm")
+focus_neighbor_right = NodePath("../YLineEdit")
+focus_next = NodePath("../YLineEdit")
+focus_previous = NodePath("../Confirm")
+max_length = 4
+virtual_keyboard_type = 2
+
+[node name="Y" type="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution"]
+layout_mode = 2
+mouse_default_cursor_shape = 1
+text = "Y:"
+
+[node name="YLineEdit" type="LineEdit" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../XLineEdit")
+focus_neighbor_right = NodePath("../Confirm")
+focus_next = NodePath("../Confirm")
+focus_previous = NodePath("../XLineEdit")
+max_length = 4
+virtual_keyboard_type = 2
+
+[node name="Confirm" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../YLineEdit")
+focus_neighbor_right = NodePath("../XLineEdit")
+focus_next = NodePath("../XLineEdit")
+focus_previous = NodePath("../YLineEdit")
+text = "Confirm"
 
 [node name="Presets" type="VBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer"]
 visible = false
@@ -882,6 +931,9 @@ text = "Cancel"
 [connection signal="was_selected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerAbove" to="." method="toggle_layer"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/AddLayer" to="." method="query_create_layer"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/DuplicateLayer" to="." method="duplicate_layer"]
+[connection signal="text_changed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution/XLineEdit" to="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution" method="update_x"]
+[connection signal="text_changed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution/YLineEdit" to="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution" method="update_y"]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution/Confirm" to="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution" method="confirm_resolution"]
 [connection signal="load_preset_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets" to="." method="confirm_load_preset"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets/UploadPreset" to="." method="request_preset_upload"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPng" to="." method="request_export" binds= [0]]
