@@ -146,6 +146,11 @@ layout_mode = 2
 text = "Export .png"
 alignment = 0
 
+[node name="ExportPackedScene" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export"]
+layout_mode = 2
+text = "Export .tscn (Godot)"
+alignment = 0
+
 [node name="ExportPreset" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export"]
 layout_mode = 2
 text = "Export Preset"
@@ -885,6 +890,7 @@ text = "Cancel"
 [connection signal="load_preset_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets" to="." method="confirm_load_preset"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets/UploadPreset" to="." method="request_preset_upload"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPng" to="." method="request_export" binds= [0]]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPackedScene" to="." method="request_export" binds= [1]]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPreset" to="." method="request_export" binds= [2]]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_left_panel"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]

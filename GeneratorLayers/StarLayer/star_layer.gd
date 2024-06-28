@@ -34,11 +34,6 @@ var max_stars : int
 var ratio : Array
 
 
-func _ready() -> void:
-	if !resolution == Vector2i.ZERO:
-		generate_stars(max_stars, ratio, resolution)
-
-
 func generate_stars\
 		(new_max_stars : int, new_ratio : Array, viewport_size : Vector2)\
 		-> void:
