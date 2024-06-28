@@ -64,8 +64,10 @@ static func decode_star_layer(layer_data : Dictionary) -> StarLayer:
 	var new_star_layer : StarLayer = STAR_LAYER_RESOURCE.instantiate()
 	new_star_layer.index = layer_data["index"]
 	new_star_layer.max_stars = layer_data["max_stars"]
-	new_star_layer.title = "Star Layer" # layer_data["title"]
 	new_star_layer.ratio = layer_data["ratio"]
+	new_star_layer.title = layer_data["title"]
+	new_star_layer.resolution = TypeConversionUtility.string_to_vector2i\
+			(layer_data["resolution"])
 	new_star_layer.speed = layer_data["speed"]
 	return new_star_layer
 
@@ -133,8 +135,9 @@ static func decode_nebula_layer(layer_data : Dictionary) -> NebulaLayer:
 			layer_data["oscillation_intensity"]
 	new_nebula_layer.oscillation_rate = layer_data["oscillation_rate"]
 	new_nebula_layer.oscillation_offset = layer_data["oscillation_offset"]
-	new_nebula_layer.title = "Nebula Layer" # layer_data["title"]
-	#new_nebula_layer.resolution = layer_data["resolution"]
+	new_nebula_layer.title = layer_data["title"]
+	new_nebula_layer.resolution = TypeConversionUtility.string_to_vector2i\
+			(layer_data["resolution"])
 	new_nebula_layer.speed = layer_data["speed"]
 	return new_nebula_layer
 
@@ -159,7 +162,8 @@ static func decode_planet_layer(layer_data : Dictionary) -> PlanetLayer:
 	new_planet_layer.max_concurrent_planets = \
 			layer_data["max_concurrent_planets"]
 	# TODO: fix!
-	new_planet_layer.title = "Planet Layer"#layer_data["title"]
-	new_planet_layer.resolution = layer_data["resolution"]
+	new_planet_layer.title = layer_data["title"]
+	new_planet_layer.resolution = TypeConversionUtility.string_to_vector2i\
+			(layer_data["resolution"])
 	new_planet_layer.speed = layer_data["speed"]
 	return new_planet_layer

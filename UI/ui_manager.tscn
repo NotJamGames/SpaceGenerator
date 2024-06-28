@@ -884,6 +884,8 @@ text = "Cancel"
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/DuplicateLayer" to="." method="duplicate_layer"]
 [connection signal="load_preset_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets" to="." method="confirm_load_preset"]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets/UploadPreset" to="." method="request_preset_upload"]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPng" to="." method="request_export" binds= [0]]
+[connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPreset" to="." method="request_export" binds= [2]]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_left_panel"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
