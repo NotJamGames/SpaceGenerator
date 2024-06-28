@@ -134,10 +134,6 @@ func save_image(image : Image, fileName : String = "export.png") -> void:
 	JavaScriptBridge.download_buffer(buffer, fileName)
 
 
-func save_packed_scene() -> void:
-	pass
-
-
 func save_preset(preset : Dictionary) -> void:
 	if OS.get_name() != "Web":
 		push_error("Error: cannot export preset from platforms other than web")

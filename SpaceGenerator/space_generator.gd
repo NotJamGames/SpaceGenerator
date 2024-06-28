@@ -20,7 +20,7 @@ const PLANET_LAYER_RESOURCE : Resource = \
 
 @export var export_resolution : Vector2i = Vector2i(360, 240)
 
-enum ExportTypes {PNG, PACKED_SCENE, PRESET}
+enum ExportTypes {PNG, PRESET}
 
 @export var ui_manager : Control
 
@@ -207,8 +207,6 @@ func evaluate_export_request(export_type : ExportTypes) -> void:
 	match export_type:
 		ExportTypes.PNG:
 			export_as_png()
-		ExportTypes.PACKED_SCENE:
-			export_as_packed_scene()
 		ExportTypes.PRESET:
 			export_as_preset()
 
