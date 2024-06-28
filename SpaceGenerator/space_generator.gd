@@ -60,7 +60,6 @@ func generate_pngs() -> void:
 
 func add_layer(layer_type : LayerTypes) -> void:
 	var new_layer : GeneratorLayer
-	print(layer_container)
 	match layer_type:
 		LayerTypes.STAR_LAYER:
 			new_layer = STAR_LAYER_RESOURCE.instantiate()
@@ -164,7 +163,12 @@ func load_preset(preset_data : Dictionary) -> void:
 	var new_layers : Array[GeneratorLayer] = \
 			PresetUtiltity.decode_preset(preset_data)
 
-	for layer : GeneratorLayer in new_layers:
+	var ordered_new_layers : Array[GeneratorLayer] = []
+	for i : int in new_layers.size(): ordered_new_layers.append(null)
+	for layer: GeneratorLayer in new_layers:
+		ordered_new_layers[layer.index] = layer
+
+	for layer : GeneratorLayer in ordered_new_layers:
 		layers.append(layer)
 		layer_container.add_child(layer)
 		if layer is StarLayer:
@@ -174,6 +178,7 @@ func load_preset(preset_data : Dictionary) -> void:
 			ui_manager.add_layer_control(layer, LayerTypes.STAR_LAYER)
 		elif layer is NebulaLayer:
 			ui_manager.add_layer_control(layer, LayerTypes.NEBULA_LAYER)
+			layer.build_nebula(export_resolution)
 		elif layer is PlanetLayer:
 			ui_manager.add_layer_control(layer, LayerTypes.PLANET_LAYER)
 

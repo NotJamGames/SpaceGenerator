@@ -12,12 +12,14 @@ const nebula_dither_shader : Shader = preload\
 		("res://GeneratorLayers/NebulaLayer/nebula_shader.gdshader")
 
 @export_category("Nebula Parameters")
+var nebula_seed : int = -1
 @export var palette : Texture : set = set_palette
 @export_range(.0, 1.0) var threshold : float = .0 : set = set_threshold
 @export_range(.0, 1.0) var density : float = .01 : set = set_density
 @export_range(.0, 1.0) var alpha : float = 1.0 : set = set_alpha
 @export var dither_enabled : bool = true : set = set_dither_enabled
 
+var modulation_seed : int = -1
 @export var modulation_enabled : bool = false : set = set_modulation_enabled
 @export var modulation_color : Color = Color.WHITE : set = set_modulation_color
 @export_range(.0, 1.0) var modulation_intensity : float = .5 :\
@@ -72,7 +74,7 @@ func build_nebula(new_base_size : Vector2i) -> void:
 	set_palette(palette)
 
 	var noise : FastNoiseLite = FastNoiseLite.new()
-	noise.seed = randi()
+	noise.seed = randi() if nebula_seed == -1 else nebula_seed
 	noise.frequency = density
 	noise_texture.noise = noise
 
@@ -84,6 +86,8 @@ func build_nebula(new_base_size : Vector2i) -> void:
 	modulation_noise_texture.height = new_base_size.y
 	modulation_noise_texture.seamless = true
 	modulation_noise_texture.noise = FastNoiseLite.new()
+	modulation_noise_texture.noise.seed = randi() if modulation_seed == -1 \
+			else modulation_seed
 	modulation_noise_texture.noise.frequency = modulation_density
 	set_shader_parameter\
 			("modulation_noise_texture", modulation_noise_texture)

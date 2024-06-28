@@ -2,7 +2,19 @@ class_name PresetManager
 extends VBoxContainer
 
 
+@export var presets : Array[Resource]
+
+
 signal load_preset_requested(preset_data : Dictionary)
+
+
+func _ready() -> void:
+	for preset_resource : Resource in presets:
+		var preset_data : JSON = preset_resource as JSON
+		if preset_data == null:
+			push_error("Error: attempting to load preset not of type JSON")
+			continue
+		add_preset_button(preset_data.data)
 
 
 func add_preset_button(preset_data : Dictionary) -> void:

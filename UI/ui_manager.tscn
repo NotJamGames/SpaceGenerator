@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=16 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://UI/preset_manager.gd" id="5_b2kux"]
 [ext_resource type="PackedScene" uid="uid://bqqvcg3pmvy88" path="res://UI/layer_control.tscn" id="5_e23ao"]
 [ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
+[ext_resource type="JSON" path="res://Presets/blue_planet.json" id="6_acawr"]
 [ext_resource type="Script" path="res://UI/stars_layer_control_panel.gd" id="7_vdxbv"]
 [ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
 [ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
@@ -120,6 +121,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 script = ExtResource("5_b2kux")
+presets = Array[Resource]([ExtResource("6_acawr")])
 
 [node name="UploadPreset" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets"]
 layout_mode = 2

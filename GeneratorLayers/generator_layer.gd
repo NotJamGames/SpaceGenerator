@@ -3,6 +3,7 @@ extends TextureRect
 
 
 @export_category("Layer Settings")
+var index : int
 @export var speed : float = 32.0 : set = set_speed
 
 
