@@ -214,7 +214,7 @@ func evaluate_export_request(export_type : ExportTypes) -> void:
 func export_as_png() -> void:
 	for layer : GeneratorLayer in layers:
 		if layer is PlanetLayer: continue
-		JavaScriptUtility.save_image(layer.texture.get_image())
+		JavaScriptUtility.save_image(layer.texture.get_image(), layer.title)
 
 
 func export_as_packed_scene() -> void:

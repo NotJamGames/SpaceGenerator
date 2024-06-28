@@ -124,14 +124,15 @@ func load_preset() -> Dictionary:
 	return {}
 
 
-func save_image(image : Image, fileName : String = "export.png") -> void:
+func save_image(image : Image, file_name : String = "export.png") -> void:
 	if OS.get_name() != "Web":
 		push_error("Error: cannot export png from platforms other than web")
 		return
 
 	image.clear_mipmaps()
 	var buffer : PackedByteArray = image.save_png_to_buffer()
-	JavaScriptBridge.download_buffer(buffer, fileName)
+	file_name = "%s.png" % file_name if file_name != "export.png" else file_name
+	JavaScriptBridge.download_buffer(buffer, file_name)
 
 
 func save_preset(preset : Dictionary) -> void:
