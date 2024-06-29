@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dyonammobqfy8" path="res://UI/CustomElements/h_range_slider.tscn" id="11_xvp22"]
 [ext_resource type="Script" path="res://UI/load_preset_dialogue.gd" id="14_tdsny"]
 
-[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "preset_manager", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "load_preset_dialogue", "duplicate_layer_button")]
+[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "preset_name_line_edit", "resolution_interface", "preset_manager", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "load_preset_dialogue", "duplicate_layer_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +29,8 @@ script = ExtResource("2_4wugv")
 left_panel = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded")
 right_panel = NodePath("MainUIHBox/RightPanel")
 layer_controls_vbox = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer")
+preset_name_line_edit = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/ExportName/LineEdit")
+resolution_interface = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution")
 preset_manager = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets")
 add_layer_dialogue = NodePath("AddLayerDialogue")
 delete_layer_dialogue = NodePath("DeleteLayerDialogue")
@@ -126,6 +128,19 @@ script = ExtResource("4_0kcov")
 [node name="Settings" type="VBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="ExportName" type="HBoxContainer" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/ExportName"]
+layout_mode = 2
+text = "Preset name: "
+
+[node name="LineEdit" type="LineEdit" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/ExportName"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "User Preset"
+max_length = 12
 
 [node name="ResolutionTitle" type="Label" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings"]
 layout_mode = 2

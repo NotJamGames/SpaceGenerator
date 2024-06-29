@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func add_preset_button(preset_data : Dictionary) -> void:
 	var button : Button = Button.new()
-	button.text = "preset!"
+	button.text = preset_data["preset_name"]
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.pressed.connect(request_load_preset.bind(preset_data))
 	add_child(button)

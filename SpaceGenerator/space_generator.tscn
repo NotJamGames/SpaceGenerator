@@ -83,8 +83,7 @@ oscillation_rate = 0.5
 title = "Foreground Nebula"
 speed = 24.0
 
-[node name="UIManager" parent="." node_paths=PackedStringArray("resolution_interface") instance=ExtResource("5_q4bfc")]
-resolution_interface = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution")
+[node name="UIManager" parent="." instance=ExtResource("5_q4bfc")]
 
 [node name="NebulaLayerBelow" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" index="0" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../../../../../Layers/LowerNebula")

@@ -10,10 +10,13 @@ const PLANET_LAYER_RESOURCE : Resource = \
 		preload("res://GeneratorLayers/PlanetLayer/planet_layer.tscn")
 
 
-static func generate_preset(layers : Array[Node], resolution : Vector2i)\
+static func generate_preset\
+		(layers : Array[Node], preset_name : String, resolution : Vector2i)\
 		-> Dictionary:
 	#TODO: add a global settings section, resolution audio etc.
 	var preset_contents : Dictionary = {}
+	if preset_name == "": preset_name = "User Preset"
+	preset_contents["preset_name"] = preset_name
 	preset_contents["resolution"] = resolution
 
 	var unique_id : int = -1
@@ -47,6 +50,7 @@ static func decode_preset(preset_data : Dictionary) -> Dictionary:
 			new_layers.append(decode_planet_layer(preset_data[key]))
 	return \
 	{
+		"preset_name" : preset_data["preset_name"],
 		"resolution" : TypeConversionUtility.string_to_vector2i\
 				(preset_data["resolution"]),
 		"new_layers" : new_layers,

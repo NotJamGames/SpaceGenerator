@@ -210,6 +210,7 @@ func load_preset(preset_data : Dictionary) -> void:
 					(layer, LayerTypes.PLANET_LAYER, layer.title)
 			planet_layers.append(layer)
 
+	ui_manager.preset_name_line_edit.text = parsed_preset_data["preset_name"]
 	ui_manager.resolution_interface.update_display\
 			(parsed_preset_data["resolution"])
 
@@ -240,5 +241,6 @@ func export_as_packed_scene() -> void:
 func export_as_preset() -> void:
 	JavaScriptUtility.save_preset\
 			(PresetUtiltity.generate_preset\
-					(layer_container.get_children(), export_resolution))
+					(layer_container.get_children(), 
+					ui_manager.preset_name_line_edit.text, export_resolution))
 

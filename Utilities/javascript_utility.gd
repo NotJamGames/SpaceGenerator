@@ -140,6 +140,10 @@ func save_preset(preset : Dictionary) -> void:
 		push_error("Error: cannot export preset from platforms other than web")
 		return
 
+	var file_name : String = preset["preset_name"].to_snake_case()
+	file_name = file_name.validate_filename()
+
 	var json : String = JSON.stringify(preset)
 	var buffer : PackedByteArray = json.to_utf8_buffer()
-	JavaScriptBridge.download_buffer(buffer, "preset.json", "application/json")
+	JavaScriptBridge.download_buffer\
+			(buffer, "%s.json" % file_name, "application/json")

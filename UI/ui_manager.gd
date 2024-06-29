@@ -9,6 +9,7 @@ const LAYER_CONTROL_RESOURCE : Resource = \
 		preload("res://UI/layer_control.tscn")
 @export var layer_controls_vbox : VBoxContainer
 
+@export var preset_name_line_edit : LineEdit
 @export var resolution_interface : HBoxContainer
 @export var preset_manager : PresetManager
 
