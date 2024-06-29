@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dyonammobqfy8" path="res://UI/CustomElements/h_range_slider.tscn" id="11_xvp22"]
 [ext_resource type="Script" path="res://UI/load_preset_dialogue.gd" id="14_tdsny"]
 
-[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "layer_controls_vbox", "preset_name_line_edit", "resolution_interface", "preset_manager", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "load_preset_dialogue", "duplicate_layer_button")]
+[node name="UIManager" type="Control" node_paths=PackedStringArray("left_panel", "right_panel", "menu_tab_container", "layer_controls_vbox", "add_layer_button", "preset_name_line_edit", "resolution_interface", "preset_manager", "add_layer_dialogue", "delete_layer_dialogue", "delete_layer_dialogue_label", "load_preset_dialogue", "duplicate_layer_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +28,9 @@ theme = ExtResource("1_hx1bx")
 script = ExtResource("2_4wugv")
 left_panel = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded")
 right_panel = NodePath("MainUIHBox/RightPanel")
+menu_tab_container = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer")
 layer_controls_vbox = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer")
+add_layer_button = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer/AddLayer")
 preset_name_line_edit = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/ExportName/LineEdit")
 resolution_interface = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings/Resolution")
 preset_manager = NodePath("MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets")
@@ -116,6 +118,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 text = "Add Layer"
+script = ExtResource("4_0kcov")
 
 [node name="DuplicateLayer" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/HBoxContainer"]
 layout_mode = 2
@@ -932,6 +935,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Cancel"
 
+[connection signal="tab_changed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer" to="." method="_on_tab_changed"]
 [connection signal="reorder_requested" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="request_layer_reorder"]
 [connection signal="request_deletion" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="query_delete_layer"]
 [connection signal="was_deselected" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer/NebulaLayerBelow" to="." method="close_layer_panel"]
@@ -954,6 +958,8 @@ text = "Cancel"
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPng" to="." method="request_export" binds= [0]]
 [connection signal="pressed" from="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Export/ExportPreset" to="." method="request_export" binds= [1]]
 [connection signal="toggled" from="MainUIHBox/LeftPanel/Button" to="." method="toggle_left_panel"]
+[connection signal="lock_tabs_requested" from="MainUIHBox/RightPanel" to="." method="lock_tabs"]
+[connection signal="unlock_tabs_requested" from="MainUIHBox/RightPanel" to="." method="unlock_tabs"]
 [connection signal="text_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit" to="." method="update_layer_name"]
 [connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
 [connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]

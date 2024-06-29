@@ -4,10 +4,12 @@ extends Control
 
 @export var left_panel : PanelContainer
 @export var right_panel : MarginContainer
+@export var menu_tab_container : TabContainer
 
 const LAYER_CONTROL_RESOURCE : Resource = \
 		preload("res://UI/layer_control.tscn")
 @export var layer_controls_vbox : VBoxContainer
+@export var add_layer_button : Button
 
 @export var preset_name_line_edit : LineEdit
 @export var resolution_interface : HBoxContainer
@@ -61,9 +63,27 @@ func toggle_layer\
 	right_panel.configure_and_open_panel(layer_control, layer, layer_type)
 
 
+func _on_tab_changed(tab : int) -> void:
+	if tab != 0: close_layer_panel()
+
+
 func close_layer_panel() -> void:
 	right_panel.close_panel()
 	duplicate_layer_button.set_disabled_with_cursor_override(true)
+
+
+func lock_tabs() -> void:
+	for i : int in range(1,4):
+		menu_tab_container.set_tab_disabled(i, true)
+	add_layer_button.set_disabled_with_cursor_override(true)
+	duplicate_layer_button.set_disabled_with_cursor_override(true)
+
+
+func unlock_tabs() -> void:
+	for i : int in menu_tab_container.get_tab_count():
+		menu_tab_container.set_tab_disabled(i, false)
+	add_layer_button.set_disabled_with_cursor_override(false)
+	duplicate_layer_button.set_disabled_with_cursor_override(false)
 
 
 func query_create_layer() -> void:

@@ -6,6 +6,9 @@ extends MarginContainer
 
 var open_panel_index : int = -1
 
+signal lock_tabs_requested()
+signal unlock_tabs_requested()
+
 
 func configure_and_open_panel\
 		(layer_control : LayerControl, layer : GeneratorLayer,
@@ -35,6 +38,7 @@ func open_palette_editor(layer : NebulaLayer) -> void:
 		layer_control.set_locked(true)
 
 	palette_editor.configure_and_open(layer)
+	lock_tabs_requested.emit()
 
 
 func close_palette_editor() -> void:
@@ -48,3 +52,5 @@ func close_palette_editor() -> void:
 			push_error("Node %s not of type LayerControl" % layer_control.name)
 			continue
 		layer_control.set_locked(false)
+
+	unlock_tabs_requested.emit()
