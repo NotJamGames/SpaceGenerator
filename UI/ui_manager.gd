@@ -54,8 +54,7 @@ func toggle_left_panel(new_state : bool) -> void:
 func toggle_layer\
 		(layer_control : LayerControl, layer : GeneratorLayer,
 		layer_type : int) -> void:
-	if active_layer_control != null:
-		active_layer_control.toggle_selected(false)
+	deselect_active_layer_control()
 
 	active_layer_control = layer_control
 	duplicate_layer_button.set_disabled_with_cursor_override(false)
@@ -65,6 +64,12 @@ func toggle_layer\
 
 func _on_tab_changed(tab : int) -> void:
 	if tab != 0: close_layer_panel()
+	deselect_active_layer_control()
+
+
+func deselect_active_layer_control() -> void:
+	if active_layer_control != null: active_layer_control.toggle_selected(false)
+	active_layer_control = null
 
 
 func close_layer_panel() -> void:

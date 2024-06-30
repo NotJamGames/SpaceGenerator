@@ -169,7 +169,7 @@ static func decode_planet_layer(layer_data : Dictionary) -> PlanetLayer:
 	new_planet_layer.max_spawn_frequency = layer_data["max_spawn_frequency"]
 	new_planet_layer.max_concurrent_planets = \
 			layer_data["max_concurrent_planets"]
-	# TODO: fix!
+
 	new_planet_layer.title = layer_data["title"]
 	new_planet_layer.resolution = TypeConversionUtility.string_to_vector2i\
 			(layer_data["resolution"])

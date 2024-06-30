@@ -164,7 +164,6 @@ func duplicate_planet_layer(source_layer : PlanetLayer) -> void:
 	new_layer.min_spawn_frequency = source_layer.min_spawn_frequency
 	new_layer.max_spawn_frequency = source_layer.max_spawn_frequency
 
-	# TODO: add a control for the layer to the UI manager
 	layers.append(new_layer)
 	planet_layers.append(new_layer)
 
@@ -213,6 +212,8 @@ func load_preset(preset_data : Dictionary) -> void:
 	ui_manager.preset_name_line_edit.text = parsed_preset_data["preset_name"]
 	ui_manager.resolution_interface.update_display\
 			(parsed_preset_data["resolution"])
+
+	ui_manager.deselect_active_layer_control()
 
 
 func upload_preset() -> void:
