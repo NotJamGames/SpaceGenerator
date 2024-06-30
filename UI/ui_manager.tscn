@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=18 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://UI/layer_settings_panel_manager.gd" id="6_7edgt"]
 [ext_resource type="JSON" path="res://Presets/blue_planet.json" id="6_acawr"]
 [ext_resource type="Script" path="res://UI/stars_layer_control_panel.gd" id="7_vdxbv"]
+[ext_resource type="JSON" path="res://Presets/voidfire.json" id="8_14smd"]
 [ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
 [ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
 [ext_resource type="Script" path="res://UI/planet_layer_control_panel.gd" id="10_cejk5"]
@@ -197,7 +198,7 @@ text = "Confirm"
 visible = false
 layout_mode = 2
 script = ExtResource("5_b2kux")
-presets = Array[Resource]([ExtResource("6_acawr")])
+presets = Array[Resource]([ExtResource("6_acawr"), ExtResource("8_14smd")])
 
 [node name="UploadPreset" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets"]
 layout_mode = 2
