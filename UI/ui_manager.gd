@@ -174,6 +174,7 @@ func delete_all_layer_controls() -> void:
 
 func update_layer_name(new_name : String) -> void:
 	active_layer_control.label.text = new_name
+	active_layer_control.matched_layer.title = new_name
 
 
 func confirm_load_preset(preset_data : Dictionary) -> void:
