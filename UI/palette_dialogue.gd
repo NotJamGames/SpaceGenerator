@@ -132,6 +132,16 @@ func delete_color_setting(color_setting : ColorSetting) -> void:
 	nodes_reordered()
 
 
+func invert_colors() -> void:
+	var color_settings : Array[Node] = color_setting_vbox.get_children()
+	for color_setting : Node in color_settings:
+		color_setting_vbox.remove_child(color_setting)
+	while color_settings.size() > 0:
+		color_setting_vbox.add_child(color_settings.pop_back())
+
+	nodes_reordered()
+
+
 func increment_palette_size(mod : int) -> void:
 	palette_size += mod
 

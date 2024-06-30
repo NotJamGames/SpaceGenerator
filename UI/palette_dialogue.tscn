@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hxkv4")
 script = ExtResource("2_0j1jo")
-color_setting_vbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer")
+color_setting_vbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -26,14 +26,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="AddColorUpload" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="UploadPalette" type="Button" parent="VBoxContainer/AddColorUpload"]
+[node name="UploadPalette" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 tooltip_text = "Palettes should be in .png format,
@@ -41,11 +34,19 @@ with 1px per color"
 mouse_default_cursor_shape = 2
 text = "Upload Palette"
 
+[node name="AddColorUpload" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
 [node name="AddColor" type="Button" parent="VBoxContainer/AddColorUpload"]
 layout_mode = 2
 size_flags_horizontal = 6
 mouse_default_cursor_shape = 2
 text = "Add Color"
+
+[node name="InvertColors" type="Button" parent="VBoxContainer/AddColorUpload"]
+layout_mode = 2
+text = "Invert Colors"
 
 [node name="ConfirmCancel" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -62,7 +63,8 @@ size_flags_horizontal = 6
 mouse_default_cursor_shape = 2
 text = "Cancel"
 
-[connection signal="pressed" from="VBoxContainer/AddColorUpload/UploadPalette" to="." method="upload_palette"]
+[connection signal="pressed" from="VBoxContainer/UploadPalette" to="." method="upload_palette"]
 [connection signal="pressed" from="VBoxContainer/AddColorUpload/AddColor" to="." method="add_color_setting"]
+[connection signal="pressed" from="VBoxContainer/AddColorUpload/InvertColors" to="." method="invert_colors"]
 [connection signal="pressed" from="VBoxContainer/ConfirmCancel/Confirm" to="." method="confirm_palette"]
 [connection signal="pressed" from="VBoxContainer/ConfirmCancel/Cancel" to="." method="cancel_palette"]
