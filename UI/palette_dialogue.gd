@@ -75,7 +75,7 @@ func evaluate_palette(new_palette : Texture) -> void:
 
 func generate_palette() -> void:
 	var new_palette : Image = Image.create\
-			(palette_size, 1, false, Image.FORMAT_RGBAF)
+			(palette_size, 1, false, Image.FORMAT_RGBA8)
 	var x_pos : int = 0
 
 	for color_setting : Node in color_setting_vbox.get_children():
