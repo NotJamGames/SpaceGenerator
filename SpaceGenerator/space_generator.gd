@@ -175,6 +175,8 @@ func reorder_layer(layer : GeneratorLayer, direction : int) -> void:
 func load_preset(preset_data : Dictionary) -> void:
 	for layer : Node in layer_container.get_children():
 		layer.queue_free()
+
+	layers.clear()
 	star_layers.clear()
 	nebula_layers.clear()
 	planet_layers.clear()
