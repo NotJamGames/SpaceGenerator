@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cty7f06ayes3d"]
+[gd_scene load_steps=10 format=3 uid="uid://cty7f06ayes3d"]
 
 [ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
 [ext_resource type="PackedScene" uid="uid://b18xsn8oiptpo" path="res://GeneratorLayers/NebulaLayer/nebula_layer.tscn" id="2_ao41h"]
 [ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://GeneratorLayers/StarLayer/star_layer.tscn" id="2_d6qfi"]
 [ext_resource type="PackedScene" uid="uid://d0omivo80nscj" path="res://UI/ui_manager.tscn" id="5_q4bfc"]
+[ext_resource type="PackedScene" uid="uid://y827grheqhve" path="res://UI/music_settings.tscn" id="6_k6vg4"]
 [ext_resource type="Texture2D" uid="uid://drsp3gxhn1jxg" path="res://GeneratorLayers/NebulaLayer/Palettes/default_bg_palette.png" id="7_eqrwb"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kcvwn"]
@@ -93,6 +94,9 @@ matched_layer = NodePath("../../../../../../../../../../../Layers/StarGenerator"
 
 [node name="NebulaLayerAbove" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Layers/LayersScrollContainer/VBoxContainer" index="2" node_paths=PackedStringArray("matched_layer")]
 matched_layer = NodePath("../../../../../../../../../../../Layers/UpperNebula")
+
+[node name="MusicSettings" parent="UIManager/MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Settings" index="3" instance=ExtResource("6_k6vg4")]
+layout_mode = 2
 
 [node name="StarQuantitySlider" parent="UIManager/MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/StarQuantity" index="1"]
 mouse_default_cursor_shape = 2

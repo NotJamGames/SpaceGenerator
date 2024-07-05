@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://y827grheqhve"]
+
+[ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_yf67b"]
+[ext_resource type="Script" path="res://UI/music_settings.gd" id="2_in0ph"]
+[ext_resource type="AudioStream" uid="uid://fbgynhywki2h" path="res://Audio/space_theme_01.ogg" id="3_yrkuc"]
+[ext_resource type="AudioStream" uid="uid://cc5jccb70jmvo" path="res://Audio/space_theme_02.ogg" id="4_jnkov"]
+
+[node name="MusicSettings" type="VBoxContainer" node_paths=PackedStringArray("available_tracks_settings", "track_buttons", "track_streams")]
+theme = ExtResource("1_yf67b")
+script = ExtResource("2_in0ph")
+available_tracks_settings = NodePath("AvailableTracks")
+track_buttons = [NodePath("AvailableTracks/PlayTrack1"), NodePath("AvailableTracks/PlayTrack2")]
+track_streams = [NodePath("Track1"), NodePath("Track2")]
+
+[node name="Music" type="CheckBox" parent="."]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Music Enabled"
+
+[node name="AvailableTracks" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AvailableTracks"]
+layout_mode = 2
+text = "Available tracks:"
+
+[node name="PlayTrack1" type="CheckBox" parent="AvailableTracks"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "Track 1"
+
+[node name="PlayTrack2" type="CheckBox" parent="AvailableTracks"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Track 2"
+
+[node name="Track1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yrkuc")
+volume_db = -12.0
+
+[node name="Track2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jnkov")
+volume_db = -12.0
+
+[connection signal="toggled" from="Music" to="." method="set_music_enabled"]
+[connection signal="toggled" from="AvailableTracks/PlayTrack1" to="." method="set_stream" binds= [0]]
+[connection signal="toggled" from="AvailableTracks/PlayTrack2" to="." method="set_stream" binds= [1]]
