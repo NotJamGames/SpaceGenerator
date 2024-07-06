@@ -33,6 +33,13 @@ const LARGE_STAR_RESOURCES : Array[Resource] = \
 
 var max_stars : int
 var ratio : Array
+var flicker_rate : float = 1.12 : set = set_flicker_rate
+var flicker_depth : float = .16 : set = set_flicker_depth
+
+
+func _ready() -> void:
+	material.set_shader_parameter("rate", flicker_rate)
+	material.set_shader_parameter("depth", flicker_depth)
 
 
 func generate_stars\
@@ -78,3 +85,13 @@ func generate_stars\
 func clear_stars() -> void:
 	for i : Node in root_2d.get_children():
 		i.queue_free()
+
+
+func set_flicker_rate(new_rate : float) -> void:
+	flicker_rate = new_rate
+	material.set_shader_parameter("rate", flicker_rate)
+
+
+func set_flicker_depth(new_depth : float) -> void:
+	flicker_depth = new_depth
+	material.set_shader_parameter("depth", flicker_depth)

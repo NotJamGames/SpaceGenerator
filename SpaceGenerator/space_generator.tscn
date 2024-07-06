@@ -1,14 +1,30 @@
-[gd_scene load_steps=10 format=3 uid="uid://cty7f06ayes3d"]
+[gd_scene load_steps=14 format=3 uid="uid://cty7f06ayes3d"]
 
 [ext_resource type="Script" path="res://SpaceGenerator/space_generator.gd" id="1_8dqb6"]
 [ext_resource type="PackedScene" uid="uid://b18xsn8oiptpo" path="res://GeneratorLayers/NebulaLayer/nebula_layer.tscn" id="2_ao41h"]
 [ext_resource type="PackedScene" uid="uid://bmakpuxdb661j" path="res://GeneratorLayers/StarLayer/star_layer.tscn" id="2_d6qfi"]
+[ext_resource type="Shader" path="res://GeneratorLayers/StarLayer/star_flicker.gdshader" id="5_erl07"]
 [ext_resource type="PackedScene" uid="uid://d0omivo80nscj" path="res://UI/ui_manager.tscn" id="5_q4bfc"]
 [ext_resource type="PackedScene" uid="uid://y827grheqhve" path="res://UI/music_settings.tscn" id="6_k6vg4"]
 [ext_resource type="Texture2D" uid="uid://drsp3gxhn1jxg" path="res://GeneratorLayers/NebulaLayer/Palettes/default_bg_palette.png" id="7_eqrwb"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kcvwn"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6oj0y"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_15hbl"]
+width = 360
+height = 240
+seamless = true
+noise = SubResource("FastNoiseLite_6oj0y")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t6scq"]
+resource_local_to_scene = true
+shader = ExtResource("5_erl07")
+shader_parameter/rate = 1.12
+shader_parameter/depth = 0.16
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_15hbl")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ofv6x"]
 viewport_path = NodePath("SubViewport")
@@ -43,7 +59,7 @@ threshold = 0.114
 alpha = 1.0
 dither_enabled = false
 modulation_enabled = true
-modulation_color = Color(0.345098, 0.0627451, 0.439216, 1)
+modulation_color = Color(0.270588, 0.0862745, 0.231373, 1)
 modulation_intensity = 0.398
 modulation_alpha_intensity = 0.231
 modulation_steps = 10
@@ -55,6 +71,7 @@ title = "Background Nebula"
 speed = 6.0
 
 [node name="StarGenerator" parent="Layers" instance=ExtResource("2_d6qfi")]
+material = SubResource("ShaderMaterial_t6scq")
 layout_mode = 0
 offset_right = 1440.0
 offset_bottom = 1440.0

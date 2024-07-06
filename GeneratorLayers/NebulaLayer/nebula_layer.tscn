@@ -7,7 +7,8 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ptxmb"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5r7c3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lte3"]
+resource_local_to_scene = true
 shader = ExtResource("3_4gl83")
 shader_parameter/threshold = 0.0
 shader_parameter/alpha = 0.48
@@ -42,4 +43,4 @@ transparent_bg = true
 size = Vector2i(360, 240)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_5r7c3")
+material = SubResource("ShaderMaterial_2lte3")

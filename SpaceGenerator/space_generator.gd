@@ -115,6 +115,8 @@ func duplicate_star_layer(source_layer : StarLayer) -> void:
 	new_layer.generate_stars\
 			(source_layer.max_stars, source_layer.ratio, export_resolution)
 	new_layer.title = "%s Copy" % source_layer.title
+	new_layer.flicker_rate = source_layer.flicker_rate
+	new_layer.flicker_depth = source_layer.flicker_depth
 	new_layer.speed = source_layer.speed
 
 	ui_manager.add_layer_control\

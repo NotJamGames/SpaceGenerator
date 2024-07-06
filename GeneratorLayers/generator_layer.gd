@@ -19,7 +19,6 @@ func _process(delta : float) -> void:
 
 func set_title(new_title : String) -> void:
 	title = new_title
-	print(title)
 
 
 func set_resolution(new_resolution : Vector2i) -> void:

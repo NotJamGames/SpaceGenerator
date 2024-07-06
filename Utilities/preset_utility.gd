@@ -62,6 +62,8 @@ static func encode_star_layer(layer : StarLayer, index : int) -> Dictionary:
 	star_layer_data["index"] = index
 	star_layer_data["max_stars"] = layer.max_stars
 	star_layer_data["ratio"] = layer.ratio
+	star_layer_data["flicker_rate"] = layer.flicker_rate
+	star_layer_data["flicker_depth"] = layer.flicker_depth
 	star_layer_data["title"] = layer.title
 	star_layer_data["resolution"] = layer.resolution
 	star_layer_data["speed"] = layer.speed
@@ -76,6 +78,8 @@ static func decode_star_layer(layer_data : Dictionary) -> StarLayer:
 	new_star_layer.title = layer_data["title"]
 	new_star_layer.resolution = TypeConversionUtility.string_to_vector2i\
 			(layer_data["resolution"])
+	new_star_layer.flicker_rate = layer_data["flicker_rate"]
+	new_star_layer.flicker_depth = layer_data["flicker_depth"]
 	new_star_layer.speed = layer_data["speed"]
 	return new_star_layer
 

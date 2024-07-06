@@ -3,6 +3,8 @@ extends LayerControlPanel
 
 @export var star_quantity_slider : HSlider
 @export var star_ratio_sliders : Array[HSlider]
+@export var flicker_rate_slider : HSlider
+@export var flicker_depth_slider : HSlider
 
 @export var scroll_speed_slider : HSlider
 
@@ -22,6 +24,8 @@ func configure_and_open\
 		push_error("Error: layer not of type StarLayer")
 
 	star_quantity_slider.value = layer.max_stars
+	flicker_rate_slider.value = layer.flicker_rate
+	flicker_depth_slider.value = layer.flicker_depth
 
 	ratio.clear()
 	ratio.append_array(layer.ratio)
@@ -40,6 +44,14 @@ func update_star_quantity(new_value : float) -> void:
 
 func update_star_ratio(new_value : float, index : int) -> void:
 	ratio[index] = new_value
+
+
+func update_flicker_rate(new_value : float) -> void:
+	layer.flicker_rate = new_value
+
+
+func update_flicker_depth(new_value : float) -> void:
+	layer.flicker_depth = new_value
 
 
 func update_layer_speed(new_value : float) -> void:

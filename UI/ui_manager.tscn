@@ -241,12 +241,14 @@ script = ExtResource("6_7edgt")
 panels = [NodePath("StarsLayerControlPanel"), NodePath("NebulaLayerControlPanel"), NodePath("PlanetLayerControlPanel")]
 palette_editor = NodePath("PaletteDialogue")
 
-[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "scroll_speed_slider", "name_edit")]
+[node name="StarsLayerControlPanel" type="PanelContainer" parent="MainUIHBox/RightPanel" node_paths=PackedStringArray("star_quantity_slider", "star_ratio_sliders", "flicker_rate_slider", "flicker_depth_slider", "scroll_speed_slider", "name_edit")]
 visible = false
 layout_mode = 2
 script = ExtResource("7_vdxbv")
 star_quantity_slider = NodePath("ScrollContainer/RightPanelVBox/StarQuantity/StarQuantitySlider")
 star_ratio_sliders = [NodePath("ScrollContainer/RightPanelVBox/SmallStars/SmallStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/MediumStars/MediumStarsSlider"), NodePath("ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider")]
+flicker_rate_slider = NodePath("ScrollContainer/RightPanelVBox/FlickerRate/HSlider")
+flicker_depth_slider = NodePath("ScrollContainer/RightPanelVBox/FlickerIntensity/HSlider")
 scroll_speed_slider = NodePath("ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider")
 name_edit = NodePath("ScrollContainer/RightPanelVBox/HBoxContainer/LineEdit")
 
@@ -343,6 +345,39 @@ size_flags_horizontal = 3
 focus_mode = 0
 max_value = 1.0
 step = 0.01
+
+[node name="FlickerRate" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/FlickerRate"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Flicker rate:"
+
+[node name="HSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/FlickerRate"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+min_value = 0.001
+max_value = 3.2
+step = 0.0
+value = 1.12
+
+[node name="FlickerIntensity" type="HBoxContainer" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/FlickerIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Flicker depth:"
+
+[node name="HSlider" type="HSlider" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/FlickerIntensity"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.0
+value = 0.16
 
 [node name="LayerParametersSeparator" type="HSeparator" parent="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox"]
 layout_mode = 2
@@ -974,6 +1009,8 @@ text = "Cancel"
 [connection signal="drag_ended" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
 [connection signal="gui_input" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="check_slider_click_and_release" binds= ["push_star_layer_update"]]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/LargeStars/LargeStarsSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_star_ratio" binds= [2]]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/FlickerRate/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_flicker_rate"]
+[connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/FlickerIntensity/HSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_flicker_depth"]
 [connection signal="value_changed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/ScrollSpeedHBox/ScrollSpeedHSlider" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="update_layer_speed"]
 [connection signal="pressed" from="MainUIHBox/RightPanel/StarsLayerControlPanel/ScrollContainer/RightPanelVBox/NewSeed" to="MainUIHBox/RightPanel/StarsLayerControlPanel" method="push_star_layer_update"]
 [connection signal="open_palette_editor_requested" from="MainUIHBox/RightPanel/NebulaLayerControlPanel" to="MainUIHBox/RightPanel" method="open_palette_editor"]

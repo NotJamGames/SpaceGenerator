@@ -12,11 +12,10 @@ seamless = true
 noise = SubResource("FastNoiseLite_6oj0y")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gr54g"]
+resource_local_to_scene = true
 shader = ExtResource("1_cdogt")
-shader_parameter/native_size = Vector2(360, 240)
 shader_parameter/rate = 1.12
-shader_parameter/intensity = 0.24
-shader_parameter/brightness = 1.0
+shader_parameter/depth = 0.16
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_15hbl")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nrfxb"]
