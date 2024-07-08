@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0omivo80nscj"]
+[gd_scene load_steps=19 format=3 uid="uid://d0omivo80nscj"]
 
 [ext_resource type="Theme" uid="uid://ckpi87fktn0od" path="res://UI/default_theme.tres" id="1_hx1bx"]
 [ext_resource type="Script" path="res://UI/ui_manager.gd" id="2_4wugv"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://UI/nebula_layer_control_panel.gd" id="8_43iu2"]
 [ext_resource type="JSON" path="res://Presets/void-fire.json" id="8_brdef"]
 [ext_resource type="PackedScene" uid="uid://8n23gphu766b" path="res://UI/palette_dialogue.tscn" id="9_8nwe8"]
+[ext_resource type="JSON" path="res://Presets/cosmic_kale.json" id="9_rkk8f"]
 [ext_resource type="Script" path="res://UI/planet_layer_control_panel.gd" id="10_cejk5"]
 [ext_resource type="PackedScene" uid="uid://dyonammobqfy8" path="res://UI/CustomElements/h_range_slider.tscn" id="11_xvp22"]
 [ext_resource type="Script" path="res://UI/load_preset_dialogue.gd" id="14_tdsny"]
@@ -198,7 +199,7 @@ text = "Confirm"
 visible = false
 layout_mode = 2
 script = ExtResource("5_b2kux")
-presets = Array[Resource]([ExtResource("6_acawr"), ExtResource("8_brdef")])
+presets = Array[Resource]([ExtResource("6_acawr"), ExtResource("8_brdef"), ExtResource("9_rkk8f")])
 
 [node name="UploadPreset" type="Button" parent="MainUIHBox/LeftPanel/VBoxContainer/LeftPanelExpanded/VBoxContainer/TabContainer/Presets"]
 layout_mode = 2

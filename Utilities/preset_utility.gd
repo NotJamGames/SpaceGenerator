@@ -13,7 +13,6 @@ const PLANET_LAYER_RESOURCE : Resource = \
 static func generate_preset\
 		(layers : Array[Node], preset_name : String, resolution : Vector2i)\
 		-> Dictionary:
-	#TODO: add a global settings section, resolution audio etc.
 	var preset_contents : Dictionary = {}
 	if preset_name == "": preset_name = "User Preset"
 	preset_contents["preset_name"] = preset_name
@@ -39,7 +38,6 @@ static func generate_preset\
 
 
 static func decode_preset(preset_data : Dictionary) -> Dictionary:
-	#TODO: add a global settings section, resolution audio etc.
 	var new_layers : Array[GeneratorLayer] = []
 	for key in preset_data:
 		if key.begins_with("StarLayer"):

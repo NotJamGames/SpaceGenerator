@@ -9,7 +9,8 @@ const PLANET_TEXTURE_RESOURCES : Array[Texture] = \
 	preload("res://GeneratorLayers/PlanetLayer/Sprites/large_planet_3.png"),
 	preload("res://GeneratorLayers/PlanetLayer/Sprites/small_planet_1.png"),
 	preload("res://GeneratorLayers/PlanetLayer/Sprites/small_planet_2.png"),
-	preload("res://GeneratorLayers/PlanetLayer/Sprites/small_planet_3.png")
+	preload("res://GeneratorLayers/PlanetLayer/Sprites/small_planet_3.png"),
+	preload("res://GeneratorLayers/PlanetLayer/Sprites/small_planet_6.png")
 ]
 
 var export_resolution : Vector2i
