@@ -16,7 +16,7 @@ uniform float modulation_steps : hint_range(1.0, 16.0, 1.0);
 uniform bool oscillate = false;
 uniform float oscillation_intensity : hint_range(.01, 1.0, .01) = .12;
 uniform float oscillation_rate : hint_range(.01, 4.0, .01) = .2;
-uniform float oscillation_offset : hint_range(.0, .5, .01) = .0;
+uniform float oscillation_offset : hint_range(.0, 1.0, .01) = .0;
 
 const int bayer_matrix[16] = int[](0,  8,  2,  10,
                                      12, 4,  14, 6,
@@ -69,7 +69,7 @@ vec4 match_color(vec4 color, vec4 fragcoord)
 	float new_threshold = threshold;
 	if (oscillate)
 	{
-		new_threshold = (sin((TIME + oscillation_offset) * oscillation_rate) 
+		new_threshold = (sin((TIME * oscillation_rate) + oscillation_offset)
 		* oscillation_intensity) + threshold;
 	}
 
